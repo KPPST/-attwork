@@ -923,22 +923,7 @@ function sendCandidateToAppsScript(data) {
           return;
         }
 
-        google.script.run
-          .withSuccessHandler(function(result) {
-            message.className = "success";
-            message.style.display = "block";
-            message.textContent = result.resumeAttached
-              ? "บันทึกข้อมูลผู้สมัครสำเร็จ รหัส: " + result.candidateId + " แนบ Resume: " + result.resumeFileName
-              : "บันทึกข้อมูลผู้สมัครสำเร็จ รหัส: " + result.candidateId + " (ไม่ได้แนบ Resume)";
-            form.reset();
-            fileNameLabel.textContent = "";
-            button.disabled = false;
-            button.textContent = "บันทึกข้อมูลผู้สมัคร";
-          })
-          .withFailureHandler(function(error) {
-            showError(error && error.message ? error.message : "บันทึกข้อมูลไม่สำเร็จ กรุณาลองใหม่");
-          })
-          .submitCandidate(data);
+        sendCandidateToAppsScript(data);
       }
 
       if (file) {
