@@ -684,6 +684,132 @@
     const MAX_FILE_SIZE = 4 * 1024 * 1024;
     let liffReady = false;
 
+    
+const ATWORK_APPS_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycby7KX2iBLzDtMnO47oRFB5ALAgOrZYekMN4Yaan7GUORhkfnkCqL38U1rnHOCGctkF7F/exec";
+
+const ATWORK_RESPONSE_FRAME_NAME = "atworkSubmitFrame";
+
+const responseFrame = document.createElement("iframe");
+responseFrame.name = ATWORK_RESPONSE_FRAME_NAME;
+responseFrame.title = "ผลการส่งข้อมูลผู้สมัคร";
+responseFrame.style.display = "none";
+responseFrame.setAttribute("aria-hidden", "true");
+document.body.appendChild(responseFrame);
+
+let pendingRequestId = "";
+let submitTimeout = null;
+
+
+/**
+ * Receive the server's result.
+ */
+window.addEventListener("message", function(event) {
+  const isGoogleOrigin =
+    event.origin === "https://script.google.com" ||
+    event.origin.endsWith(".googleusercontent.com");
+
+  if (!isGoogleOrigin) return;
+
+  const result = event.data;
+
+  if (
+    !result ||
+    result.type !== "ATWORK_CANDIDATE_RESULT" ||
+    !pendingRequestId ||
+    String(result.requestId) !== pendingRequestId
+  ) {
+    return;
+  }
+
+  if (submitTimeout) {
+    clearTimeout(submitTimeout);
+    submitTimeout = null;
+  }
+
+  pendingRequestId = "";
+
+  if (!result.success) {
+    showError(result.message || "บันทึกข้อมูลไม่สำเร็จ กรุณาตรวจสอบแล้วลองใหม่");
+    return;
+  }
+
+  message.className = "success";
+  message.style.display = "block";
+  message.textContent = result.resumeAttached
+    ? "บันทึกข้อมูลผู้สมัครสำเร็จ รหัส: " +
+      result.candidateId + " แนบ Resume: " + result.resumeFileName
+    : "บันทึกข้อมูลผู้สมัครสำเร็จ รหัส: " +
+      result.candidateId + " (ไม่ได้แนบ Resume)";
+
+  form.reset();
+  fileNameLabel.textContent = "";
+  button.disabled = false;
+  button.textContent = "บันทึกข้อมูลผู้สมัคร";
+});
+
+
+/**
+ * Send data to Apps Script without google.script.run.
+ */
+function sendCandidateToAppsScript(data) {
+  const requestId =
+    window.crypto && typeof window.crypto.randomUUID === "function"
+      ? window.crypto.randomUUID()
+      : Date.now() + "-" + Math.random().toString(36).slice(2);
+
+  pendingRequestId = requestId;
+
+  const requestForm = document.createElement("form");
+  requestForm.method = "POST";
+  requestForm.action = ATWORK_APPS_SCRIPT_URL;
+  requestForm.target = ATWORK_RESPONSE_FRAME_NAME;
+  requestForm.acceptCharset = "UTF-8";
+  requestForm.style.display = "none";
+
+  const fields = {
+    action: "submitCandidate",
+    requestId: requestId,
+    payload: JSON.stringify(data)
+  };
+
+  Object.keys(fields).forEach(function(key) {
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = key;
+    input.value = fields[key];
+    requestForm.appendChild(input);
+  });
+
+  document.body.appendChild(requestForm);
+
+  try {
+    requestForm.submit();
+  } catch (error) {
+    pendingRequestId = "";
+    requestForm.remove();
+    showError("ส่งข้อมูลไปยังระบบไม่สำเร็จ กรุณาลองใหม่");
+    return;
+  }
+
+  requestForm.remove();
+
+  if (submitTimeout) clearTimeout(submitTimeout);
+
+  submitTimeout = setTimeout(function() {
+    if (pendingRequestId !== requestId) return;
+
+    pendingRequestId = "";
+    submitTimeout = null;
+
+    showError(
+      "ระบบยังไม่ตอบกลับภายใน 120 วินาที " +
+      "กรุณาตรวจสอบ Google Sheets ก่อนกดส่งซ้ำ เพื่อป้องกันข้อมูลซ้ำ"
+    );
+  }, 120000);
+}
+
+
     async function initializeAtworkLiff() {
       if (!ATWORK_LIFF_ID || ATWORK_LIFF_ID === "REPLACE_WITH_NEW_LIFF_ID") {
         lineStatus.className = "line-status error";
