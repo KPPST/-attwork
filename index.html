@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>ATWORK | แจ้งความต้องการบุคลากร</title>
+  <title>@attwork | แจ้งความต้องการบุคลากร</title>
 
   <!-- Sarabun is used when available; system fonts remain as fallbacks. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -643,9 +643,8 @@
             </div>
 
             <div class="field full">
-              <label for="ContactEmail">อีเมล</label>
-              <input id="ContactEmail" name="ContactEmail" type="email" maxlength="150" placeholder="example@company.com">
-              <span class="field-hint">ไม่บังคับกรอก แต่แนะนำให้ระบุเพื่อใช้ติดต่อกลับ</span>
+              <label for="ContactEmail">อีเมล<span class="required">*</span></label>
+              <input id="ContactEmail" name="ContactEmail" type="email" maxlength="150" required placeholder="example@company.com">
             </div>
           </div>
         </section>
@@ -662,7 +661,15 @@
           <div class="form-grid">
             <div class="field full">
               <label for="JobTitle">ตำแหน่งงาน <span class="required">*</span></label>
-              <input id="JobTitle" name="JobTitle" maxlength="200" required placeholder="เช่น พนักงานคลังสินค้า">
+              <select id="JobTitle" name="JobTitle" required>
+                <option value="">-- เลือกตำแหน่งที่ต้องการ --</option>
+                <option value="พนักงานฝ่ายผลิต">พนักงานฝ่ายผลิต</option>
+                <option value="ช่างเทคนิค">ช่างเทคนิค</option>
+                <option value="พนักงานคลังสินค้า">พนักงานคลังสินค้า</option>
+                <option value="พนักงานออฟฟิศ">พนักงานออฟฟิศ</option>
+                <option value="เจ้าหน้าที่ธุรการ">เจ้าหน้าที่ธุรการ</option>
+                <option value="พนักงานบริการลูกค้า">พนักงานบริการลูกค้า</option>
+              </select>
             </div>
 
             <div class="field">
