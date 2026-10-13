@@ -4,131 +4,670 @@
   <base target="_top">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#173B65">
+  <title>ATWORK | ข้อมูลผู้สมัครงาน</title>
+
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
-    * { box-sizing: border-box; }
     :root {
-      --navy: #173B65; --blue: #2F72C4; --light-blue: #EAF2FC;
-      --border: #D6DFEA; --text: #24364B; --muted: #64748B;
+      color-scheme: light;
+      --navy: #173B65;
+      --navy-deep: #102B4B;
+      --blue: #2869B2;
+      --blue-hover: #1C528F;
+      --blue-soft: #EAF3FF;
+      --page: #F3F6FB;
+      --surface: #FFFFFF;
+      --border: #D9E2EE;
+      --text: #213449;
+      --muted: #5D6F84;
+      --placeholder: #8795A7;
+      --green: #17633C;
+      --green-bg: #ECF9F1;
+      --red: #A12C27;
+      --red-bg: #FFF2F0;
+      --amber: #855A0A;
+      --amber-bg: #FFF7E5;
+      --shadow: 0 16px 44px rgba(20, 47, 79, .08);
+      --radius-lg: 20px;
+      --radius-md: 12px;
     }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
     body {
-      margin: 0; padding: 22px 12px; color: var(--text);
-      background: #F3F6FA; font-family: Arial, Tahoma, sans-serif; font-size: 14px;
+      margin: 0;
+      padding: 30px 16px 42px;
+      background:
+        radial-gradient(circle at 8% 0%, rgba(71, 136, 210, .09), transparent 26rem),
+        var(--page);
+      color: var(--text);
+      font-family: "Noto Sans Thai", Tahoma, Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
+
+    button, input, textarea { font: inherit; }
+    button, input, textarea { -webkit-tap-highlight-color: transparent; }
+
     .container {
-      max-width: 780px; margin: auto; padding: 26px; background: #fff;
-      border: 1px solid #E7ECF3; border-radius: 16px;
-      box-shadow: 0 8px 28px rgba(23,59,101,.06);
+      width: 100%;
+      max-width: 820px;
+      margin: 0 auto;
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid rgba(217, 226, 238, .95);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
     }
-    .brand { color: var(--blue); font-size: 13px; font-weight: 800; letter-spacing: 2px; }
-    h1 { margin: 9px 0; color: var(--navy); font-size: 24px; }
-    .subtitle { margin: 0 0 18px; color: var(--muted); line-height: 1.7; }
-    .line-status { margin: 0 0 22px; padding: 10px 12px; border-radius: 8px; background: #FFF7E6; color: #8A5A00; line-height: 1.5; }
-    .line-status.connected { background: #EFFAF4; color: #17633C; }
-    .line-status.error { background: #FFF3F2; color: #9B2823; }
-    .form-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 17px 14px; }
+
+    .page-header {
+      position: relative;
+      overflow: hidden;
+      padding: 30px 34px 28px;
+      background: linear-gradient(120deg, var(--navy-deep), var(--navy) 64%, #24548A);
+      color: #fff;
+    }
+
+    .page-header::before,
+    .page-header::after {
+      position: absolute;
+      content: "";
+      pointer-events: none;
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 50%;
+    }
+
+    .page-header::before {
+      width: 250px;
+      height: 250px;
+      right: -85px;
+      top: -135px;
+    }
+
+    .page-header::after {
+      width: 175px;
+      height: 175px;
+      right: -35px;
+      top: -95px;
+    }
+
+    .brand-row,
+    .header-content { position: relative; z-index: 1; }
+
+    .brand-row {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      margin-bottom: 23px;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 39px;
+      height: 39px;
+      flex: 0 0 39px;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, .38);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, .12);
+      color: #fff;
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -.5px;
+    }
+
+    .brand-name {
+      color: #fff;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      line-height: 1.25;
+    }
+
+    .brand-caption {
+      display: block;
+      margin-top: 3px;
+      color: #CBDCF0;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 1.25px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 8px;
+      color: #D7E7FA;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .eyebrow-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #8FC6FF;
+      box-shadow: 0 0 0 4px rgba(143, 198, 255, .13);
+    }
+
+    h1 {
+      margin: 0;
+      color: #fff;
+      font-size: clamp(23px, 4vw, 30px);
+      font-weight: 800;
+      line-height: 1.35;
+      letter-spacing: -.45px;
+    }
+
+    .subtitle {
+      max-width: 610px;
+      margin: 11px 0 0;
+      color: #E0EBF8;
+      font-size: 14px;
+      line-height: 1.85;
+    }
+
+    .header-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      margin-top: 19px;
+      padding: 11px 13px;
+      border: 1px solid rgba(255, 255, 255, .16);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, .08);
+      color: #F1F6FC;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .header-note svg { flex: 0 0 17px; margin-top: 2px; }
+
+    .form-content { padding: 25px 28px 28px; }
+
+    .form-intro {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 17px;
+    }
+
+    .form-intro-title {
+      margin: 0;
+      color: var(--navy);
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .form-intro-text {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .required-note {
+      flex: 0 0 auto;
+      padding: 5px 9px;
+      border: 1px solid #F0D5D2;
+      border-radius: 7px;
+      background: #FFF7F6;
+      color: #9A3832;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .line-status {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 0 0 23px;
+      padding: 13px 14px;
+      border: 1px solid #F0DEB4;
+      border-radius: var(--radius-md);
+      background: var(--amber-bg);
+      color: var(--amber);
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.7;
+    }
+
+    .status-icon {
+      display: grid;
+      width: 24px;
+      height: 24px;
+      flex: 0 0 24px;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(133, 90, 10, .1);
+    }
+
+    .line-status.connected {
+      border-color: #B8E4CA;
+      background: var(--green-bg);
+      color: var(--green);
+    }
+
+    .line-status.connected .status-icon { background: rgba(23, 99, 60, .1); }
+
+    .line-status.error {
+      border-color: #F0C7C3;
+      background: var(--red-bg);
+      color: var(--red);
+    }
+
+    .line-status.error .status-icon { background: rgba(161, 44, 39, .1); }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px 16px;
+    }
+
     .field { min-width: 0; }
     .full, .section-title { grid-column: 1 / -1; }
+
     .section-title {
-      margin-top: 7px; padding-bottom: 8px; border-bottom: 1px solid var(--border);
-      color: var(--navy); font-size: 15px; font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 8px;
+      padding: 16px 16px 14px;
+      border: 1px solid #E1EAF5;
+      border-radius: 13px;
+      background: linear-gradient(110deg, #F7FAFE, #FFFFFF);
+      color: var(--navy);
     }
-    label { display: block; margin-bottom: 7px; color: var(--navy); font-size: 13px; font-weight: 600; }
-    input, textarea {
-      width: 100%; min-width: 0; padding: 11px 12px; border: 1px solid #CBD5E1;
-      border-radius: 8px; background: #fff; color: var(--text); font-family: inherit; font-size: 14px;
+
+    .section-number {
+      display: grid;
+      width: 36px;
+      height: 36px;
+      flex: 0 0 36px;
+      place-items: center;
+      border-radius: 10px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .3px;
     }
-    input:focus, textarea:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(47,114,196,.10); }
-    textarea { min-height: 100px; resize: vertical; line-height: 1.6; }
-    .upload-box { padding: 16px; border: 1px dashed #AAC4E5; border-radius: 12px; background: #F8FBFF; }
-    .hint { display: block; margin-top: 7px; color: var(--muted); font-size: 12px; line-height: 1.6; }
-    .file-name { margin-top: 8px; color: var(--navy); overflow-wrap: anywhere; }
-    button { width: 100%; min-height: 44px; margin-top: 24px; padding: 12px 18px; border: 0; border-radius: 9px; background: var(--blue); color: #fff; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; }
-    button:hover { background: var(--navy); }
-    button:disabled { opacity: .6; cursor: wait; }
-    #message { display: none; margin-top: 16px; padding: 14px; border-radius: 9px; line-height: 1.7; overflow-wrap: anywhere; }
-    #message.success { display: block; border: 1px solid #A7E0C2; background: #EFFAF4; color: #17633C; }
-    #message.error { display: block; border: 1px solid #F2B8B5; background: #FFF3F2; color: #9B2823; }
-    @media (max-width: 520px) {
-      body { padding: 10px 7px; }
-      .container { padding: 17px 12px; border-radius: 12px; }
-      h1 { font-size: 21px; }
-      .form-grid { gap: 14px 9px; }
-      input, textarea { padding: 10px 9px; font-size: 13px; }
+
+    .section-heading { min-width: 0; }
+    .section-heading strong { display: block; font-size: 14px; font-weight: 800; line-height: 1.5; }
+    .section-heading small { display: block; margin-top: 2px; color: var(--muted); font-size: 11px; font-weight: 400; line-height: 1.6; }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      color: #243D59;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.55;
+    }
+
+    .required-star { color: #C53D35; font-weight: 800; }
+
+    input:not([type="file"]), textarea {
+      display: block;
+      width: 100%;
+      min-width: 0;
+      min-height: 45px;
+      padding: 11px 13px;
+      border: 1px solid #C9D5E3;
+      border-radius: 10px;
+      background: #fff;
+      color: #1F3349;
+      font-family: inherit;
+      font-size: 14px;
+      line-height: 1.6;
+      transition: border-color .16s ease, box-shadow .16s ease, background .16s ease;
+    }
+
+    input::placeholder, textarea::placeholder { color: var(--placeholder); opacity: 1; }
+
+    input:hover:not(:disabled), textarea:hover:not(:disabled) { border-color: #A7BBD2; }
+
+    input:focus-visible, textarea:focus-visible {
+      outline: none;
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(40, 105, 178, .14);
+    }
+
+    input[type="date"] { color: #33485F; }
+
+    textarea {
+      min-height: 112px;
+      resize: vertical;
+      line-height: 1.8;
+    }
+
+    .hint {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .upload-box {
+      padding: 19px;
+      border: 1px dashed #9CB9DB;
+      border-radius: 14px;
+      background: #F8FBFF;
+      transition: border-color .15s ease, background .15s ease;
+    }
+
+    .upload-box:focus-within {
+      border-color: var(--blue);
+      background: #F3F8FF;
+    }
+
+    .upload-heading {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .upload-icon {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      flex: 0 0 42px;
+      place-items: center;
+      border: 1px solid #D8E7F8;
+      border-radius: 12px;
+      background: #EAF3FF;
+      color: var(--blue);
+    }
+
+    .upload-title { margin: 0; color: var(--navy); font-size: 13px; font-weight: 800; }
+    .upload-description { margin: 3px 0 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
+
+    input[type="file"] {
+      display: block;
+      width: 100%;
+      min-width: 0;
+      padding: 9px;
+      border: 1px solid #CFDCEB;
+      border-radius: 9px;
+      background: #fff;
+      color: #344B64;
+      font-family: inherit;
+      font-size: 12px;
+    }
+
+    input[type="file"]::file-selector-button {
+      margin: 0 11px 0 0;
+      padding: 8px 12px;
+      border: 1px solid #C5D8EE;
+      border-radius: 7px;
+      background: #EEF5FD;
+      color: #214F83;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    input[type="file"]::file-selector-button:hover { background: #E0EDFC; }
+
+    .file-name {
+      margin-top: 9px;
+      color: var(--navy);
+      font-size: 12px;
+      font-weight: 600;
+      overflow-wrap: anywhere;
+    }
+
+    .privacy-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      margin-top: 22px;
+      padding: 12px 13px;
+      border-radius: 10px;
+      background: #F5F8FC;
+      color: #53677D;
+      font-size: 11px;
+      line-height: 1.8;
+    }
+
+    .privacy-note svg { flex: 0 0 16px; margin-top: 2px; color: #5279A5; }
+
+    button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      width: 100%;
+      min-height: 51px;
+      margin-top: 18px;
+      padding: 13px 20px;
+      border: 1px solid transparent;
+      border-radius: 11px;
+      background: linear-gradient(100deg, var(--blue), #347AC5);
+      box-shadow: 0 7px 16px rgba(40, 105, 178, .18);
+      color: #fff;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .15s ease, background .15s ease, box-shadow .15s ease, opacity .15s ease;
+    }
+
+    button:hover:not(:disabled) {
+      background: linear-gradient(100deg, var(--blue-hover), #2869B2);
+      box-shadow: 0 9px 20px rgba(40, 105, 178, .24);
+      transform: translateY(-1px);
+    }
+
+    button:focus-visible { outline: 3px solid rgba(40, 105, 178, .25); outline-offset: 3px; }
+    button:not(:disabled)::after { content: "→"; font-size: 18px; line-height: 1; }
+    button:disabled { box-shadow: none; opacity: .68; cursor: wait; transform: none; }
+
+    #message {
+      display: none;
+      margin-top: 16px;
+      padding: 14px 15px;
+      border: 1px solid transparent;
+      border-radius: 11px;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.8;
+      overflow-wrap: anywhere;
+      white-space: pre-line;
+    }
+
+    #message.success { display: block; border-color: #B4E2C8; background: var(--green-bg); color: var(--green); }
+    #message.error { display: block; border-color: #F0C3BF; background: var(--red-bg); color: var(--red); }
+
+    .footer-caption {
+      padding: 15px 20px;
+      border-top: 1px solid #E8EEF5;
+      background: #FBFCFE;
+      color: #78889A;
+      text-align: center;
+      font-size: 11px;
+    }
+
+    @media (max-width: 600px) {
+      body { padding: 12px 8px 24px; }
+      .container { border-radius: 16px; }
+      .page-header { padding: 23px 19px 22px; }
+      .brand-row { margin-bottom: 20px; }
+      .subtitle { font-size: 13px; }
+      .form-content { padding: 20px 15px 21px; }
+      .form-grid { gap: 16px 11px; }
+      .form-intro { gap: 8px; }
+      .required-note { padding: 4px 7px; font-size: 10px; }
+      .section-title { gap: 10px; padding: 13px 12px; }
+      .section-number { width: 32px; height: 32px; flex-basis: 32px; }
+      input:not([type="file"]), textarea { min-height: 44px; padding: 10px 11px; font-size: 14px; }
+      .upload-box { padding: 14px; }
+    }
+
+    @media (max-width: 390px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .field, .full, .section-title { grid-column: 1; }
+      .form-intro { display: block; }
+      .required-note { display: inline-flex; margin-top: 9px; }
+      .page-header { padding: 21px 16px; }
+      .form-content { padding: 17px 12px 18px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
     }
   </style>
 </head>
 <body>
   <main class="container">
-    <div class="brand">ATWORK</div>
-    <h1>ข้อมูลผู้สมัครงาน</h1>
-    <p class="subtitle">กรอกข้อมูลส่วนตัว การศึกษา และประสบการณ์ทำงาน พร้อมแนบ Resume ที่มีอยู่แล้ว (ถ้ามี)</p>
-    <div id="lineStatus" class="line-status" role="status" aria-live="polite">กำลังเชื่อมต่อบัญชี LINE...</div>
-
-    <form id="candidateForm">
-      <div class="form-grid">
-        <div class="section-title">ข้อมูลส่วนตัว</div>
-        <div class="field full">
-          <label for="FullName">ชื่อ-นามสกุล *</label>
-          <input id="FullName" name="FullName" maxlength="150" required placeholder="กรอกชื่อและนามสกุล">
-        </div>
-        <div class="field">
-          <label for="Nickname">ชื่อเล่น</label>
-          <input id="Nickname" name="Nickname" maxlength="100">
-        </div>
-        <div class="field">
-          <label for="DateOfBirth">วันเกิด</label>
-          <input id="DateOfBirth" name="DateOfBirth" type="date">
-        </div>
-        <div class="field">
-          <label for="Phone">เบอร์โทรศัพท์ *</label>
-          <input id="Phone" name="Phone" type="tel" maxlength="30" required placeholder="เบอร์โทรศัพท์ที่ติดต่อได้">
-        </div>
-        <div class="field">
-          <label for="Email">อีเมล</label>
-          <input id="Email" name="Email" type="email" maxlength="150" placeholder="example@email.com">
-        </div>
-        <div class="field">
-          <label for="Province">จังหวัด</label>
-          <input id="Province" name="Province" maxlength="100">
-        </div>
-        <div class="field">
-          <label for="Address">ที่อยู่</label>
-          <input id="Address" name="Address" maxlength="500">
-        </div>
-
-        <div class="section-title">ประวัติการศึกษาและประสบการณ์</div>
-        <div class="field full">
-          <label for="Education">ประวัติการศึกษา</label>
-          <textarea id="Education" name="Education" maxlength="3000" placeholder="วุฒิการศึกษา สถานศึกษา สาขาวิชา และปีที่จบ"></textarea>
-        </div>
-        <div class="field full">
-          <label for="WorkExperience">ประสบการณ์ทำงาน</label>
-          <textarea id="WorkExperience" name="WorkExperience" maxlength="5000" placeholder="บริษัท ตำแหน่ง หน้าที่รับผิดชอบ และระยะเวลาทำงาน"></textarea>
-        </div>
-        <div class="field full">
-          <label for="Skills">ทักษะ</label>
-          <textarea id="Skills" name="Skills" maxlength="2000" placeholder="เช่น ทักษะคอมพิวเตอร์ การใช้เครื่องมือ หรือทักษะเฉพาะงาน"></textarea>
-        </div>
-        <div class="field full">
-          <label for="Languages">ภาษา</label>
-          <textarea id="Languages" name="Languages" maxlength="1000" placeholder="เช่น ภาษาไทย ภาษาอังกฤษ และระดับความสามารถ"></textarea>
-        </div>
-
-        <div class="section-title">แนบ Resume</div>
-        <div class="field full">
-          <div class="upload-box">
-            <label for="ResumeFile">เลือกไฟล์ Resume (ไม่บังคับ)</label>
-            <input type="file" id="ResumeFile" name="ResumeFile" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/jpeg,image/png">
-            <small class="hint">รองรับ PDF, DOC, DOCX, JPG และ PNG ขนาดไม่เกิน 4 MB หากยังไม่มี Resume สามารถเว้นว่างไว้ได้ ระบบจะไม่สร้าง Resume PDF ให้อัตโนมัติ</small>
-            <div id="fileName" class="file-name" aria-live="polite"></div>
-          </div>
+    <header class="page-header">
+      <div class="brand-row">
+        <div class="brand-mark" aria-hidden="true">A</div>
+        <div>
+          <div class="brand-name">ATWORK</div>
+          <span class="brand-caption">CAREER &amp; TALENT SERVICES</span>
         </div>
       </div>
 
-      <button id="submitButton" type="submit" disabled>กำลังเชื่อมต่อ LINE...</button>
-      <div id="message" role="status" aria-live="polite"></div>
-    </form>
+      <div class="header-content">
+        <div class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span> แบบฟอร์มสำหรับผู้สมัครงาน</div>
+        <h1>ข้อมูลผู้สมัครงาน</h1>
+        <p class="subtitle">กรอกข้อมูลส่วนตัว ประวัติการศึกษา และประสบการณ์ทำงาน เพื่อให้ทีมงานเข้าใจคุณมากขึ้น พร้อมแนบ Resume ที่มีอยู่แล้วได้ (ถ้ามี)</p>
+        <div class="header-note">
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v5M12 7.5h.01"></path></svg>
+          <span>เตรียมข้อมูลให้ครบถ้วนก่อนส่ง เพื่อช่วยให้ทีมงานพิจารณาข้อมูลของคุณได้สะดวกยิ่งขึ้น</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="form-content">
+      <div class="form-intro">
+        <div>
+          <h2 class="form-intro-title">กรอกข้อมูลของคุณ</h2>
+          <p class="form-intro-text">ช่องที่มีเครื่องหมาย <span class="required-star">*</span> จำเป็นต้องกรอก</p>
+        </div>
+        <span class="required-note">ใช้เวลาไม่นาน</span>
+      </div>
+
+      <div id="lineStatus" class="line-status" role="status" aria-live="polite">
+        <span class="status-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 7v5l3 2"></path><circle cx="12" cy="12" r="9"></circle></svg>
+        </span>
+        <span id="lineStatusText">กำลังเชื่อมต่อบัญชี LINE...</span>
+      </div>
+
+      <form id="candidateForm">
+        <div class="form-grid">
+          <div class="section-title">
+            <span class="section-number">01</span>
+            <span class="section-heading"><strong>ข้อมูลส่วนตัว</strong><small>ข้อมูลพื้นฐานสำหรับติดต่อกลับ</small></span>
+          </div>
+
+          <div class="field full">
+            <label for="FullName">ชื่อ-นามสกุล <span class="required-star">*</span></label>
+            <input id="FullName" name="FullName" maxlength="150" required autocomplete="name" placeholder="กรอกชื่อและนามสกุล">
+          </div>
+          <div class="field">
+            <label for="Nickname">ชื่อเล่น</label>
+            <input id="Nickname" name="Nickname" maxlength="100" autocomplete="nickname" placeholder="ชื่อที่ต้องการให้เรียก">
+          </div>
+          <div class="field">
+            <label for="DateOfBirth">วันเกิด</label>
+            <input id="DateOfBirth" name="DateOfBirth" type="date" autocomplete="bday">
+          </div>
+          <div class="field">
+            <label for="Phone">เบอร์โทรศัพท์ <span class="required-star">*</span></label>
+            <input id="Phone" name="Phone" type="tel" maxlength="30" required autocomplete="tel" placeholder="เบอร์โทรศัพท์ที่ติดต่อได้">
+          </div>
+          <div class="field">
+            <label for="Email">อีเมล</label>
+            <input id="Email" name="Email" type="email" maxlength="150" autocomplete="email" placeholder="example@email.com">
+          </div>
+          <div class="field">
+            <label for="Province">จังหวัด</label>
+            <input id="Province" name="Province" maxlength="100" autocomplete="address-level1" placeholder="จังหวัดที่อาศัยอยู่">
+          </div>
+          <div class="field">
+            <label for="Address">ที่อยู่</label>
+            <input id="Address" name="Address" maxlength="500" autocomplete="street-address" placeholder="ที่อยู่สำหรับติดต่อ (ถ้ามี)">
+          </div>
+
+          <div class="section-title">
+            <span class="section-number">02</span>
+            <span class="section-heading"><strong>ประวัติการศึกษาและประสบการณ์</strong><small>ช่วยให้ทีมงานเห็นภาพความรู้และทักษะของคุณ</small></span>
+          </div>
+          <div class="field full">
+            <label for="Education">ประวัติการศึกษา</label>
+            <textarea id="Education" name="Education" maxlength="3000" placeholder="วุฒิการศึกษา สถานศึกษา สาขาวิชา และปีที่จบ"></textarea>
+            <small class="hint">สามารถระบุการศึกษาล่าสุดก่อน แล้วจึงเพิ่มประวัติที่ผ่านมา</small>
+          </div>
+          <div class="field full">
+            <label for="WorkExperience">ประสบการณ์ทำงาน</label>
+            <textarea id="WorkExperience" name="WorkExperience" maxlength="5000" placeholder="บริษัท ตำแหน่ง หน้าที่รับผิดชอบ และระยะเวลาทำงาน"></textarea>
+          </div>
+          <div class="field full">
+            <label for="Skills">ทักษะ</label>
+            <textarea id="Skills" name="Skills" maxlength="2000" placeholder="เช่น ทักษะคอมพิวเตอร์ การใช้เครื่องมือ หรือทักษะเฉพาะงาน"></textarea>
+          </div>
+          <div class="field full">
+            <label for="Languages">ภาษา</label>
+            <textarea id="Languages" name="Languages" maxlength="1000" placeholder="เช่น ภาษาไทย ภาษาอังกฤษ และระดับความสามารถ"></textarea>
+          </div>
+
+          <div class="section-title">
+            <span class="section-number">03</span>
+            <span class="section-heading"><strong>แนบ Resume</strong><small>แนบเอกสารประกอบเพื่อให้ทีมงานดูข้อมูลได้สะดวกขึ้น</small></span>
+          </div>
+          <div class="field full">
+            <div class="upload-box">
+              <div class="upload-heading">
+                <div class="upload-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6M12 18v-6M9.5 14.5 12 12l2.5 2.5"></path></svg>
+                </div>
+                <div>
+                  <p class="upload-title">ไฟล์ Resume ของคุณ</p>
+                  <p class="upload-description">เลือกไฟล์จากอุปกรณ์ของคุณ โดยไม่จำเป็นต้องแนบหากยังไม่มี</p>
+                </div>
+              </div>
+              <label for="ResumeFile">เลือกไฟล์ Resume (ไม่บังคับ)</label>
+              <input type="file" id="ResumeFile" name="ResumeFile" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/jpeg,image/png">
+              <small class="hint">รองรับ PDF, DOC, DOCX, JPG และ PNG ขนาดไม่เกิน 4 MB หากยังไม่มี Resume สามารถเว้นว่างไว้ได้ ระบบจะไม่สร้าง Resume PDF ให้อัตโนมัติ</small>
+              <div id="fileName" class="file-name" aria-live="polite"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="privacy-note">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"></path></svg>
+          <span>โปรดตรวจสอบความถูกต้องของข้อมูลก่อนส่ง และแนบเฉพาะเอกสารที่ต้องการใช้ประกอบการสมัครงาน</span>
+        </div>
+
+        <button id="submitButton" type="submit" disabled>
+          <span>กำลังเชื่อมต่อ LINE...</span>
+          <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+        </button>
+        <div id="message" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+
+    <footer class="footer-caption">ATWORK · Candidate Information Form</footer>
   </main>
 
   <script>
@@ -148,7 +687,7 @@
     async function initializeAtworkLiff() {
       if (!ATWORK_LIFF_ID || ATWORK_LIFF_ID === "REPLACE_WITH_NEW_LIFF_ID") {
         lineStatus.className = "line-status error";
-        lineStatus.textContent = "ต้องตั้งค่า LIFF ID ก่อนจึงจะใช้งานฟอร์มผ่าน LINE ได้";
+        document.getElementById("lineStatusText").textContent = "ต้องตั้งค่า LIFF ID ก่อนจึงจะใช้งานฟอร์มผ่าน LINE ได้";
         button.disabled = true;
         button.textContent = "รอตั้งค่า LINE LIFF";
         return;
@@ -169,13 +708,13 @@
 
         liffReady = true;
         lineStatus.className = "line-status connected";
-        lineStatus.textContent = "เชื่อมต่อ LINE สำเร็จ สามารถกรอกข้อมูลผู้สมัครได้";
+        document.getElementById("lineStatusText").textContent = "เชื่อมต่อ LINE สำเร็จ สามารถกรอกข้อมูลผู้สมัครได้";
         button.disabled = false;
         button.textContent = "บันทึกข้อมูลผู้สมัคร";
       } catch (error) {
         liffReady = false;
         lineStatus.className = "line-status error";
-        lineStatus.textContent = error && error.message
+        document.getElementById("lineStatusText").textContent = error && error.message
           ? "เชื่อมต่อ LINE ไม่สำเร็จ: " + error.message
           : "เชื่อมต่อ LINE ไม่สำเร็จ กรุณาลองเปิดผ่าน LINE อีกครั้ง";
         button.disabled = true;
