@@ -61,7 +61,7 @@
 
     .shell {
       width: 100%;
-      max-width: 900px;
+      max-width: 760px;
       margin: 0 auto;
       overflow: hidden;
       background: var(--surface);
@@ -74,7 +74,7 @@
       position: relative;
       isolation: isolate;
       overflow: hidden;
-      padding: 27px clamp(22px, 5vw, 48px) 34px;
+      padding: 20px clamp(18px, 3vw, 30px) 22px;
       background: linear-gradient(120deg, #142B43 0%, #1A374F 70%, #254C63 100%);
       color: #fff;
     }
@@ -86,10 +86,10 @@
       border-radius: 50%;
       pointer-events: none;
     }
-    .hero::before { width: 330px; height: 330px; right: -135px; top: -195px; }
-    .hero::after { width: 235px; height: 235px; right: -88px; top: -148px; }
+    .hero::before { width: 240px; height: 240px; right: -110px; top: -155px; }
+    .hero::after { width: 165px; height: 165px; right: -70px; top: -112px; }
 
-    .brand-row { display: flex; align-items: center; gap: 12px; margin-bottom: 29px; }
+    .brand-row { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
     .brand-mark {
       display: grid;
       width: 43px; height: 43px; flex: 0 0 43px;
@@ -104,13 +104,13 @@
     .brand-caption { display: block; margin-top: 4px; color: #C4D0D9; font-size: 10px; letter-spacing: 1.15px; }
     .eyebrow { display: inline-flex; align-items: center; gap: 9px; margin-bottom: 10px; color: #DDCEAA; font-size: 11px; font-weight: 700; letter-spacing: .5px; }
     .eyebrow::before { content: ""; width: 22px; height: 1px; background: var(--gold); }
-    h1 { margin: 0; color: #fff; font-size: clamp(25px, 4.3vw, 34px); font-weight: 700; line-height: 1.35; letter-spacing: -.45px; }
-    .hero-copy { max-width: 580px; margin: 12px 0 0; color: #D5DFE7; font-size: 13px; line-height: 1.9; }
-    .hero-meta { display: flex; align-items: center; gap: 8px; margin-top: 23px; color: #D8E0E7; font-size: 11px; }
+    h1 { margin: 0; color: #fff; font-size: clamp(23px, 3.5vw, 29px); font-weight: 700; line-height: 1.35; letter-spacing: -.45px; }
+    .hero-copy { max-width: 520px; margin: 8px 0 0; color: #D5DFE7; font-size: 13px; line-height: 1.9; }
+    .hero-meta { display: flex; align-items: center; gap: 8px; margin-top: 13px; color: #D8E0E7; font-size: 11px; }
     .hero-meta svg { color: #D7C29B; flex: 0 0 auto; }
 
-    .content { padding: 28px clamp(16px, 4vw, 42px) 35px; }
-    .intro-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; margin-bottom: 18px; }
+    .content { padding: 20px clamp(14px, 3vw, 28px) 26px; }
+    .intro-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; margin-bottom: 12px; }
     .intro-title { margin: 0; color: var(--navy); font-size: 17px; font-weight: 800; }
     .intro-subtitle { margin: 5px 0 0; color: var(--muted); font-size: 12px; }
     .required-note { flex: 0 0 auto; padding: 5px 9px; border: 1px solid #E8DCD1; border-radius: 7px; background: #FCF8F4; color: #95664C; font-size: 10px; font-weight: 700; white-space: nowrap; }
@@ -151,10 +151,11 @@
     .profile-badge { display: inline-flex; align-items: center; gap: 5px; align-self: flex-start; flex: 0 0 auto; padding: 5px 8px; border-radius: 20px; background: var(--green-bg); color: var(--green); font-size: 10px; font-weight: 700; }
     .profile-badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #3B9A69; }
 
-    .form-section { margin-top: 28px; }
+    .form-section { margin-top: 14px; padding: 17px 18px 18px; border: 1px solid #E3E7EA; border-radius: 14px; background: linear-gradient(145deg, #FFFFFF 0%, #FCFCFB 100%); }
+    .form-section:first-child { margin-top: 0; }
     .section-heading {
       display: flex; align-items: center; gap: 12px;
-      margin: 0 0 18px; padding-bottom: 13px;
+      margin: 0 0 15px; padding-bottom: 10px;
       border-bottom: 1px solid #EAEDEF;
     }
     .section-number {
@@ -218,14 +219,48 @@
     #message.error { display: block; border-color: #EFCECA; background: var(--red-bg); color: var(--red); }
     .footer { padding: 15px 20px; border-top: 1px solid #E9ECEF; background: #FBFBFC; color: #8A959D; text-align: center; font-size: 10px; letter-spacing: .2px; }
 
+
+
+    /* หน้าต่างสถานะการส่งใบสมัคร พร้อมวงกลมเปอร์เซ็นต์ */
+    .submission-modal[hidden] { display: none !important; }
+    .submission-modal { position: fixed; inset: 0; z-index: 9999; display: grid; place-items: center; padding: 18px; }
+    .modal-backdrop { position: absolute; inset: 0; background: rgba(12, 26, 39, .58); backdrop-filter: blur(5px); }
+    .modal-card { position: relative; width: min(100%, 370px); padding: 27px 23px 22px; border: 1px solid rgba(255,255,255,.75); border-radius: 20px; background: #fff; box-shadow: 0 24px 80px rgba(10, 25, 40, .28); text-align: center; animation: modalIn .2s ease-out; }
+    @keyframes modalIn { from { opacity: 0; transform: translateY(8px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    .modal-brand { margin-bottom: 17px; color: #8D7952; font-size: 10px; font-weight: 800; letter-spacing: 1.8px; }
+    .progress-wrap { position: relative; width: 142px; height: 142px; margin: 0 auto 17px; }
+    .progress-svg { display: block; width: 142px; height: 142px; transform: rotate(-90deg); }
+    .progress-track, .progress-ring { fill: none; stroke-width: 8; }
+    .progress-track { stroke: #EDF0F2; }
+    .progress-ring { stroke: #B69B68; stroke-linecap: round; stroke-dasharray: 301.593; stroke-dashoffset: 301.593; transition: stroke-dashoffset .25s ease, stroke .2s ease; }
+    .progress-ring.is-complete { stroke: #2D7958; }
+    .progress-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .progress-percent { color: #142B43; font-size: 31px; font-weight: 800; line-height: 1.15; font-variant-numeric: tabular-nums; }
+    .progress-estimate { margin-top: 5px; color: #7D8992; font-size: 10px; }
+    .modal-eyebrow { margin: 0 0 6px; color: #8D7952; font-size: 10px; font-weight: 800; letter-spacing: 1px; }
+    .modal-title { margin: 0; color: #142B43; font-size: 19px; font-weight: 800; line-height: 1.5; }
+    .modal-description { margin: 8px auto 0; max-width: 285px; color: #6F7C87; font-size: 12px; line-height: 1.8; overflow-wrap: anywhere; }
+    .modal-reference { margin-top: 17px; padding: 12px 13px; border: 1px solid #E2E8E4; border-radius: 11px; background: #F7FAF8; }
+    .modal-reference[hidden] { display: none; }
+    .modal-reference-label { display: block; color: #6F7C87; font-size: 10px; }
+    .modal-reference-code { display: block; margin-top: 3px; color: #24664B; font-size: 15px; font-weight: 800; overflow-wrap: anywhere; letter-spacing: .35px; }
+    .modal-state-icon { display: grid; place-items: center; width: 56px; height: 56px; margin: 0 auto 13px; border-radius: 50%; background: #EFF7F2; color: #24664B; }
+    .modal-state-icon[hidden] { display: none; }
+    .modal-state-icon.error { color: #A74440; background: #FFF3F1; }
+    .modal-close { display: inline-flex; align-items: center; justify-content: center; width: 100%; min-height: 46px; margin-top: 19px; padding: 11px 16px; border: 0; border-radius: 10px; background: #142B43; color: white; font: inherit; font-size: 13px; font-weight: 800; cursor: pointer; }
+    .modal-close:hover { background: #203F5C; }
+    .modal-close[hidden] { display: none; }
+    body.modal-open { overflow: hidden; }
+
     @media (max-width: 620px) {
       body { padding: 9px 7px calc(18px + env(safe-area-inset-bottom)); }
       .shell { border-radius: 17px; }
-      .hero { padding: 22px 19px 26px; }
+      .hero { padding: 18px 17px 20px; }
       .brand-row { margin-bottom: 23px; }
       .hero-copy { font-size: 12px; }
-      .content { padding: 22px 16px 24px; }
-      .form-grid { gap: 15px 12px; }
+      .content { padding: 17px 12px 20px; }
+      .form-grid { gap: 14px 12px; }
+      .form-section { padding: 14px 13px 15px; margin-top: 12px; }
       .profile-card { gap: 11px; padding: 13px; }
       .avatar-frame { width: 52px; height: 52px; flex-basis: 52px; }
       .profile-name { font-size: 14px; }
@@ -239,8 +274,8 @@
       .intro-row { display: block; }
       .required-note { display: inline-flex; margin-top: 10px; }
       .profile-badge { align-self: center; }
-      .hero { padding: 20px 16px 23px; }
-      .content { padding: 19px 12px 20px; }
+      .hero { padding: 17px 14px 18px; }
+      .content { padding: 15px 10px 18px; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -412,8 +447,39 @@
       </form>
     </section>
 
-    <footer class="footer">ATWORK · CANDIDATE INFORMATION PORTAL</footer>
+    <footer class="footer">ATWORK · CANDIDATE PORTAL</footer>
   </main>
+
+  <!-- Pop-up สถานะการส่งใบสมัคร: ระหว่างส่งแสดงวงกลมเปอร์เซ็นต์โดยประมาณ -->
+  <div id="submissionModal" class="submission-modal" hidden aria-hidden="true">
+    <div class="modal-backdrop" aria-hidden="true"></div>
+    <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDescription">
+      <div class="modal-brand">ATWORK · CANDIDATE PORTAL</div>
+      <div id="progressWrap" class="progress-wrap">
+        <svg class="progress-svg" viewBox="0 0 120 120" aria-hidden="true">
+          <circle class="progress-track" cx="60" cy="60" r="48"></circle>
+          <circle id="progressRing" class="progress-ring" cx="60" cy="60" r="48"></circle>
+        </svg>
+        <div class="progress-center">
+          <strong id="progressPercent" class="progress-percent">0%</strong>
+          <span class="progress-estimate">ความคืบหน้าโดยประมาณ</span>
+        </div>
+      </div>
+      <div id="modalStateIcon" class="modal-state-icon" hidden aria-hidden="true">
+        <svg id="modalStateSvg" viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m5 12 4 4L19 6"></path>
+        </svg>
+      </div>
+      <p id="modalEyebrow" class="modal-eyebrow">กำลังดำเนินการ</p>
+      <h2 id="modalTitle" class="modal-title">กำลังส่งใบสมัคร</h2>
+      <p id="modalDescription" class="modal-description">โปรดอย่าปิดหน้าต่างนี้ ระบบกำลังส่งข้อมูลและรอผลยืนยัน</p>
+      <div id="modalReference" class="modal-reference" hidden>
+        <span class="modal-reference-label">เลขอ้างอิงผู้สมัคร</span>
+        <strong id="modalReferenceCode" class="modal-reference-code"></strong>
+      </div>
+      <button id="modalCloseButton" class="modal-close" type="button" hidden>ปิดหน้าต่าง</button>
+    </section>
+  </div>
 
   <script>
     /************************************************************
@@ -439,6 +505,19 @@
     const profileName = document.getElementById("profileName");
     const profilePicture = document.getElementById("profilePicture");
     const profileFallback = document.getElementById("profileFallback");
+    const submissionModal = document.getElementById("submissionModal");
+    const progressWrap = document.getElementById("progressWrap");
+    const progressRing = document.getElementById("progressRing");
+    const progressPercent = document.getElementById("progressPercent");
+    const progressEstimate = document.querySelector(".progress-estimate");
+    const modalStateIcon = document.getElementById("modalStateIcon");
+    const modalEyebrow = document.getElementById("modalEyebrow");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalDescription = document.getElementById("modalDescription");
+    const modalReference = document.getElementById("modalReference");
+    const modalReferenceCode = document.getElementById("modalReferenceCode");
+    const modalCloseButton = document.getElementById("modalCloseButton");
+    const CIRCLE_CIRCUMFERENCE = 2 * Math.PI * 48;
 
     const MAX_FILE_SIZE = 4 * 1024 * 1024;
     const ALLOWED_EXTENSIONS = ["pdf", "doc", "docx", "jpg", "jpeg", "png"];
@@ -456,6 +535,8 @@
     let pendingRequestId = "";
     let submitTimeout = null;
     let lineProfile = null;
+    let progressTimer = null;
+    let displayedProgress = 0;
 
     // สร้าง iframe เฉพาะสำหรับรับผลตอบกลับจาก Apps Script
     const responseFrame = document.createElement("iframe");
@@ -471,17 +552,126 @@
       button.classList.toggle("is-loading", Boolean(loading));
     }
 
+    // อัปเดตวงแหวนและตัวเลขเปอร์เซ็นต์ในป๊อปอัป
+    function updateProgress(value) {
+      displayedProgress = Math.max(0, Math.min(100, value));
+      progressPercent.textContent = Math.round(displayedProgress) + "%";
+      progressRing.style.strokeDasharray = String(CIRCLE_CIRCUMFERENCE);
+      progressRing.style.strokeDashoffset = String(
+        CIRCLE_CIRCUMFERENCE * (1 - displayedProgress / 100)
+      );
+    }
+
+    function stopProgressTimer() {
+      if (progressTimer) {
+        window.clearInterval(progressTimer);
+        progressTimer = null;
+      }
+    }
+
+    // เนื่องจากการส่งแบบฟอร์มผ่าน iframe ไม่รายงานเปอร์เซ็นต์ byte จริง
+    // ตัวเลขระหว่างส่งจึงเป็นค่าประมาณ และจะค้างไม่เกิน 92% จนเซิร์ฟเวอร์ยืนยัน
+    function startEstimatedProgress() {
+      stopProgressTimer();
+      progressTimer = window.setInterval(function() {
+        if (displayedProgress < 48) displayedProgress += 2.4;
+        else if (displayedProgress < 70) displayedProgress += 1.1;
+        else if (displayedProgress < 82) displayedProgress += 0.45;
+        else if (displayedProgress < 90) displayedProgress += 0.16;
+        else if (displayedProgress < 92) displayedProgress += 0.035;
+
+        updateProgress(Math.min(displayedProgress, 92));
+
+        if (displayedProgress < 22) {
+          modalDescription.textContent = "กำลังเตรียมข้อมูลและตรวจสอบไฟล์ โปรดรอสักครู่";
+        } else if (displayedProgress < 60) {
+          modalDescription.textContent = "กำลังส่งข้อมูลไปยังระบบ ATWORK";
+        } else if (displayedProgress < 84) {
+          modalDescription.textContent = "กำลังตรวจสอบข้อมูลและบันทึกใบสมัคร";
+        } else {
+          modalDescription.textContent = "กำลังรอระบบยืนยันผลการบันทึก เพื่อป้องกันเลขอ้างอิงผิดพลาด";
+        }
+      }, 260);
+    }
+
+    function openProgressModal() {
+      submissionModal.hidden = false;
+      submissionModal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+      progressWrap.hidden = false;
+      progressRing.classList.remove("is-complete");
+      modalStateIcon.hidden = true;
+      modalStateIcon.classList.remove("error");
+      modalReference.hidden = true;
+      modalReferenceCode.textContent = "";
+      modalCloseButton.hidden = true;
+      modalEyebrow.textContent = "ATWORK · CANDIDATE PORTAL";
+      progressEstimate.textContent = "ความคืบหน้าโดยประมาณ";
+      modalTitle.textContent = "กำลังส่งใบสมัคร";
+      modalDescription.textContent = "กำลังเตรียมข้อมูล โปรดอย่าปิดหน้าต่างนี้";
+      updateProgress(0);
+      startEstimatedProgress();
+    }
+
+    function closeProgressModal() {
+      stopProgressTimer();
+      submissionModal.hidden = true;
+      submissionModal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+      if (button && !button.disabled) button.focus();
+    }
+
+    function showModalError(text) {
+      stopProgressTimer();
+      progressWrap.hidden = true;
+      modalStateIcon.hidden = false;
+      modalStateIcon.classList.add("error");
+      modalStateIcon.innerHTML = '<svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"></path></svg>';
+      modalEyebrow.textContent = "โปรดตรวจสอบ";
+      modalTitle.textContent = "ยังส่งใบสมัครไม่สำเร็จ";
+      modalDescription.textContent = text;
+      modalReference.hidden = true;
+      modalCloseButton.hidden = false;
+      modalCloseButton.textContent = "ปิดหน้าต่าง";
+    }
+
+    function showModalSuccess(result) {
+      stopProgressTimer();
+      progressWrap.hidden = false;
+      progressRing.classList.add("is-complete");
+      updateProgress(100);
+      modalStateIcon.hidden = true;
+      modalEyebrow.textContent = "เสร็จเรียบร้อย";
+      progressEstimate.textContent = "บันทึกสำเร็จ";
+      modalTitle.textContent = "ส่งใบสมัครสำเร็จ";
+      modalDescription.textContent = result.resumeAttached
+        ? "บันทึกข้อมูลผู้สมัครและไฟล์ Resume เรียบร้อยแล้ว"
+        : "บันทึกข้อมูลผู้สมัครเรียบร้อยแล้ว ขอบคุณที่สมัครงานกับ ATWORK";
+      modalReference.hidden = false;
+      modalReferenceCode.textContent = result.candidateId || "ไม่พบเลขอ้างอิง กรุณาติดต่อทีมงาน";
+      modalCloseButton.hidden = false;
+      modalCloseButton.textContent = "เรียบร้อย";
+    }
+
+    modalCloseButton.addEventListener("click", closeProgressModal);
+    window.addEventListener("keydown", function(event) {
+      if (event.key === "Escape" && !submissionModal.hidden && !isSubmitting) {
+        closeProgressModal();
+      }
+    });
+
     function showError(text) {
       message.className = "error";
       message.style.display = "block";
       message.textContent = text;
       isSubmitting = false;
       setButtonState("บันทึกข้อมูลผู้สมัคร", !liffReady, false);
+      if (!submissionModal.hidden) showModalError(text);
     }
 
     function showSuccess(result) {
       message.className = "success";
-      message.style.display = "block";
+      message.style.display = "none";
       message.textContent = result.resumeAttached
         ? "บันทึกข้อมูลผู้สมัครสำเร็จ\nรหัสผู้สมัคร: " + result.candidateId + "\nแนบ Resume: " + result.resumeFileName
         : "บันทึกข้อมูลผู้สมัครสำเร็จ\nรหัสผู้สมัคร: " + result.candidateId + "\nคุณยังไม่ได้แนบ Resume";
@@ -490,8 +680,7 @@
       fileNameLabel.textContent = "";
       isSubmitting = false;
       setButtonState("บันทึกข้อมูลผู้สมัคร", !liffReady, false);
-      // ย้ายข้อความผลลัพธ์เข้ามาในมุมมองเพื่อให้เห็นชัดบนมือถือ
-      message.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      showModalSuccess(result);
     }
 
     function showProfile(profile) {
@@ -718,6 +907,7 @@
       message.className = "";
       message.style.display = "none";
       message.textContent = "";
+      openProgressModal();
 
       const data = {};
       new FormData(form).forEach(function(value, key) {
