@@ -923,7 +923,11 @@ function sendCandidateToAppsScript(data) {
           return;
         }
 
-        sendCandidateToAppsScript(data);
+        const fields = {
+          action: "submitCandidate",
+          requestId: requestId,
+          payload: JSON.stringify(data)
+          };
       }
 
       if (file) {
