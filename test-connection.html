@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>@attwork V2 - ทดสอบการเชื่อมต่อ</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+      color: #173B65;
+      line-height: 1.7;
+    }
+
+    .panel {
+      padding: 24px;
+      border: 1px solid #d9e2ee;
+      border-radius: 14px;
+    }
+
+    button {
+      padding: 12px 18px;
+      border: 0;
+      border-radius: 8px;
+      background: #2869b2;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    #result {
+      margin-top: 20px;
+      padding: 12px;
+      border-radius: 8px;
+      background: #f3f6fb;
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="panel">
+    <h2>@attwork V2</h2>
+    <p>ทดสอบการส่งข้อมูลจาก GitHub Pages ไป Google Apps Script</p>
+
+    <button id="testButton" type="button">
+      ทดสอบการเชื่อมต่อ
+    </button>
+
+    <div id="result" role="status" aria-live="polite">
+      พร้อมทดสอบ
+    </div>
+  </div>
+
+  <!-- iframe สำหรับรับผลตอบกลับจาก Apps Script -->
+  <iframe
+    name="attworkTestFrame"
+    title="ผลทดสอบการเชื่อมต่อ"
+    style="display:none">
+  </iframe>
+
+  <script>
+    /**************************************************
+     * ส่วนที่ 1: ตั้งค่า URL ของ Apps Script
+     *
+     * ให้วาง URL /exec จาก Deployment ของโปรเจกต์
+     * @attwork DB โดยตรง ห้ามใช้ URL ของโปรเจกต์เก่า
+     **************************************************/
+
+    const ATTWORK_WEB_APP_URL =
+      "วาง_URL_WEB_APP_ใหม่ที่ลงท้ายด้วย_EXEC_ตรงนี้";
+
+    const button = document.getElementById("testButton");
+    const resultBox = document.getElementById("result");
+
+    let pendingRequestId = "";
+    let timeoutId = null;
+
+
+    /**************************************************
+     * ส่วนที่ 2: รอรับผลตอบกลับจาก Apps Script
+     *
+     * ตรวจสอบ origin ชนิดข้อความ และรหัสคำขอ
+     * ก่อนแสดงผลบนหน้าเว็บ
+     **************************************************/
+
+    window.addEventListener("message", function(event) {
+      const allowedOrigin =
+        event.origin === "https://script.google.com" ||
+        event.origin.endsWith(".googleusercontent.com");
+
+      if (!allowedOrigin) return;
+
+      const data = event.data;
+
+      if (
+        !data ||
+        data.type !== "ATTWORK_CONNECTION_TEST" ||
+        !pendingRequestId ||
+        data.requestId !== pendingRequestId
+      ) {
+        return;
+      }
+
+      clearTimeout(timeoutId);
+      timeoutId = null;
+      pendingRequestId = "";
+      button.disabled = false;
+
+      if (data.success && data.status === "POST_RECEIVED") {
+        resultBox.textContent =
+          "ทดสอบสำเร็จ!\n\n" +
+          "สถานะ: " + data.status + "\n" +
+          "ระบบ: " + data.service + "\n" +
+          "ข้อความ: " + data.message;
+      } else {
+        resultBox.textContent =
+          "Apps Script ตอบกลับ แต่การทดสอบไม่ผ่าน\n\n" +
+          "สถานะ: " + (data.status || "ไม่ทราบสถานะ") + "\n" +
+          "ข้อความ: " + (data.message || "ไม่มีรายละเอียด");
+      }
+    });
+
+
+    /**************************************************
+     * ส่วนที่ 3: ส่งคำขอ POST
+     *
+     * ขั้นนี้ส่งเฉพาะคำสั่ง connectionTest
+     * ไม่บันทึกข้อมูลผู้สมัครลง Google Sheets
+     **************************************************/
+
+    button.addEventListener("click", function() {
+      if (pendingRequestId) return;
+
+      if (
+        !ATTWORK_WEB_APP_URL.startsWith("https://script.google.com/") ||
+        !ATTWORK_WEB_APP_URL.endsWith("/exec")
+      ) {
+        resultBox.textContent =
+          "กรุณาตั้งค่า URL ของ Apps Script ที่ลงท้ายด้วย /exec ก่อน";
+        return;
+      }
+
+      const requestId =
+        Date.now() + "-" + Math.random().toString(36).slice(2);
+
+      pendingRequestId = requestId;
+      button.disabled = true;
+
+      resultBox.textContent = "กำลังส่งคำขอไปยัง Apps Script...";
+
+      const form = document.createElement("form");
+      form.method = "POST";
+      form.action = ATTWORK_WEB_APP_URL;
+      form.target = "attworkTestFrame";
+      form.style.display = "none";
+
+      const fields = {
+        action: "connectionTest",
+        requestId: requestId
+      };
+
+      Object.keys(fields).forEach(function(key) {
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = key;
+        input.value = fields[key];
+        form.appendChild(input);
+      });
+
+      document.body.appendChild(form);
+
+      try {
+        form.submit();
+      } catch (error) {
+        pendingRequestId = "";
+        button.disabled = false;
+        resultBox.textContent =
+          "ส่งคำขอไม่สำเร็จ: " + error.message;
+      } finally {
+        form.remove();
+      }
+
+      timeoutId = setTimeout(function() {
+        if (!pendingRequestId) return;
+
+        pendingRequestId = "";
+        button.disabled = false;
+
+        resultBox.textContent =
+          "ยังไม่ได้รับผลตอบกลับภายใน 30 วินาที\n" +
+          "โปรดตรวจ URL ของ Web App และสถานะการ Deploy";
+      }, 30000);
+    });
+  </script>
+</body>
+</html>
