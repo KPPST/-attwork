@@ -15,16 +15,16 @@
   <style>
     :root {
       color-scheme: light;
-      --ink: #182C40;
-      --navy: #142B43;
-      --navy-2: #203F5C;
-      --blue: #326B88;
-      --blue-soft: #EEF4F7;
-      --gold: #B69B68;
-      --gold-soft: #F5F0E7;
-      --paper: #F5F6F7;
+      --ink: #1B3150;
+      --navy: #1749A2;
+      --navy-2: #245FC2;
+      --blue: #287DEB;
+      --blue-soft: #EDF5FF;
+      --gold: #FFC247;
+      --gold-soft: #FFF4D8;
+      --paper: #F2F7FF;
       --surface: #FFFFFF;
-      --line: #E0E5E9;
+      --line: #DCE7F5;
       --muted: #6F7C87;
       --placeholder: #9AA5AE;
       --green: #24664B;
@@ -46,7 +46,8 @@
       padding: 28px 16px 42px;
       color: var(--ink);
       background:
-        radial-gradient(circle at 90% 0%, rgba(182, 155, 104, .10), transparent 25rem),
+        radial-gradient(circle at 90% 0%, rgba(56, 139, 255, .15), transparent 25rem),
+        radial-gradient(circle at 5% 30%, rgba(0, 190, 210, .07), transparent 22rem),
         var(--paper);
       font-family: "Noto Sans Thai", Tahoma, Arial, sans-serif;
       font-size: 14px;
@@ -55,8 +56,8 @@
       text-rendering: optimizeLegibility;
     }
 
-    button, input, textarea { font: inherit; }
-    button, input, textarea { -webkit-tap-highlight-color: transparent; }
+    button, input, textarea, select { font: inherit; }
+    button, input, textarea, select { -webkit-tap-highlight-color: transparent; }
     button { touch-action: manipulation; }
 
     .shell {
@@ -65,7 +66,7 @@
       margin: 0 auto;
       overflow: hidden;
       background: var(--surface);
-      border: 1px solid rgba(216, 224, 230, .92);
+      border: 1px solid rgba(211, 226, 246, .96);
       border-radius: var(--radius-xl);
       box-shadow: var(--shadow);
     }
@@ -74,40 +75,40 @@
       position: relative;
       isolation: isolate;
       overflow: hidden;
-      padding: 20px clamp(18px, 3vw, 30px) 22px;
-      background: linear-gradient(120deg, #142B43 0%, #1A374F 70%, #254C63 100%);
+      padding: 18px clamp(18px, 3vw, 30px) 19px;
+      background: linear-gradient(118deg, #2457D6 0%, #237FE8 53%, #00AFC5 100%);
       color: #fff;
     }
     .hero::before, .hero::after {
       position: absolute;
       z-index: -1;
       content: "";
-      border: 1px solid rgba(226, 211, 177, .19);
+      border: 1px solid rgba(255, 255, 255, .24);
       border-radius: 50%;
       pointer-events: none;
     }
     .hero::before { width: 240px; height: 240px; right: -110px; top: -155px; }
     .hero::after { width: 165px; height: 165px; right: -70px; top: -112px; }
 
-    .brand-row { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+    .brand-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
     .brand-mark {
       display: grid;
-      width: 43px; height: 43px; flex: 0 0 43px;
+      width: 37px; height: 37px; flex: 0 0 37px;
       place-items: center;
       border: 1px solid rgba(233, 219, 187, .55);
-      border-radius: 13px;
+      border-radius: 11px;
       background: rgba(255, 255, 255, .07);
       color: #F1E5C9;
       font-size: 18px; font-weight: 800; letter-spacing: -.5px;
     }
-    .brand-name { color: #fff; font-size: 15px; font-weight: 800; letter-spacing: 2.2px; line-height: 1.25; }
-    .brand-caption { display: block; margin-top: 4px; color: #C4D0D9; font-size: 10px; letter-spacing: 1.15px; }
-    .eyebrow { display: inline-flex; align-items: center; gap: 9px; margin-bottom: 10px; color: #DDCEAA; font-size: 11px; font-weight: 700; letter-spacing: .5px; }
-    .eyebrow::before { content: ""; width: 22px; height: 1px; background: var(--gold); }
-    h1 { margin: 0; color: #fff; font-size: clamp(23px, 3.5vw, 29px); font-weight: 700; line-height: 1.35; letter-spacing: -.45px; }
-    .hero-copy { max-width: 520px; margin: 8px 0 0; color: #D5DFE7; font-size: 13px; line-height: 1.9; }
-    .hero-meta { display: flex; align-items: center; gap: 8px; margin-top: 13px; color: #D8E0E7; font-size: 11px; }
-    .hero-meta svg { color: #D7C29B; flex: 0 0 auto; }
+    .brand-name { color: #fff; font-size: 13px; font-weight: 800; letter-spacing: 1.9px; line-height: 1.25; }
+    .brand-caption { display: block; margin-top: 3px; color: #C4D0D9; font-size: 9px; letter-spacing: 1px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 6px; color: #FFF0B7; font-size: 11px; font-weight: 700; letter-spacing: .5px; }
+    .eyebrow::before { content: ""; width: 22px; height: 1px; background: #FFE07A; }
+    h1 { margin: 0; color: #fff; font-size: clamp(21px, 3vw, 25px); font-weight: 700; line-height: 1.3; letter-spacing: -.35px; }
+    .hero-copy { max-width: 520px; margin: 6px 0 0; color: #EFF8FF; font-size: 12px; line-height: 1.7; }
+    .hero-meta { display: flex; align-items: center; gap: 7px; margin-top: 9px; color: #F0FBFF; font-size: 10px; }
+    .hero-meta svg { color: #FFE07A; flex: 0 0 auto; }
 
     .content { padding: 20px clamp(14px, 3vw, 28px) 26px; }
     .intro-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; margin-bottom: 12px; }
@@ -170,7 +171,7 @@
     .full { grid-column: 1 / -1; }
     label { display: block; margin: 0 0 7px; color: #2A3D4F; font-size: 12px; font-weight: 700; line-height: 1.55; }
     .required-star { color: #B94C43; }
-    input:not([type="file"]), textarea {
+    input:not([type="file"]), textarea, select {
       display: block; width: 100%; min-width: 0; min-height: 46px;
       padding: 11px 13px; border: 1px solid #D6DDE2; border-radius: 10px;
       outline: none; background: #fff; color: var(--ink);
@@ -178,9 +179,9 @@
       transition: border-color .16s ease, box-shadow .16s ease, background .16s ease;
     }
     input::placeholder, textarea::placeholder { color: var(--placeholder); opacity: 1; }
-    input:hover:not(:disabled), textarea:hover:not(:disabled) { border-color: #AEBCC6; }
-    input:focus-visible, textarea:focus-visible { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(50, 107, 136, .12); }
-    input[aria-invalid="true"], textarea[aria-invalid="true"] { border-color: var(--red); }
+    input:hover:not(:disabled), textarea:hover:not(:disabled), select:hover:not(:disabled) { border-color: #AEBCC6; }
+    input:focus-visible, textarea:focus-visible, select:focus-visible { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(50, 107, 136, .12); }
+    input[aria-invalid="true"], textarea[aria-invalid="true"], select[aria-invalid="true"] { border-color: var(--red); }
     textarea { min-height: 104px; resize: vertical; line-height: 1.8; }
     .hint { display: block; margin-top: 7px; color: var(--muted); font-size: 11px; line-height: 1.8; }
 
@@ -191,9 +192,6 @@
     .upload-description { margin: 3px 0 0; color: var(--muted); font-size: 11px; line-height: 1.7; }
     input[type="file"] { display: block; width: 100%; min-width: 0; padding: 8px; border: 1px solid #D6DDE2; border-radius: 9px; background: #fff; color: #415362; font-family: inherit; font-size: 12px; }
     input[type="file"]::file-selector-button { margin-right: 10px; padding: 8px 11px; border: 1px solid #D6DDE2; border-radius: 7px; background: #F4F6F7; color: var(--navy); font: inherit; font-size: 11px; font-weight: 700; cursor: pointer; }
-    .file-meta { display: none; align-items: flex-start; gap: 8px; margin-top: 11px; padding: 10px 11px; border-radius: 9px; background: #EEF5F0; color: #2F644C; font-size: 11px; overflow-wrap: anywhere; }
-    .file-meta.visible { display: flex; }
-    .file-meta svg { flex: 0 0 auto; margin-top: 2px; }
 
     .privacy-note { display: flex; align-items: flex-start; gap: 9px; margin-top: 24px; padding: 12px 13px; border-radius: 10px; background: #F7F8F8; color: #6D7982; font-size: 11px; line-height: 1.85; }
     .privacy-note svg { flex: 0 0 16px; margin-top: 3px; color: #8A9AA5; }
@@ -202,11 +200,11 @@
       display: flex; align-items: center; justify-content: center; gap: 10px;
       width: 100%; min-height: 52px; padding: 13px 18px;
       border: 1px solid var(--navy); border-radius: 11px;
-      background: var(--navy); color: #fff; box-shadow: 0 7px 18px rgba(20, 43, 67, .13);
+      background: linear-gradient(105deg, #245DDB, #1789E8); color: #fff; box-shadow: 0 7px 18px rgba(36, 93, 219, .22);
       font-family: inherit; font-size: 13px; font-weight: 800; cursor: pointer;
       transition: background .16s ease, transform .16s ease, box-shadow .16s ease, opacity .16s ease;
     }
-    .submit-button:hover:not(:disabled) { background: #203F5C; box-shadow: 0 10px 22px rgba(20, 43, 67, .18); transform: translateY(-1px); }
+    .submit-button:hover:not(:disabled) { background: linear-gradient(105deg, #194FC7, #0877D7); box-shadow: 0 10px 22px rgba(36, 93, 219, .28); transform: translateY(-1px); }
     .submit-button:focus-visible { outline: 3px solid rgba(50, 107, 136, .26); outline-offset: 3px; }
     .submit-button:disabled { opacity: .58; cursor: not-allowed; box-shadow: none; }
     .submit-button .button-arrow { font-size: 18px; line-height: 1; font-weight: 400; }
@@ -227,18 +225,18 @@
     .modal-backdrop { position: absolute; inset: 0; background: rgba(12, 26, 39, .58); backdrop-filter: blur(5px); }
     .modal-card { position: relative; width: min(100%, 370px); padding: 27px 23px 22px; border: 1px solid rgba(255,255,255,.75); border-radius: 20px; background: #fff; box-shadow: 0 24px 80px rgba(10, 25, 40, .28); text-align: center; animation: modalIn .2s ease-out; }
     @keyframes modalIn { from { opacity: 0; transform: translateY(8px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
-    .modal-brand { margin-bottom: 17px; color: #8D7952; font-size: 10px; font-weight: 800; letter-spacing: 1.8px; }
+    .modal-brand { margin-bottom: 17px; color: #9A6A00; font-size: 10px; font-weight: 800; letter-spacing: 1.8px; }
     .progress-wrap { position: relative; width: 142px; height: 142px; margin: 0 auto 17px; }
     .progress-svg { display: block; width: 142px; height: 142px; transform: rotate(-90deg); }
     .progress-track, .progress-ring { fill: none; stroke-width: 8; }
     .progress-track { stroke: #EDF0F2; }
-    .progress-ring { stroke: #B69B68; stroke-linecap: round; stroke-dasharray: 301.593; stroke-dashoffset: 301.593; transition: stroke-dashoffset .25s ease, stroke .2s ease; }
+    .progress-ring { stroke: #FFB92E; stroke-linecap: round; stroke-dasharray: 301.593; stroke-dashoffset: 301.593; transition: stroke-dashoffset .25s ease, stroke .2s ease; }
     .progress-ring.is-complete { stroke: #2D7958; }
     .progress-center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-    .progress-percent { color: #142B43; font-size: 31px; font-weight: 800; line-height: 1.15; font-variant-numeric: tabular-nums; }
+    .progress-percent { color: #1749A2; font-size: 31px; font-weight: 800; line-height: 1.15; font-variant-numeric: tabular-nums; }
     .progress-estimate { margin-top: 5px; color: #7D8992; font-size: 10px; }
-    .modal-eyebrow { margin: 0 0 6px; color: #8D7952; font-size: 10px; font-weight: 800; letter-spacing: 1px; }
-    .modal-title { margin: 0; color: #142B43; font-size: 19px; font-weight: 800; line-height: 1.5; }
+    .modal-eyebrow { margin: 0 0 6px; color: #9A6A00; font-size: 10px; font-weight: 800; letter-spacing: 1px; }
+    .modal-title { margin: 0; color: #1749A2; font-size: 19px; font-weight: 800; line-height: 1.5; }
     .modal-description { margin: 8px auto 0; max-width: 285px; color: #6F7C87; font-size: 12px; line-height: 1.8; overflow-wrap: anywhere; }
     .modal-reference { margin-top: 17px; padding: 12px 13px; border: 1px solid #E2E8E4; border-radius: 11px; background: #F7FAF8; }
     .modal-reference[hidden] { display: none; }
@@ -247,17 +245,55 @@
     .modal-state-icon { display: grid; place-items: center; width: 56px; height: 56px; margin: 0 auto 13px; border-radius: 50%; background: #EFF7F2; color: #24664B; }
     .modal-state-icon[hidden] { display: none; }
     .modal-state-icon.error { color: #A74440; background: #FFF3F1; }
-    .modal-close { display: inline-flex; align-items: center; justify-content: center; width: 100%; min-height: 46px; margin-top: 19px; padding: 11px 16px; border: 0; border-radius: 10px; background: #142B43; color: white; font: inherit; font-size: 13px; font-weight: 800; cursor: pointer; }
-    .modal-close:hover { background: #203F5C; }
+    .modal-close { display: inline-flex; align-items: center; justify-content: center; width: 100%; min-height: 46px; margin-top: 19px; padding: 11px 16px; border: 0; border-radius: 10px; background: linear-gradient(105deg, #245DDB, #1789E8); color: white; font: inherit; font-size: 13px; font-weight: 800; cursor: pointer; }
+    .modal-close:hover { background: linear-gradient(105deg, #194FC7, #0877D7); }
     .modal-close[hidden] { display: none; }
     body.modal-open { overflow: hidden; }
+
+
+    select { cursor: pointer; }
+    select:disabled { background: #F5F7FA; color: #778694; cursor: wait; }
+    .choice-help { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 10px; color: var(--muted); font-size: 11px; }
+    .choice-count { flex: 0 0 auto; padding: 4px 8px; border-radius: 999px; background: var(--blue-soft); color: var(--navy); font-weight: 800; }
+    .skill-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+    .skill-option { display: flex; align-items: center; justify-content: center; min-width: 0; min-height: 43px; padding: 10px 12px; border: 1px solid #CFE0F5; border-radius: 999px; background: #FFFFFF; color: #234365; cursor: pointer; text-align: center; font-size: 11px; line-height: 1.5; font-weight: 700; transition: border-color .15s, background .15s, box-shadow .15s, transform .15s; }
+    .skill-option:hover { border-color: #76A6EB; background: #F5F9FF; }
+    .skill-option:has(input:checked) { border-color: #3F7EE8; background: linear-gradient(120deg, #E9F2FF, #F3F8FF); color: #1749A2; box-shadow: inset 0 0 0 1px #A8C8FF; }
+    .skill-option input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+    .skill-option:has(input:focus-visible) { outline: 3px solid #8BB8FF; outline-offset: 2px; }
+    .limit-warning { color: var(--red); font-weight: 700; }
+    .hint.validation-warning { color: var(--red); font-weight: 700; }
+    .experience-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .experience-option { display: flex; align-items: center; justify-content: flex-start; gap: 9px; min-width: 0; min-height: 43px; margin: 0; padding: 10px 12px; border: 1px solid #CFE0F5; border-radius: 10px; background: #FFFFFF; color: #234365; cursor: pointer; font-size: 11px; line-height: 1.5; font-weight: 700; transition: border-color .15s, background .15s, box-shadow .15s; }
+    .experience-option:hover { border-color: #76A6EB; background: #F5F9FF; }
+    .experience-option:has(input:checked) { border-color: #3F7EE8; background: linear-gradient(120deg, #E9F2FF, #F3F8FF); color: #1749A2; box-shadow: inset 0 0 0 1px #A8C8FF; }
+    .experience-option input[type="radio"] { display: inline-block; width: 16px; min-width: 16px; height: 16px; min-height: 16px; margin: 0; padding: 0; accent-color: #287DEB; }
+    .experience-option:has(input:focus-visible) { outline: 3px solid #8BB8FF; outline-offset: 2px; }
+    .language-list { display: grid; gap: 12px; }
+    .language-row { padding: 13px; border: 1px solid #DCE5F1; border-radius: 12px; background: #FBFDFF; }
+    .language-row-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+    .language-row-title { color: var(--navy); font-size: 12px; font-weight: 800; }
+    .remove-language { border: 0; background: transparent; color: #A74440; font: inherit; font-size: 11px; cursor: pointer; }
+    .language-fields { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 9px; }
+    .language-fields .language-name { grid-column: span 1; }
+    .language-fields label { margin-bottom: 5px; font-size: 10px; }
+    .language-fields input, .language-fields select { min-height: 40px; padding: 8px; font-size: 11px; }
+    .secondary-button { margin-top: 11px; min-height: 40px; padding: 8px 12px; border: 1px solid #BFD4F5; border-radius: 9px; background: #F4F8FF; color: #1749A2; font: inherit; font-size: 11px; font-weight: 800; cursor: pointer; }
+    .photo-preview-wrap { display: flex; align-items: center; gap: 14px; margin-top: 12px; }
+    .photo-preview { display: none; width: 100px; height: 120px; object-fit: cover; border: 1px solid #DCE5F1; border-radius: 12px; background: #F4F8FF; }
+    .photo-preview.visible { display: block; }
+    .photo-preview-note { color: var(--muted); font-size: 11px; line-height: 1.7; }
+    .job-load-status { margin-top: 7px; color: var(--muted); font-size: 11px; line-height: 1.7; }
+    .job-load-status.error { color: var(--red); }
+    .modal-resume-link { display: inline-flex; justify-content: center; align-items: center; margin-top: 12px; padding: 10px 14px; border: 1px solid #BFD4F5; border-radius: 9px; background: #F4F8FF; color: #1749A2; font-size: 12px; font-weight: 800; text-decoration: none; }
+    .modal-resume-link[hidden] { display: none; }
 
     @media (max-width: 620px) {
       body { padding: 9px 7px calc(18px + env(safe-area-inset-bottom)); }
       .shell { border-radius: 17px; }
-      .hero { padding: 18px 17px 20px; }
-      .brand-row { margin-bottom: 23px; }
-      .hero-copy { font-size: 12px; }
+      .hero { padding: 16px 16px 17px; }
+      
+      .hero-copy { font-size: 11px; line-height: 1.7; }
       .content { padding: 17px 12px 20px; }
       .form-grid { gap: 14px 12px; }
       .form-section { padding: 14px 13px 15px; margin-top: 12px; }
@@ -274,7 +310,7 @@
       .intro-row { display: block; }
       .required-note { display: inline-flex; margin-top: 10px; }
       .profile-badge { align-self: center; }
-      .hero { padding: 17px 14px 18px; }
+      .hero { padding: 15px 13px 16px; }
       .content { padding: 15px 10px 18px; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -286,16 +322,9 @@
 <body>
   <main class="shell">
     <header class="hero">
-      <div class="brand-row">
-        <div class="brand-mark" aria-hidden="true">A</div>
-        <div>
-          <div class="brand-name">ATWORK</div>
-          <span class="brand-caption">CAREER &amp; TALENT SERVICES</span>
-        </div>
-      </div>
       <div class="eyebrow">CANDIDATE REGISTRATION</div>
       <h1>ข้อมูลผู้สมัครงาน</h1>
-      <p class="hero-copy">กรอกข้อมูลของคุณเพื่อให้ทีมงาน ATWORK รู้จักคุณมากขึ้น ใช้เวลาเพียงไม่กี่นาที และสามารถแนบ Resume เพิ่มเติมได้ตามต้องการ</p>
+      <p class="hero-copy">กรอกข้อมูลให้ครบเพื่อสร้างโปรไฟล์ผู้สมัครและ Resume ของคุณโดยอัตโนมัติ</p>
       <div class="hero-meta">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 3 7.5 7 10 4-2.5 7-5.5 7-10V6l-7-3Z"></path><path d="m9 12 2 2 4-4"></path></svg>
         ข้อมูลของคุณจะถูกใช้เพื่อประกอบการติดต่อเรื่องงาน
@@ -336,40 +365,50 @@
         <section class="form-section" aria-labelledby="personalHeading">
           <div class="section-heading">
             <span class="section-number">01</span>
-            <div>
-              <h2 id="personalHeading">ข้อมูลส่วนตัว</h2>
-              <p>ข้อมูลพื้นฐานสำหรับติดต่อกลับ</p>
-            </div>
+            <div><h2 id="personalHeading">ข้อมูลส่วนตัวและที่อยู่</h2><p>ข้อมูลสำหรับติดต่อและจัดทำ Resume</p></div>
           </div>
           <div class="form-grid">
             <div class="field full">
-              <label for="FullName">ชื่อ-นามสกุล <span class="required-star">*</span></label>
+              <label for="FullName">1. ชื่อ-นามสกุล <span class="required-star">*</span></label>
               <input id="FullName" name="FullName" maxlength="150" autocomplete="name" required placeholder="กรอกชื่อและนามสกุล" aria-describedby="FullNameHint">
-              <small class="hint" id="FullNameHint">กรุณากรอกชื่อจริงและนามสกุลให้ตรงกับข้อมูลที่ใช้ติดต่อ</small>
+              <small class="hint" id="FullNameHint">ใช้ชื่อจริงที่ต้องการให้แสดงใน Resume</small>
             </div>
             <div class="field">
-              <label for="Nickname">ชื่อเล่น</label>
-              <input id="Nickname" name="Nickname" maxlength="100" autocomplete="nickname" placeholder="ชื่อที่ต้องการให้เรียก">
+              <label for="Age">2. อายุ (ปี) <span class="required-star">*</span></label>
+              <input id="Age" name="Age" type="number" inputmode="numeric" min="1" max="120" step="1" required placeholder="เช่น 25">
             </div>
             <div class="field">
-              <label for="DateOfBirth">วันเกิด</label>
-              <input id="DateOfBirth" name="DateOfBirth" type="date" autocomplete="bday">
+              <label for="Phone">3. เบอร์โทรศัพท์ <span class="required-star">*</span></label>
+              <input id="Phone" name="Phone" type="tel" inputmode="tel" maxlength="20" autocomplete="tel" required placeholder="เช่น 0812345678">
+              <small class="hint">กรอกตัวเลขให้ครบ และเก็บเลข 0 ด้านหน้าไว้</small>
             </div>
-            <div class="field">
-              <label for="Phone">เบอร์โทรศัพท์ <span class="required-star">*</span></label>
-              <input id="Phone" name="Phone" type="tel" inputmode="tel" maxlength="30" required autocomplete="tel" placeholder="เช่น 0812345678">
-            </div>
-            <div class="field">
-              <label for="Email">อีเมล</label>
+            <div class="field full">
+              <label for="Email">4. อีเมล</label>
               <input id="Email" name="Email" type="email" maxlength="150" autocomplete="email" placeholder="name@example.com">
             </div>
             <div class="field">
-              <label for="Province">จังหวัดที่พักอาศัย</label>
-              <input id="Province" name="Province" maxlength="100" autocomplete="address-level1" placeholder="เช่น กรุงเทพมหานคร">
+              <label for="HouseNo">5. บ้านเลขที่</label>
+              <input id="HouseNo" name="HouseNo" maxlength="100" autocomplete="address-line1" placeholder="เช่น 99/12">
             </div>
             <div class="field">
-              <label for="Address">ที่อยู่สำหรับติดต่อ</label>
-              <input id="Address" name="Address" maxlength="500" autocomplete="street-address" placeholder="บ้านเลขที่ ถนน แขวง/ตำบล (ถ้ามี)">
+              <label for="moo">6. หมู่</label>
+              <input id="moo" name="moo" maxlength="50" placeholder="เช่น หมู่ 4 หรือ 4">
+            </div>
+            <div class="field">
+              <label for="Subdistrict">7. ตำบล/แขวง</label>
+              <input id="Subdistrict" name="Subdistrict" maxlength="100" autocomplete="address-level3" placeholder="กรอกตำบลหรือแขวง">
+            </div>
+            <div class="field">
+              <label for="District">8. อำเภอ/เขต</label>
+              <input id="District" name="District" maxlength="100" autocomplete="address-level2" placeholder="กรอกอำเภอหรือเขต">
+            </div>
+            <div class="field">
+              <label for="Province">9. จังหวัด</label>
+              <input id="Province" name="Province" type="text" maxlength="100" autocomplete="address-level1" placeholder="กรอกชื่อจังหวัด">
+            </div>
+            <div class="field">
+              <label for="PastalCode">10. รหัสไปรษณีย์</label>
+              <input id="PastalCode" name="PastalCode" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" pattern="[0-9]{5}" placeholder="5 หลัก เช่น 10110">
             </div>
           </div>
         </section>
@@ -377,63 +416,121 @@
         <section class="form-section" aria-labelledby="experienceHeading">
           <div class="section-heading">
             <span class="section-number">02</span>
-            <div>
-              <h2 id="experienceHeading">การศึกษาและประสบการณ์</h2>
-              <p>ช่วยให้ทีมงานเข้าใจความรู้และทักษะของคุณ</p>
-            </div>
+            <div><h2 id="experienceHeading">การศึกษาและความสามารถ</h2><p>ข้อมูลที่ระบบจะนำไปจัดหน้า Resume ให้อัตโนมัติ</p></div>
           </div>
           <div class="form-grid">
             <div class="field full">
-              <label for="Education">ประวัติการศึกษา</label>
-              <textarea id="Education" name="Education" maxlength="3000" placeholder="วุฒิการศึกษา สถานศึกษา สาขาวิชา และปีที่จบ"></textarea>
-              <small class="hint">เริ่มจากวุฒิการศึกษาล่าสุดได้เลย</small>
+              <label for="Education">11. ระดับการศึกษาสูงสุด <span class="required-star">*</span></label>
+              <select id="Education" name="Education" required>
+                <option value="">เลือกระดับการศึกษาสูงสุด</option>
+                <option value="ประถมศึกษา">ประถมศึกษา</option>
+                <option value="มัธยมศึกษาตอนต้น">มัธยมศึกษาตอนต้น</option>
+                <option value="มัธยมศึกษาตอนปลาย">มัธยมศึกษาตอนปลาย</option>
+                <option value="ประกาศนียบัตรวิชาชีพ (ปวช.)">ประกาศนียบัตรวิชาชีพ (ปวช.)</option>
+                <option value="ประกาศนียบัตรวิชาชีพชั้นสูง (ปวส.) / อนุปริญญา">ประกาศนียบัตรวิชาชีพชั้นสูง (ปวส.) / อนุปริญญา</option>
+                <option value="ปริญญาตรี">ปริญญาตรี</option>
+                <option value="ปริญญาโท">ปริญญาโท</option>
+                <option value="ปริญญาเอก">ปริญญาเอก</option>
+              </select>
+              <small class="hint">เลือกวุฒิการศึกษาสูงสุดที่สำเร็จแล้ว</small>
             </div>
             <div class="field full">
-              <label for="WorkExperience">ประสบการณ์ทำงาน</label>
-              <textarea id="WorkExperience" name="WorkExperience" maxlength="5000" placeholder="บริษัท ตำแหน่ง หน้าที่รับผิดชอบ และระยะเวลาทำงาน"></textarea>
+              <label id="WorkExperienceLabel">12. ประสบการณ์ทำงาน <span class="required-star">*</span></label>
+              <div id="workExperienceOptions" class="experience-grid" role="radiogroup" aria-labelledby="WorkExperienceLabel">
+                <label class="experience-option"><input type="radio" id="WorkExperienceNone" name="WorkExperience" value="ยังไม่มีประสบการณ์ทำงาน" required><span>ยังไม่มีประสบการณ์ทำงาน</span></label>
+                <label class="experience-option"><input type="radio" id="WorkExperienceIntern" name="WorkExperience" value="ฝึกงาน / สหกิจศึกษา"><span>ฝึกงาน / สหกิจศึกษา</span></label>
+                <label class="experience-option"><input type="radio" id="WorkExperienceUnder1" name="WorkExperience" value="น้อยกว่า 1 ปี"><span>น้อยกว่า 1 ปี</span></label>
+                <label class="experience-option"><input type="radio" id="WorkExperience1to3" name="WorkExperience" value="1–3 ปี"><span>1–3 ปี</span></label>
+                <label class="experience-option"><input type="radio" id="WorkExperience4to5" name="WorkExperience" value="4–5 ปี"><span>4–5 ปี</span></label>
+                <label class="experience-option"><input type="radio" id="WorkExperience6to10" name="WorkExperience" value="6–10 ปี"><span>6–10 ปี</span></label>
+                <label class="experience-option"><input type="radio" id="WorkExperienceOver10" name="WorkExperience" value="มากกว่า 10 ปี"><span>มากกว่า 10 ปี</span></label>
+              </div>
+              <small class="hint">เลือกได้ 1 รายการที่ตรงกับประสบการณ์ทำงานของคุณมากที่สุด</small>
             </div>
-            <div class="field">
-              <label for="Skills">ทักษะ</label>
-              <textarea id="Skills" name="Skills" maxlength="2000" placeholder="ทักษะเฉพาะงาน คอมพิวเตอร์ หรือเครื่องมือที่ใช้ได้"></textarea>
+            <div class="field full">
+              <div class="choice-help">
+                <label style="margin:0" id="skillsLabel">13. ทักษะ <span class="required-star">*</span></label>
+                <span id="skillCount" class="choice-count" aria-live="polite">เลือก 0 / 5</span>
+              </div>
+              <p class="hint" style="margin:0 0 10px">เลือกทักษะที่ตรงกับตัวเองอย่างน้อย 3 และไม่เกิน 5 รายการ</p>
+              <div id="skillsGrid" class="skill-grid" role="group" aria-labelledby="skillsLabel">
+                <label class="skill-option"><input type="checkbox" name="SkillOption" value="การใช้คอมพิวเตอร์พื้นฐาน"><span>การใช้คอมพิวเตอร์พื้นฐาน</span></label>
+                <label class="skill-option"><input type="checkbox" name="SkillOption" value="Microsoft Office"><span>Microsoft Office</span></label>
+                <label class="skill-option"><input type="checkbox" name="SkillOption" value="การสื่อสาร"><span>การสื่อสาร</span></label>
+                <label class="skill-option"><input type="checkbox" name="SkillOption" value="การประสานงาน"><span>การประสานงาน</span></label>
+                <label class="skill-option"><input type="checkbox" name="SkillOption" value="การบริการลูกค้า"><span>การบริการลูกค้า</span></label>
+                <label class="skill-option"><input type="checkbox" name="SkillOption" value="การขาย"><span>การขาย</span></label>
+                <label class="skill-option"><input type="checkbox" name="SkillOption" value="การแก้ปัญหา"><span>การแก้ปัญหา</span></label>
+                <label class="skill-option"><input type="checkbox" name="SkillOption" value="การทำงานเป็นทีม"><span>การทำงานเป็นทีม</span></label>
+                <label class="skill-option"><input type="checkbox" name="SkillOption" value="การใช้งานเครื่องจักร"><span>การใช้งานเครื่องจักร</span></label>
+                <label class="skill-option"><input type="checkbox" name="SkillOption" value="การตรวจสอบคุณภาพ (QC)"><span>การตรวจสอบคุณภาพ (QC)</span></label>
+                <label class="skill-option"><input type="checkbox" name="SkillOption" value="งานคลังสินค้า"><span>งานคลังสินค้า</span></label>
+                <label class="skill-option"><input type="checkbox" name="SkillOption" value="การขับขี่"><span>การขับขี่</span></label>
+                <label class="skill-option"><input type="checkbox" name="SkillOption" value="งานเอกสารและคีย์ข้อมูล"><span>งานเอกสารและคีย์ข้อมูล</span></label>
+                <label class="skill-option"><input type="checkbox" name="SkillOption" value="การบรรจุและแพ็กสินค้า"><span>การบรรจุและแพ็กสินค้า</span></label>
+                <label class="skill-option"><input type="checkbox" name="SkillOption" value="การดูแลอุปกรณ์และเครื่องมือ"><span>การดูแลอุปกรณ์และเครื่องมือ</span></label>
+              </div>
+              <small id="skillsError" class="hint" role="status" aria-live="polite">ยังไม่ได้เลือกทักษะ ระบบต้องการอย่างน้อย 3 รายการ</small>
             </div>
-            <div class="field">
-              <label for="Languages">ภาษา</label>
-              <textarea id="Languages" name="Languages" maxlength="1000" placeholder="เช่น ไทย (ดี), อังกฤษ (พื้นฐาน)"></textarea>
+            <div class="field full">
+              <div class="choice-help">
+                <label style="margin:0" for="languageName0">14. ภาษาและระดับความสามารถ</label>
+                <span id="languageCount" class="choice-count" aria-live="polite">0 / 3 ภาษา</span>
+              </div>
+              <small class="hint" style="margin:0 0 10px">เพิ่มภาษาได้สูงสุด 3 ภาษา กรอกชื่อภาษาและเลือกระดับฟัง พูด อ่าน และเขียนให้ครบ หากไม่ต้องการระบุภาษา สามารถเว้นว่างได้</small>
+              <div id="languageList" class="language-list"></div>
+              <button id="addLanguageButton" class="secondary-button" type="button">+ เพิ่มภาษา</button>
+              <small id="languageLimitMessage" class="hint limit-warning" role="status" aria-live="polite" hidden></small>
             </div>
           </div>
         </section>
 
-        <section class="form-section" aria-labelledby="resumeHeading">
+        <section class="form-section" aria-labelledby="jobHeading">
           <div class="section-heading">
             <span class="section-number">03</span>
-            <div>
-              <h2 id="resumeHeading">แนบ Resume</h2>
-              <p>ขั้นตอนนี้ไม่บังคับ หากยังไม่มีไฟล์สามารถข้ามได้</p>
+            <div><h2 id="jobHeading">ตำแหน่งงานและเงินเดือน</h2><p>ตำแหน่งจะโหลดจากรายการงานที่เปิดรับในระบบ ATWORK</p></div>
+          </div>
+          <div class="form-grid">
+            <div class="field full">
+              <label for="ExpectedPosition">15. ตำแหน่งงานที่ต้องการ <span class="required-star">*</span></label>
+              <select id="ExpectedPosition" name="ExpectedPosition" required disabled>
+                <option value="">กำลังโหลดตำแหน่งงานที่เปิดรับ...</option>
+              </select>
+              <div id="jobLoadStatus" class="job-load-status" role="status" aria-live="polite">กำลังเชื่อมต่อรายการตำแหน่งงาน</div>
             </div>
+            <div class="field full">
+              <label for="ExpectedSalary">16. เงินเดือนที่คาดหวัง (บาท/เดือน)</label>
+              <input id="ExpectedSalary" name="ExpectedSalary" type="number" inputmode="numeric" min="0" max="10000000" step="500" placeholder="เช่น 18000">
+              <small class="hint">กรอกเป็นตัวเลขบาทต่อเดือน สามารถเว้นว่างไว้ได้หากยังไม่กำหนด</small>
+            </div>
+          </div>
+        </section>
+
+        <section class="form-section" aria-labelledby="photoHeading">
+          <div class="section-heading">
+            <span class="section-number">04</span>
+            <div><h2 id="photoHeading">17. รูปผู้สมัครงาน</h2><p>รูปนี้จะใช้ประกอบ Resume ที่ระบบสร้างให้</p></div>
           </div>
           <div class="upload-box">
             <div class="upload-heading">
               <div class="upload-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6M12 18v-6M9.5 14.5 12 12l2.5 2.5"></path></svg>
+                <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="m21 15-5-5L5 21"></path></svg>
               </div>
-              <div>
-                <p class="upload-title">ไฟล์ Resume ของคุณ</p>
-                <p class="upload-description">แนบเอกสารล่าสุดเพื่อให้ทีมงานพิจารณาข้อมูลได้สะดวกขึ้น</p>
-              </div>
+              <div><p class="upload-title">รูปถ่ายสำหรับ Resume <span class="required-star">*</span></p><p class="upload-description">เลือกภาพที่มองเห็นใบหน้าได้ชัด ระบบจะใช้รูปนี้ใน Resume PDF</p></div>
             </div>
-            <label for="ResumeFile">เลือกไฟล์ Resume (ไม่บังคับ)</label>
-            <input type="file" id="ResumeFile" name="ResumeFile" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,image/jpeg,image/png">
-            <small class="hint">รองรับ PDF, DOC, DOCX, JPG และ PNG ขนาดไม่เกิน 4 MB</small>
-            <div id="fileMeta" class="file-meta" aria-live="polite">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4 4L19 6"></path></svg>
-              <span id="fileName"></span>
+            <label for="PhotoFile">เลือกภาพผู้สมัคร <span class="required-star">*</span></label>
+            <input type="file" id="PhotoFile" name="PhotoFile" accept=".jpg,.jpeg,.png,image/jpeg,image/png" required aria-describedby="photoHint">
+            <small id="photoHint" class="hint">รองรับ JPG, JPEG และ PNG ขนาดไม่เกิน 4 MB</small>
+            <div class="photo-preview-wrap">
+              <img id="photoPreview" class="photo-preview" alt="ตัวอย่างรูปผู้สมัคร">
+              <div class="photo-preview-note" id="photoPreviewNote">ยังไม่ได้เลือกรูป กรุณาเลือกรูปเพื่อดูตัวอย่างก่อนส่งข้อมูล</div>
             </div>
           </div>
         </section>
 
         <div class="privacy-note">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"></path></svg>
-          <span>โปรดตรวจสอบข้อมูลก่อนส่ง ระบบใช้ LINE เพื่อยืนยันบัญชีผู้ส่งเท่านั้น และจะไม่แสดง LINE User ID บนหน้านี้</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"></path></svg>
+          <span>โปรดตรวจสอบข้อมูลก่อนส่ง ระบบใช้ LINE เพื่อยืนยันบัญชีผู้สมัคร ข้อมูลและรูปจะถูกส่งไปยังระบบ ATWORK เพื่อบันทึกและสร้าง Resume</span>
         </div>
 
         <div class="actions">
@@ -450,7 +547,7 @@
     <footer class="footer">ATWORK · CANDIDATE PORTAL</footer>
   </main>
 
-  <!-- Pop-up สถานะการส่งใบสมัคร: ระหว่างส่งแสดงวงกลมเปอร์เซ็นต์โดยประมาณ -->
+  <!-- หน้าต่างสถานะการบันทึกข้อมูลและสร้าง Resume -->
   <div id="submissionModal" class="submission-modal" hidden aria-hidden="true">
     <div class="modal-backdrop" aria-hidden="true"></div>
     <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDescription">
@@ -460,37 +557,33 @@
           <circle class="progress-track" cx="60" cy="60" r="48"></circle>
           <circle id="progressRing" class="progress-ring" cx="60" cy="60" r="48"></circle>
         </svg>
-        <div class="progress-center">
-          <strong id="progressPercent" class="progress-percent">0%</strong>
-          <span class="progress-estimate">ความคืบหน้าโดยประมาณ</span>
-        </div>
+        <div class="progress-center"><strong id="progressPercent" class="progress-percent">0%</strong><span class="progress-estimate">ความคืบหน้าโดยประมาณ</span></div>
       </div>
       <div id="modalStateIcon" class="modal-state-icon" hidden aria-hidden="true">
-        <svg id="modalStateSvg" viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="m5 12 4 4L19 6"></path>
-        </svg>
+        <svg id="modalStateSvg" viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"></path></svg>
       </div>
       <p id="modalEyebrow" class="modal-eyebrow">กำลังดำเนินการ</p>
-      <h2 id="modalTitle" class="modal-title">กำลังส่งใบสมัคร</h2>
-      <p id="modalDescription" class="modal-description">โปรดอย่าปิดหน้าต่างนี้ ระบบกำลังส่งข้อมูลและรอผลยืนยัน</p>
-      <div id="modalReference" class="modal-reference" hidden>
-        <span class="modal-reference-label">เลขอ้างอิงผู้สมัคร</span>
-        <strong id="modalReferenceCode" class="modal-reference-code"></strong>
-      </div>
+      <h2 id="modalTitle" class="modal-title">กำลังบันทึกข้อมูลผู้สมัคร</h2>
+      <p id="modalDescription" class="modal-description">โปรดอย่าปิดหน้าต่างนี้ ระบบกำลังบันทึกข้อมูลและสร้าง Resume</p>
+      <a id="modalResumeLink" class="modal-resume-link" href="#" target="_blank" rel="noopener noreferrer" hidden>เปิด Resume PDF</a>
+      <div id="modalReference" class="modal-reference" hidden><span class="modal-reference-label">เลขอ้างอิงผู้สมัคร</span><strong id="modalReferenceCode" class="modal-reference-code"></strong></div>
       <button id="modalCloseButton" class="modal-close" type="button" hidden>ปิดหน้าต่าง</button>
     </section>
   </div>
 
   <script>
     /************************************************************
-     * ระบบ @attwork — หน้าแบบฟอร์มผู้สมัคร
-     * LIFF: อ่านข้อมูลโปรไฟล์เพื่อแสดงบนหน้าจอเท่านั้น
-     * Apps Script: ตรวจสอบ ID Token และบันทึกข้อมูลที่เซิร์ฟเวอร์
+     * ATWORK — แบบฟอร์มข้อมูลผู้สมัครและสร้าง Resume
+     * LIFF: ยืนยันบัญชี LINE และแสดงโปรไฟล์
+     * Apps Script: ตรวจสอบ ID Token, บันทึกข้อมูล และสร้าง Resume PDF
      ************************************************************/
-
     const ATWORK_LIFF_ID = "2011995684-Db7RXwnB";
-    const ATWORK_APPS_SCRIPT_URL =
-      "https://script.google.com/macros/s/AKfycbzjLTf5pExf4UrFWjSvadcM4G3bCqugaY1kSuq0I6ajIYorWO9hBOO_r9F3pT0j1G00/exec";
+    const ATWORK_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzjLTf5pExf4UrFWjSvadcM4G3bCqugaY1kSuq0I6ajIYorWO9hBOO_r9F3pT0j1G00/exec";
+    const MAX_PHOTO_SIZE = 4 * 1024 * 1024;
+    const ALLOWED_PHOTO_EXTENSIONS = ["jpg", "jpeg", "png"];
+    const PHOTO_MIME_BY_EXTENSION = { jpg: "image/jpeg", jpeg: "image/jpeg", png: "image/png" };
+    const LANGUAGE_LEVELS = ["พื้นฐาน", "พอใช้", "ดี", "ดีมาก"];
+    const MAX_LANGUAGE_ROWS = 3;
 
     const form = document.getElementById("candidateForm");
     const button = document.getElementById("submitButton");
@@ -498,13 +591,22 @@
     const message = document.getElementById("message");
     const lineStatus = document.getElementById("lineStatus");
     const lineStatusText = document.getElementById("lineStatusText");
-    const resumeInput = document.getElementById("ResumeFile");
-    const fileMeta = document.getElementById("fileMeta");
-    const fileNameLabel = document.getElementById("fileName");
     const profileCard = document.getElementById("lineProfileCard");
     const profileName = document.getElementById("profileName");
     const profilePicture = document.getElementById("profilePicture");
     const profileFallback = document.getElementById("profileFallback");
+    const skillsGrid = document.getElementById("skillsGrid");
+    const skillCount = document.getElementById("skillCount");
+    const skillsError = document.getElementById("skillsError");
+    const languageList = document.getElementById("languageList");
+    const addLanguageButton = document.getElementById("addLanguageButton");
+    const languageLimitMessage = document.getElementById("languageLimitMessage");
+    const positionSelect = document.getElementById("ExpectedPosition");
+    const jobLoadStatus = document.getElementById("jobLoadStatus");
+    const photoInput = document.getElementById("PhotoFile");
+    const photoPreview = document.getElementById("photoPreview");
+    const photoPreviewNote = document.getElementById("photoPreviewNote");
+
     const submissionModal = document.getElementById("submissionModal");
     const progressWrap = document.getElementById("progressWrap");
     const progressRing = document.getElementById("progressRing");
@@ -514,31 +616,20 @@
     const modalEyebrow = document.getElementById("modalEyebrow");
     const modalTitle = document.getElementById("modalTitle");
     const modalDescription = document.getElementById("modalDescription");
+    const modalResumeLink = document.getElementById("modalResumeLink");
     const modalReference = document.getElementById("modalReference");
     const modalReferenceCode = document.getElementById("modalReferenceCode");
     const modalCloseButton = document.getElementById("modalCloseButton");
     const CIRCLE_CIRCUMFERENCE = 2 * Math.PI * 48;
 
-    const MAX_FILE_SIZE = 4 * 1024 * 1024;
-    const ALLOWED_EXTENSIONS = ["pdf", "doc", "docx", "jpg", "jpeg", "png"];
-    const MIME_BY_EXTENSION = {
-      pdf: "application/pdf",
-      doc: "application/msword",
-      docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-      jpg: "image/jpeg",
-      jpeg: "image/jpeg",
-      png: "image/png"
-    };
-
     let liffReady = false;
     let isSubmitting = false;
     let pendingRequestId = "";
     let submitTimeout = null;
-    let lineProfile = null;
     let progressTimer = null;
     let displayedProgress = 0;
+    let openJobs = [];
 
-    // สร้าง iframe เฉพาะสำหรับรับผลตอบกลับจาก Apps Script
     const responseFrame = document.createElement("iframe");
     responseFrame.name = "atworkSubmitFrame";
     responseFrame.title = "ผลการส่งข้อมูลผู้สมัคร";
@@ -552,145 +643,20 @@
       button.classList.toggle("is-loading", Boolean(loading));
     }
 
-    // อัปเดตวงแหวนและตัวเลขเปอร์เซ็นต์ในป๊อปอัป
-    function updateProgress(value) {
-      displayedProgress = Math.max(0, Math.min(100, value));
-      progressPercent.textContent = Math.round(displayedProgress) + "%";
-      progressRing.style.strokeDasharray = String(CIRCLE_CIRCUMFERENCE);
-      progressRing.style.strokeDashoffset = String(
-        CIRCLE_CIRCUMFERENCE * (1 - displayedProgress / 100)
-      );
-    }
-
-    function stopProgressTimer() {
-      if (progressTimer) {
-        window.clearInterval(progressTimer);
-        progressTimer = null;
-      }
-    }
-
-    // เนื่องจากการส่งแบบฟอร์มผ่าน iframe ไม่รายงานเปอร์เซ็นต์ byte จริง
-    // ตัวเลขระหว่างส่งจึงเป็นค่าประมาณ และจะค้างไม่เกิน 92% จนเซิร์ฟเวอร์ยืนยัน
-    function startEstimatedProgress() {
-      stopProgressTimer();
-      progressTimer = window.setInterval(function() {
-        if (displayedProgress < 48) displayedProgress += 2.4;
-        else if (displayedProgress < 70) displayedProgress += 1.1;
-        else if (displayedProgress < 82) displayedProgress += 0.45;
-        else if (displayedProgress < 90) displayedProgress += 0.16;
-        else if (displayedProgress < 92) displayedProgress += 0.035;
-
-        updateProgress(Math.min(displayedProgress, 92));
-
-        if (displayedProgress < 22) {
-          modalDescription.textContent = "กำลังเตรียมข้อมูลและตรวจสอบไฟล์ โปรดรอสักครู่";
-        } else if (displayedProgress < 60) {
-          modalDescription.textContent = "กำลังส่งข้อมูลไปยังระบบ ATWORK";
-        } else if (displayedProgress < 84) {
-          modalDescription.textContent = "กำลังตรวจสอบข้อมูลและบันทึกใบสมัคร";
-        } else {
-          modalDescription.textContent = "กำลังรอระบบยืนยันผลการบันทึก เพื่อป้องกันเลขอ้างอิงผิดพลาด";
-        }
-      }, 260);
-    }
-
-    function openProgressModal() {
-      submissionModal.hidden = false;
-      submissionModal.setAttribute("aria-hidden", "false");
-      document.body.classList.add("modal-open");
-      progressWrap.hidden = false;
-      progressRing.classList.remove("is-complete");
-      modalStateIcon.hidden = true;
-      modalStateIcon.classList.remove("error");
-      modalReference.hidden = true;
-      modalReferenceCode.textContent = "";
-      modalCloseButton.hidden = true;
-      modalEyebrow.textContent = "ATWORK · CANDIDATE PORTAL";
-      progressEstimate.textContent = "ความคืบหน้าโดยประมาณ";
-      modalTitle.textContent = "กำลังส่งใบสมัคร";
-      modalDescription.textContent = "กำลังเตรียมข้อมูล โปรดอย่าปิดหน้าต่างนี้";
-      updateProgress(0);
-      startEstimatedProgress();
-    }
-
-    function closeProgressModal() {
-      stopProgressTimer();
-      submissionModal.hidden = true;
-      submissionModal.setAttribute("aria-hidden", "true");
-      document.body.classList.remove("modal-open");
-      if (button && !button.disabled) button.focus();
-    }
-
-    function showModalError(text) {
-      stopProgressTimer();
-      progressWrap.hidden = true;
-      modalStateIcon.hidden = false;
-      modalStateIcon.classList.add("error");
-      modalStateIcon.innerHTML = '<svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"></path></svg>';
-      modalEyebrow.textContent = "โปรดตรวจสอบ";
-      modalTitle.textContent = "ยังส่งใบสมัครไม่สำเร็จ";
-      modalDescription.textContent = text;
-      modalReference.hidden = true;
-      modalCloseButton.hidden = false;
-      modalCloseButton.textContent = "ปิดหน้าต่าง";
-    }
-
-    function showModalSuccess(result) {
-      stopProgressTimer();
-      progressWrap.hidden = false;
-      progressRing.classList.add("is-complete");
-      updateProgress(100);
-      modalStateIcon.hidden = true;
-      modalEyebrow.textContent = "เสร็จเรียบร้อย";
-      progressEstimate.textContent = "บันทึกสำเร็จ";
-      modalTitle.textContent = "ส่งใบสมัครสำเร็จ";
-      modalDescription.textContent = result.resumeAttached
-        ? "บันทึกข้อมูลผู้สมัครและไฟล์ Resume เรียบร้อยแล้ว"
-        : "บันทึกข้อมูลผู้สมัครเรียบร้อยแล้ว ขอบคุณที่สมัครงานกับ ATWORK";
-      modalReference.hidden = false;
-      modalReferenceCode.textContent = result.candidateId || "ไม่พบเลขอ้างอิง กรุณาติดต่อทีมงาน";
-      modalCloseButton.hidden = false;
-      modalCloseButton.textContent = "เรียบร้อย";
-    }
-
-    modalCloseButton.addEventListener("click", closeProgressModal);
-    window.addEventListener("keydown", function(event) {
-      if (event.key === "Escape" && !submissionModal.hidden && !isSubmitting) {
-        closeProgressModal();
-      }
-    });
-
-    function showError(text) {
-      message.className = "error";
-      message.style.display = "block";
-      message.textContent = text;
-      isSubmitting = false;
-      setButtonState("บันทึกข้อมูลผู้สมัคร", !liffReady, false);
-      if (!submissionModal.hidden) showModalError(text);
-    }
-
-    function showSuccess(result) {
-      message.className = "success";
-      message.style.display = "none";
-      message.textContent = result.resumeAttached
-        ? "บันทึกข้อมูลผู้สมัครสำเร็จ\nรหัสผู้สมัคร: " + result.candidateId + "\nแนบ Resume: " + result.resumeFileName
-        : "บันทึกข้อมูลผู้สมัครสำเร็จ\nรหัสผู้สมัคร: " + result.candidateId + "\nคุณยังไม่ได้แนบ Resume";
-      form.reset();
-      fileMeta.classList.remove("visible");
-      fileNameLabel.textContent = "";
-      isSubmitting = false;
-      setButtonState("บันทึกข้อมูลผู้สมัคร", !liffReady, false);
-      showModalSuccess(result);
+    function setLineStatus(state, text) {
+      lineStatus.className = "line-status";
+      if (state === "connected") lineStatus.classList.add("connected");
+      if (state === "error") lineStatus.classList.add("error");
+      lineStatusText.textContent = text;
     }
 
     function showProfile(profile) {
-      lineProfile = profile || null;
       const name = profile && profile.displayName ? profile.displayName : "ผู้ใช้ LINE";
       profileName.textContent = name;
       profileFallback.textContent = Array.from(name.trim())[0] || "L";
       profilePicture.style.display = "none";
       profilePicture.removeAttribute("src");
-
+      profileFallback.style.display = "grid";
       if (profile && profile.pictureUrl) {
         profilePicture.onload = function() {
           profilePicture.style.display = "block";
@@ -701,99 +667,429 @@
           profileFallback.style.display = "grid";
         };
         profilePicture.src = profile.pictureUrl;
-      } else {
-        profileFallback.style.display = "grid";
       }
-
       profileCard.classList.add("visible");
     }
 
-    function setLineStatus(state, text) {
-      lineStatus.className = "line-status";
-      if (state === "connected") lineStatus.classList.add("connected");
-      if (state === "error") lineStatus.classList.add("error");
-      lineStatusText.textContent = text;
-    }
-
     async function initializeAtworkLiff() {
-      if (!ATWORK_LIFF_ID || ATWORK_LIFF_ID === "REPLACE_WITH_NEW_LIFF_ID") {
+      if (!ATWORK_LIFF_ID) {
         setLineStatus("error", "ยังไม่ได้ตั้งค่า LIFF ID กรุณาตรวจสอบการตั้งค่าระบบ");
         setButtonState("LINE ยังไม่พร้อมใช้งาน", true, false);
         return;
       }
-
       try {
         await liff.init({ liffId: ATWORK_LIFF_ID });
-
         if (!liff.isLoggedIn() && !liff.isInClient()) {
-          liff.login({ redirectUri: window.location.href });
+          // ใช้ redirect เริ่มต้นของ LIFF เพื่อลดปัญหา URL ไม่ตรงกับ Endpoint URL
+          liff.login();
           return;
         }
-
-        const idToken = liff.getIDToken();
-        if (!idToken) {
-          throw new Error("ไม่พบ LINE ID Token กรุณาตรวจสอบว่า LIFF เปิด scope openid แล้ว");
-        }
-
-        // getProfile() ต้องเปิด scope profile ใน LIFF Login Channel
+        if (!liff.getIDToken()) throw new Error("ไม่พบ LINE ID Token กรุณาตรวจสอบว่า LIFF เปิด scope openid แล้ว");
         let profile = null;
-        try {
-          profile = await liff.getProfile();
-        } catch (profileError) {
-          // ถ้าดึงโปรไฟล์ไม่สำเร็จ ยังให้สมัครต่อได้ เพราะ ID Token ยังมีอยู่
-          console.warn("อ่านโปรไฟล์ LINE ไม่สำเร็จ:", profileError);
-        }
-
-        if (profile) {
-          showProfile(profile);
-          setLineStatus("connected", "เชื่อมต่อ LINE สำเร็จ สามารถกรอกและส่งข้อมูลผู้สมัครได้");
-        } else {
-          showProfile({ displayName: "ผู้ใช้ LINE" });
-          setLineStatus("connected", "ยืนยันการเข้าสู่ระบบ LINE แล้ว แต่ยังแสดงรูปโปรไฟล์ไม่ได้");
-        }
-
+        try { profile = await liff.getProfile(); }
+        catch (error) { console.warn("อ่านโปรไฟล์ LINE ไม่สำเร็จ:", error); }
+        showProfile(profile || { displayName: "ผู้ใช้ LINE" });
+        setLineStatus("connected", profile
+          ? "เชื่อมต่อ LINE สำเร็จ สามารถกรอกและส่งข้อมูลผู้สมัครได้"
+          : "ยืนยันการเข้าสู่ระบบ LINE แล้ว แต่ยังแสดงรูปโปรไฟล์ไม่ได้");
         liffReady = true;
-        setButtonState("บันทึกข้อมูลผู้สมัคร", false, false);
+        updateSubmitAvailability();
       } catch (error) {
         liffReady = false;
         profileCard.classList.remove("visible");
-        setLineStatus("error", error && error.message
-          ? "เชื่อมต่อ LINE ไม่สำเร็จ: " + error.message
-          : "เชื่อมต่อ LINE ไม่สำเร็จ กรุณาปิดและเปิดฟอร์มผ่าน LINE อีกครั้ง");
+        setLineStatus("error", error && error.message ? "เชื่อมต่อ LINE ไม่สำเร็จ: " + error.message : "เชื่อมต่อ LINE ไม่สำเร็จ กรุณาเปิดฟอร์มผ่าน LINE อีกครั้ง");
         setButtonState("เชื่อมต่อ LINE ไม่สำเร็จ", true, false);
       }
     }
 
-    // รับผลตอบกลับจาก Apps Script iframe
+    function updateSubmitAvailability() {
+      const canSubmit = liffReady && openJobs.length > 0 && !isSubmitting;
+      setButtonState(canSubmit ? "บันทึกข้อมูลและสร้าง Resume" : (!liffReady ? "กำลังเชื่อมต่อ LINE..." : "รอตำแหน่งงานที่เปิดรับ"), !canSubmit, false);
+    }
+
+    // สัญญาการเชื่อมต่อกับ Code.gs: GET ?action=getOpenJobs&callback=<ชื่อ callback>
+    // Code.gs ต้องส่ง JSONP { success:true, jobs:[{jobId:"...", title:"..."}] }
+    function loadOpenJobs() {
+      positionSelect.disabled = true;
+      jobLoadStatus.classList.remove("error");
+      jobLoadStatus.textContent = "กำลังโหลดตำแหน่งงานที่เปิดรับ...";
+      positionSelect.replaceChildren(new Option("กำลังโหลดตำแหน่งงานที่เปิดรับ...", ""));
+      const callbackName = "atworkOpenJobsCallback";
+      let finished = false;
+      const script = document.createElement("script");
+      const timeout = window.setTimeout(function() {
+        if (finished) return;
+        finished = true;
+        cleanup();
+        handleJobLoadError("โหลดตำแหน่งงานไม่สำเร็จ กรุณาลองเปิดหน้าเว็บใหม่ หรือติดต่อเจ้าหน้าที่");
+      }, 15000);
+      function cleanup() {
+        window.clearTimeout(timeout);
+        script.remove();
+        try { delete window[callbackName]; } catch (_) { window[callbackName] = undefined; }
+      }
+      window[callbackName] = function(response) {
+        if (finished) return;
+        finished = true;
+        cleanup();
+        const jobs = response && Array.isArray(response.jobs) ? response.jobs : [];
+        if (!response || response.success !== true || !jobs.length) {
+          handleJobLoadError(response && response.message ? response.message : "ขณะนี้ไม่มีตำแหน่งงานที่เปิดรับ หรือระบบยังไม่ได้เชื่อมรายการงาน");
+          return;
+        }
+        openJobs = jobs.map(function(job) {
+          const title = String(job.title || job.positionTitle || job.PositionTitle || job.jobTitle || job.JobTitle || "").trim();
+          const jobId = String(job.jobId || job.JobID || job.id || "").trim();
+          return { title: title, jobId: jobId };
+        }).filter(function(job) { return job.title; });
+        if (!openJobs.length) {
+          handleJobLoadError("พบรายการงานแต่ไม่มีชื่อตำแหน่งที่ใช้งานได้ กรุณาตรวจสอบข้อมูลในฐานข้อมูล");
+          return;
+        }
+        positionSelect.replaceChildren(new Option("เลือกตำแหน่งงานที่ต้องการ", ""));
+        openJobs.forEach(function(job) {
+          const option = new Option(job.title, job.title);
+          option.dataset.jobId = job.jobId;
+          positionSelect.add(option);
+        });
+        positionSelect.disabled = false;
+        jobLoadStatus.classList.remove("error");
+        jobLoadStatus.textContent = "โหลดแล้ว " + openJobs.length + " ตำแหน่ง จากรายการงานที่เปิดรับในระบบ";
+        updateSubmitAvailability();
+      };
+      script.onerror = function() {
+        if (finished) return;
+        finished = true;
+        cleanup();
+        handleJobLoadError("ยังเชื่อมต่อรายการตำแหน่งงานไม่ได้ ต้องตั้งค่า endpoint getOpenJobs ใน Code.gs ก่อน");
+      };
+      script.src = ATWORK_APPS_SCRIPT_URL + "?action=getOpenJobs&callback=" + encodeURIComponent(callbackName) + "&_=" + Date.now();
+      document.head.appendChild(script);
+    }
+
+    function handleJobLoadError(text) {
+      openJobs = [];
+      positionSelect.disabled = true;
+      positionSelect.replaceChildren(new Option("โหลดตำแหน่งงานไม่สำเร็จ", ""));
+      jobLoadStatus.classList.add("error");
+      jobLoadStatus.textContent = text;
+      updateSubmitAvailability();
+    }
+
+    function selectedSkills() {
+      return Array.from(skillsGrid.querySelectorAll('input[name="SkillOption"]:checked')).map(function(input) { return input.value; });
+    }
+    function updateSkillCount() {
+      const count = selectedSkills().length;
+      skillCount.textContent = "เลือก " + count + " / 5";
+      skillCount.style.background = count >= 5 ? "var(--gold-soft)" : "var(--blue-soft)";
+      skillsError.classList.remove("validation-warning");
+      if (count < 3) skillsError.textContent = "เลือกเพิ่มอีก " + (3 - count) + " รายการ เพื่อให้ครบอย่างน้อย 3 ทักษะ";
+      else skillsError.textContent = "เลือกครบตามเงื่อนไขแล้ว สามารถเลือกได้อีก " + (5 - count) + " รายการ";
+    }
+    skillsGrid.addEventListener("change", function(event) {
+      const selected = selectedSkills();
+      if (selected.length > 5 && event.target.checked) {
+        event.target.checked = false;
+        updateSkillCount();
+        skillsError.textContent = "เลือกทักษะได้สูงสุด 5 รายการ กรุณายกเลิกทักษะเดิมก่อนเลือกเพิ่ม";
+        skillsError.classList.add("validation-warning");
+      } else {
+        updateSkillCount();
+      }
+      message.style.display = "none";
+    });
+
+    function buildLanguageRow(index) {
+      const row = document.createElement("div");
+      row.className = "language-row";
+      row.dataset.index = String(index);
+      const header = document.createElement("div");
+      header.className = "language-row-head";
+      const rowTitle = document.createElement("span");
+      rowTitle.className = "language-row-title";
+      rowTitle.textContent = "ภาษา " + (index + 1);
+      const removeButton = document.createElement("button");
+      removeButton.type = "button";
+      removeButton.className = "remove-language";
+      removeButton.textContent = "ลบภาษานี้";
+      removeButton.addEventListener("click", function() {
+        row.remove();
+        refreshLanguageRows();
+      });
+      header.append(rowTitle, removeButton);
+      const fields = document.createElement("div");
+      fields.className = "language-fields";
+      const languageField = document.createElement("div");
+      languageField.className = "language-name";
+      const languageId = "languageName" + index;
+      const languageLabel = document.createElement("label");
+      languageLabel.setAttribute("for", languageId);
+      languageLabel.textContent = "ชื่อภาษา";
+      const languageInput = document.createElement("input");
+      languageInput.id = languageId;
+      languageInput.type = "text";
+      languageInput.maxLength = 50;
+      languageInput.placeholder = "เช่น ไทย";
+      languageInput.autocomplete = "off";
+      languageInput.dataset.languageName = "true";
+      languageField.append(languageLabel, languageInput);
+      fields.appendChild(languageField);
+      [ ["listening", "ฟัง"], ["speaking", "พูด"], ["reading", "อ่าน"], ["writing", "เขียน"] ].forEach(function(item) {
+        const field = document.createElement("div");
+        const id = "lang" + index + item[0];
+        const label = document.createElement("label");
+        label.setAttribute("for", id);
+        label.textContent = item[1];
+        const select = document.createElement("select");
+        select.id = id;
+        select.dataset.languageLevel = item[0];
+        select.appendChild(new Option("เลือกระดับ", ""));
+        LANGUAGE_LEVELS.forEach(function(level) { select.add(new Option(level, level)); });
+        field.append(label, select);
+        fields.appendChild(field);
+      });
+      row.append(header, fields);
+      return row;
+    }
+    function refreshLanguageRows() {
+      const rows = Array.from(languageList.querySelectorAll(".language-row"));
+      rows.forEach(function(row, index) {
+        row.querySelector(".language-row-title").textContent = "ภาษา " + (index + 1);
+        row.querySelector(".remove-language").hidden = rows.length === 1;
+      });
+      addLanguageButton.disabled = false;
+      addLanguageButton.textContent = "+ เพิ่มภาษา";
+      const languageCount = document.getElementById("languageCount");
+      if (languageCount) languageCount.textContent = rows.length + " / 3 ภาษา";
+      languageLimitMessage.hidden = true;
+      languageLimitMessage.textContent = "";
+    }
+    function addLanguageRow() {
+      const nextIndex = Array.from(languageList.querySelectorAll(".language-row")).length;
+      if (nextIndex >= MAX_LANGUAGE_ROWS) {
+        languageLimitMessage.textContent = "เพิ่มภาษาได้สูงสุด 3 ภาษาเท่านั้น กรุณาลบภาษาเดิมก่อนเพิ่มภาษาใหม่";
+        languageLimitMessage.hidden = false;
+        return;
+      }
+      languageLimitMessage.hidden = true;
+      languageLimitMessage.textContent = "";
+      languageList.appendChild(buildLanguageRow(nextIndex));
+      refreshLanguageRows();
+    }
+    addLanguageButton.addEventListener("click", addLanguageRow);
+    addLanguageRow();
+
+    function collectLanguages() {
+      const rows = Array.from(languageList.querySelectorAll(".language-row"));
+      const languages = [];
+      const errors = [];
+      const usedNames = new Set();
+      rows.forEach(function(row) {
+        const nameInput = row.querySelector("[data-language-name]");
+        const name = nameInput.value.trim();
+        const levels = {};
+        row.querySelectorAll("[data-language-level]").forEach(function(select) { levels[select.dataset.languageLevel] = select.value; });
+        const hasAnyLevel = Object.values(levels).some(Boolean);
+        if (!name && !hasAnyLevel) return;
+        if (!name) { errors.push("กรุณากรอกชื่อภาษาที่ต้องการระบุ"); return; }
+        if ([levels.listening, levels.speaking, levels.reading, levels.writing].some(function(value) { return !value; })) {
+          errors.push("กรุณาเลือกระดับฟัง พูด อ่าน และเขียนให้ครบสำหรับภาษา " + name);
+          return;
+        }
+        const key = name.toLocaleLowerCase();
+        if (usedNames.has(key)) { errors.push("มีชื่อภาษา " + name + " ซ้ำกัน กรุณาตรวจสอบ"); return; }
+        usedNames.add(key);
+        languages.push({ language: name, listening: levels.listening, speaking: levels.speaking, reading: levels.reading, writing: levels.writing });
+      });
+      return { languages: languages, errors: errors };
+    }
+
+    function getFileExtension(fileName) {
+      const match = /\.([a-z0-9]+)$/i.exec(fileName || "");
+      return match ? match[1].toLowerCase() : "";
+    }
+    function getPhotoMimeType(file) {
+      const extension = getFileExtension(file.name);
+      return file.type || PHOTO_MIME_BY_EXTENSION[extension] || "";
+    }
+    function validatePhotoFile(file) {
+      if (!file) return "กรุณาอัปโหลดรูปผู้สมัครงานก่อนส่งข้อมูล";
+      const extension = getFileExtension(file.name);
+      const mime = getPhotoMimeType(file);
+      if (!ALLOWED_PHOTO_EXTENSIONS.includes(extension) || !["image/jpeg", "image/png"].includes(mime)) return "รูปผู้สมัครต้องเป็นไฟล์ JPG, JPEG หรือ PNG เท่านั้น";
+      if (file.size <= 0) return "ไฟล์รูปว่างเปล่า กรุณาเลือกรูปใหม่";
+      if (file.size > MAX_PHOTO_SIZE) return "รูปผู้สมัครต้องมีขนาดไม่เกิน 4 MB";
+      return "";
+    }
+    photoInput.addEventListener("change", function() {
+      const file = photoInput.files && photoInput.files[0];
+      if (!file) {
+        photoPreview.classList.remove("visible");
+        photoPreview.removeAttribute("src");
+        photoPreviewNote.textContent = "ยังไม่ได้เลือกรูป กรุณาเลือกรูปเพื่อดูตัวอย่างก่อนส่งข้อมูล";
+        return;
+      }
+      const error = validatePhotoFile(file);
+      if (error) {
+        photoInput.value = "";
+        photoPreview.classList.remove("visible");
+        photoPreview.removeAttribute("src");
+        photoPreviewNote.textContent = "ยังไม่ได้เลือกรูปที่ถูกต้อง";
+        showError(error);
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = function() {
+        photoPreview.src = String(reader.result || "");
+        photoPreview.classList.add("visible");
+        photoPreviewNote.textContent = file.name + " · " + (file.size / 1024 / 1024).toFixed(2) + " MB";
+      };
+      reader.onerror = function() { showError("อ่านรูปไม่สำเร็จ กรุณาเลือกไฟล์ใหม่"); };
+      reader.readAsDataURL(file);
+      message.style.display = "none";
+    });
+
+    function updateProgress(value) {
+      displayedProgress = Math.max(0, Math.min(100, value));
+      progressPercent.textContent = Math.round(displayedProgress) + "%";
+      progressRing.style.strokeDasharray = String(CIRCLE_CIRCUMFERENCE);
+      progressRing.style.strokeDashoffset = String(CIRCLE_CIRCUMFERENCE * (1 - displayedProgress / 100));
+    }
+    function stopProgressTimer() {
+      if (progressTimer) { window.clearInterval(progressTimer); progressTimer = null; }
+    }
+    function startEstimatedProgress() {
+      stopProgressTimer();
+      progressTimer = window.setInterval(function() {
+        if (displayedProgress < 48) displayedProgress += 2.4;
+        else if (displayedProgress < 70) displayedProgress += 1.1;
+        else if (displayedProgress < 82) displayedProgress += 0.45;
+        else if (displayedProgress < 90) displayedProgress += 0.16;
+        else if (displayedProgress < 92) displayedProgress += 0.035;
+        updateProgress(Math.min(displayedProgress, 92));
+        if (displayedProgress < 22) modalDescription.textContent = "กำลังเตรียมข้อมูลและตรวจสอบรูปผู้สมัคร โปรดรอสักครู่";
+        else if (displayedProgress < 60) modalDescription.textContent = "กำลังส่งข้อมูลไปยังระบบ ATWORK";
+        else if (displayedProgress < 84) modalDescription.textContent = "กำลังบันทึกโปรไฟล์และสร้าง Resume PDF";
+        else modalDescription.textContent = "กำลังรอระบบยืนยันผลและลิงก์ Resume เพื่อป้องกันข้อมูลซ้ำ";
+      }, 260);
+    }
+    function openProgressModal() {
+      submissionModal.hidden = false;
+      submissionModal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("modal-open");
+      progressWrap.hidden = false;
+      progressRing.classList.remove("is-complete");
+      modalStateIcon.hidden = true;
+      modalStateIcon.classList.remove("error");
+      modalReference.hidden = true;
+      modalReferenceCode.textContent = "";
+      modalResumeLink.hidden = true;
+      modalResumeLink.removeAttribute("href");
+      modalCloseButton.hidden = true;
+      modalEyebrow.textContent = "ATWORK · CANDIDATE PORTAL";
+      progressEstimate.textContent = "ความคืบหน้าโดยประมาณ";
+      modalTitle.textContent = "กำลังบันทึกข้อมูลผู้สมัคร";
+      modalDescription.textContent = "กำลังเตรียมข้อมูล โปรดอย่าปิดหน้าต่างนี้";
+      updateProgress(0);
+      startEstimatedProgress();
+    }
+    function closeProgressModal() {
+      stopProgressTimer();
+      submissionModal.hidden = true;
+      submissionModal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("modal-open");
+      if (button && !button.disabled) button.focus();
+    }
+    function showModalError(text) {
+      stopProgressTimer();
+      progressWrap.hidden = true;
+      modalStateIcon.hidden = false;
+      modalStateIcon.classList.add("error");
+      modalStateIcon.innerHTML = '<svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"></path></svg>';
+      modalEyebrow.textContent = "โปรดตรวจสอบ";
+      modalTitle.textContent = "ยังส่งข้อมูลไม่สำเร็จ";
+      modalDescription.textContent = text;
+      modalReference.hidden = true;
+      modalResumeLink.hidden = true;
+      modalCloseButton.hidden = false;
+      modalCloseButton.textContent = "ปิดหน้าต่าง";
+    }
+    function normalizeResumeUrl(result) {
+      const raw = result && (result.resumePDFURL || result.resumePdfUrl || result.resumeURL || result.resumeUrl || result.ResumePDFURL);
+      if (!raw) return "";
+      try {
+        const url = new URL(String(raw));
+        if (url.protocol !== "https:") return "";
+        return url.href;
+      } catch (_) { return ""; }
+    }
+    function showModalSuccess(result) {
+      stopProgressTimer();
+      progressWrap.hidden = false;
+      progressRing.classList.add("is-complete");
+      updateProgress(100);
+      modalStateIcon.hidden = true;
+      modalStateIcon.classList.remove("error");
+      modalEyebrow.textContent = "เสร็จเรียบร้อย";
+      progressEstimate.textContent = "บันทึกข้อมูลสำเร็จ";
+      modalTitle.textContent = "ส่งข้อมูลผู้สมัครสำเร็จ";
+      const resumeUrl = normalizeResumeUrl(result);
+      modalDescription.textContent = resumeUrl
+        ? "บันทึกข้อมูลเรียบร้อยและระบบสร้าง Resume PDF แล้ว"
+        : "ระบบตอบรับการบันทึกข้อมูลแล้ว แต่ไม่ได้ส่งลิงก์ Resume กลับมา โปรดติดต่อเจ้าหน้าที่ก่อนส่งข้อมูลซ้ำ";
+      modalResumeLink.hidden = !resumeUrl;
+      if (resumeUrl) modalResumeLink.href = resumeUrl;
+      modalReference.hidden = false;
+      modalReferenceCode.textContent = result.candidateId || result.CandidateID || "โปรดติดต่อทีมงานเพื่อขอเลขอ้างอิง";
+      modalCloseButton.hidden = false;
+      modalCloseButton.textContent = "เรียบร้อย";
+    }
+    modalCloseButton.addEventListener("click", closeProgressModal);
+    window.addEventListener("keydown", function(event) {
+      if (event.key === "Escape" && !submissionModal.hidden && !isSubmitting) closeProgressModal();
+    });
+
+    function showError(text) {
+      message.className = "error";
+      message.style.display = "block";
+      message.textContent = text;
+      isSubmitting = false;
+      updateSubmitAvailability();
+      if (!submissionModal.hidden) showModalError(text);
+    }
+    function showSuccess(result) {
+      message.className = "success";
+      message.style.display = "none";
+      message.textContent = "บันทึกข้อมูลผู้สมัครสำเร็จ";
+      form.reset();
+      photoPreview.classList.remove("visible");
+      photoPreview.removeAttribute("src");
+      photoPreviewNote.textContent = "ยังไม่ได้เลือกรูป กรุณาเลือกรูปเพื่อดูตัวอย่างก่อนส่งข้อมูล";
+      languageList.replaceChildren();
+      languageLimitMessage.hidden = true;
+      languageLimitMessage.textContent = "";
+      addLanguageRow();
+      updateSkillCount();
+      isSubmitting = false;
+      updateSubmitAvailability();
+      showModalSuccess(result);
+    }
+
     window.addEventListener("message", function(event) {
-      const isGoogleOrigin = event.origin === "https://script.google.com" ||
-        event.origin.endsWith(".googleusercontent.com");
+      const isGoogleOrigin = event.origin === "https://script.google.com" || event.origin.endsWith(".googleusercontent.com");
       if (!isGoogleOrigin) return;
-
       const result = event.data;
-      if (!result || result.type !== "ATWORK_CANDIDATE_RESULT" ||
-          !pendingRequestId || String(result.requestId) !== pendingRequestId) {
-        return;
-      }
-
-      if (submitTimeout) {
-        clearTimeout(submitTimeout);
-        submitTimeout = null;
-      }
+      if (!result || result.type !== "ATWORK_CANDIDATE_RESULT" || !pendingRequestId || String(result.requestId) !== pendingRequestId) return;
+      if (submitTimeout) { clearTimeout(submitTimeout); submitTimeout = null; }
       pendingRequestId = "";
-
-      if (!result.success) {
-        showError(result.message || "บันทึกข้อมูลไม่สำเร็จ กรุณาตรวจสอบแล้วลองใหม่");
-        return;
-      }
+      if (!result.success) { showError(result.message || "บันทึกข้อมูลไม่สำเร็จ กรุณาตรวจสอบแล้วลองใหม่"); return; }
       showSuccess(result);
     });
 
     function sendCandidateToAppsScript(data) {
       const requestId = window.crypto && typeof window.crypto.randomUUID === "function"
-        ? window.crypto.randomUUID()
-        : Date.now() + "-" + Math.random().toString(36).slice(2);
-
+        ? window.crypto.randomUUID() : Date.now() + "-" + Math.random().toString(36).slice(2);
       pendingRequestId = requestId;
       const requestForm = document.createElement("form");
       requestForm.method = "POST";
@@ -801,141 +1097,107 @@
       requestForm.target = "atworkSubmitFrame";
       requestForm.acceptCharset = "UTF-8";
       requestForm.style.display = "none";
-
-      const fields = {
-        action: "submitCandidate",
-        requestId: requestId,
-        payload: JSON.stringify(data)
-      };
-
+      const fields = { action: "submitCandidate", requestId: requestId, payload: JSON.stringify(data) };
       Object.keys(fields).forEach(function(key) {
         const input = document.createElement("input");
-        input.type = "hidden";
-        input.name = key;
-        input.value = fields[key];
+        input.type = "hidden"; input.name = key; input.value = fields[key];
         requestForm.appendChild(input);
       });
-
       document.body.appendChild(requestForm);
-      try {
-        requestForm.submit();
-      } catch (error) {
-        pendingRequestId = "";
-        requestForm.remove();
-        showError("ส่งข้อมูลไปยังระบบไม่สำเร็จ กรุณาลองใหม่");
-        return;
+      try { requestForm.submit(); }
+      catch (error) {
+        pendingRequestId = ""; requestForm.remove();
+        showError("ส่งข้อมูลไปยังระบบไม่สำเร็จ กรุณาลองใหม่"); return;
       }
       requestForm.remove();
-
       if (submitTimeout) clearTimeout(submitTimeout);
       submitTimeout = setTimeout(function() {
         if (pendingRequestId !== requestId) return;
-        pendingRequestId = "";
-        submitTimeout = null;
-        showError("ระบบยังไม่ตอบกลับภายใน 120 วินาที กรุณาตรวจสอบ Google Sheets ก่อนกดส่งซ้ำ เพื่อป้องกันข้อมูลซ้ำ");
+        pendingRequestId = ""; submitTimeout = null;
+        showError("ระบบยังไม่ตอบกลับภายใน 120 วินาที ข้อมูลอาจถูกบันทึกแล้ว โปรดตรวจสอบ Candidates ก่อนกดส่งซ้ำเพื่อป้องกันข้อมูลซ้ำ");
       }, 120000);
     }
 
-    function getFileExtension(fileName) {
-      const match = /\.([a-z0-9]+)$/i.exec(fileName || "");
-      return match ? match[1].toLowerCase() : "";
-    }
-
-    function getFileMimeType(file) {
-      const extension = getFileExtension(file.name);
-      return file.type || MIME_BY_EXTENSION[extension] || "";
-    }
-
-    resumeInput.addEventListener("change", function() {
-      const file = resumeInput.files && resumeInput.files[0];
-      fileMeta.classList.remove("visible");
-      fileNameLabel.textContent = "";
-      if (!file) return;
-
-      const extension = getFileExtension(file.name);
-      const mimeType = getFileMimeType(file);
-
-      if (file.size > MAX_FILE_SIZE) {
-        resumeInput.value = "";
-        showError("ไฟล์ Resume ต้องมีขนาดไม่เกิน 4 MB");
-        return;
-      }
-      if (!ALLOWED_EXTENSIONS.includes(extension) || !mimeType) {
-        resumeInput.value = "";
-        showError("กรุณาเลือกไฟล์ PDF, DOC, DOCX, JPG หรือ PNG");
-        return;
-      }
-
-      fileNameLabel.textContent = file.name + " · " + (file.size / 1024 / 1024).toFixed(2) + " MB";
-      fileMeta.classList.add("visible");
-      message.style.display = "none";
-    });
-
-    // ฟอร์มมี validation ที่อ่านง่าย ไม่ส่งคำขอจนกว่าจะกรอกข้อมูลจำเป็นครบ
-    form.addEventListener("submit", function(event) {
+    async function handleSubmit(event) {
       event.preventDefault();
       if (isSubmitting) return;
-
       if (!form.reportValidity()) {
         const firstInvalid = form.querySelector(":invalid");
         if (firstInvalid) firstInvalid.focus();
         return;
       }
-      if (!liffReady) {
-        showError("กรุณาเปิดแบบฟอร์มผ่าน LINE LIFF ก่อนส่งข้อมูล");
+      if (!liffReady || !liff.getIDToken()) {
+        showError("กรุณาเข้าสู่ระบบผ่าน LINE LIFF ก่อนส่งข้อมูล"); return;
+      }
+      if (!openJobs.length || !positionSelect.value) {
+        showError("ยังไม่สามารถตรวจสอบตำแหน่งงานที่เปิดรับได้ กรุณารอโหลดรายการงานหรือติดต่อเจ้าหน้าที่");
+        positionSelect.focus(); return;
+      }
+      const skills = selectedSkills();
+      if (skills.length < 3 || skills.length > 5) {
+        showError("กรุณาเลือกทักษะอย่างน้อย 3 และไม่เกิน 5 รายการ");
+        skillsGrid.scrollIntoView({ behavior: "smooth", block: "center" });
         return;
       }
-
-      const file = resumeInput.files && resumeInput.files[0];
-      if (file && file.size > MAX_FILE_SIZE) {
-        showError("ไฟล์ Resume ต้องมีขนาดไม่เกิน 4 MB");
-        return;
+      const languageData = collectLanguages();
+      if (languageData.errors.length) {
+        showError(languageData.errors[0]);
+        languageList.scrollIntoView({ behavior: "smooth", block: "center" }); return;
       }
-      if (file && !ALLOWED_EXTENSIONS.includes(getFileExtension(file.name))) {
-        showError("ชนิดไฟล์ Resume ไม่รองรับ");
-        return;
+      const photo = photoInput.files && photoInput.files[0];
+      const photoError = validatePhotoFile(photo);
+      if (photoError) { showError(photoError); photoInput.focus(); return; }
+      const age = Number(document.getElementById("Age").value);
+      if (!Number.isInteger(age) || age < 1 || age > 120) {
+        showError("กรุณากรอกอายุเป็นจำนวนเต็มตั้งแต่ 1 ถึง 120 ปี"); document.getElementById("Age").focus(); return;
       }
-
-      const token = liff.getIDToken();
-      if (!token) {
-        showError("ไม่พบ LINE ID Token กรุณาปิดและเปิดฟอร์มผ่าน LINE ใหม่");
-        return;
+      const phone = document.getElementById("Phone").value.trim();
+      if (!/^[0-9+\-\s()]{8,20}$/.test(phone)) {
+        showError("รูปแบบเบอร์โทรศัพท์ไม่ถูกต้อง กรุณาตรวจสอบอีกครั้ง"); document.getElementById("Phone").focus(); return;
+      }
+      const postal = document.getElementById("PastalCode").value.trim();
+      if (postal && !/^\d{5}$/.test(postal)) {
+        showError("รหัสไปรษณีย์ต้องเป็นตัวเลข 5 หลัก"); document.getElementById("PastalCode").focus(); return;
+      }
+      const salaryRaw = document.getElementById("ExpectedSalary").value.trim();
+      if (salaryRaw && (!Number.isFinite(Number(salaryRaw)) || Number(salaryRaw) < 0 || Number(salaryRaw) > 10000000)) {
+        showError("กรุณากรอกเงินเดือนที่คาดหวังเป็นตัวเลขตั้งแต่ 0 ถึง 10,000,000 บาทต่อเดือน"); document.getElementById("ExpectedSalary").focus(); return;
       }
 
       isSubmitting = true;
-      setButtonState("กำลังบันทึกข้อมูล...", true, true);
-      message.className = "";
-      message.style.display = "none";
-      message.textContent = "";
+      setButtonState("กำลังบันทึกและสร้าง Resume...", true, true);
+      message.className = ""; message.style.display = "none"; message.textContent = "";
       openProgressModal();
 
       const data = {};
       new FormData(form).forEach(function(value, key) {
-        if (!(value instanceof File)) data[key] = value;
+        if (value instanceof File || key === "SkillOption" || key === "PhotoFile") return;
+        data[key] = value;
       });
-      data.lineIdToken = token;
+      data.Age = age;
+      data.ExpectedSalary = salaryRaw ? Number(salaryRaw) : "";
+      data.Skills = JSON.stringify(skills);
+      data.Languages = JSON.stringify(languageData.languages);
+      const selectedOption = positionSelect.options[positionSelect.selectedIndex];
+      data.ExpectedPosition = positionSelect.value;
+      data.ExpectedPositionJobID = selectedOption ? (selectedOption.dataset.jobId || "") : "";
+      data.lineIdToken = liff.getIDToken();
 
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function() {
-          data.ResumeBase64 = String(reader.result).split(",")[1] || "";
-          data.ResumeFileName = file.name;
-          data.ResumeMimeType = getFileMimeType(file);
-          sendCandidateToAppsScript(data);
-        };
-        reader.onerror = function() {
-          showError("อ่านไฟล์ Resume ไม่สำเร็จ กรุณาเลือกไฟล์ใหม่");
-        };
-        reader.readAsDataURL(file);
-      } else {
-        data.ResumeBase64 = "";
-        data.ResumeFileName = "";
-        data.ResumeMimeType = "";
+      const reader = new FileReader();
+      reader.onload = function() {
+        data.PhotoBase64 = String(reader.result || "").split(",")[1] || "";
+        data.PhotoFileName = photo.name;
+        data.PhotoMimeType = getPhotoMimeType(photo);
         sendCandidateToAppsScript(data);
-      }
-    });
+      };
+      reader.onerror = function() { showError("อ่านรูปผู้สมัครไม่สำเร็จ กรุณาเลือกรูปใหม่"); };
+      reader.readAsDataURL(photo);
+    }
 
+    form.addEventListener("submit", handleSubmit);
+    loadOpenJobs();
     initializeAtworkLiff();
+    updateSkillCount();
   </script>
 </body>
 </html>
