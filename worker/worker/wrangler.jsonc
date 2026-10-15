@@ -1,1 +1,7 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "atwork-line-webhook-new",
+  "main": "index.js",
+  "compatibility_date": "2026-10-15"
+}
 
