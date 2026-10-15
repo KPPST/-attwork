@@ -1104,7 +1104,7 @@
       requestForm.target = "atworkSubmitFrame";
       requestForm.acceptCharset = "UTF-8";
       requestForm.style.display = "none";
-      const fields = { action: "submitCandidate", requestId: requestId, payload: JSON.stringify(data) };
+      const fields = { action: "submitCandidate", requestId: requestId, parentOrigin: window.location.origin, payload: JSON.stringify(data) };
       Object.keys(fields).forEach(function(key) {
         const input = document.createElement("input");
         input.type = "hidden"; input.name = key; input.value = fields[key];
