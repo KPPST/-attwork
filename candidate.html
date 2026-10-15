@@ -384,36 +384,36 @@
             </div>
             <div class="field">
               <label for="Phone">3. เบอร์โทรศัพท์ <span class="required-star">*</span></label>
-              <input id="Phone" name="Phone" type="tel" inputmode="tel" maxlength="20" autocomplete="tel" required placeholder="เช่น 0812345678" >
+              <input id="Phone" name="Phone" type="tel" inputmode="tel" maxlength="20" autocomplete="tel" required placeholder="เช่น 0812345678">
               <small class="hint">กรอกตัวเลขให้ครบ และเก็บเลข 0 ด้านหน้าไว้</small>
             </div>
             <div class="field full">
-              <label for="Email">4. อีเมล <span class="required-star">*</span></label>
-              <input id="Email" name="Email" type="email" maxlength="150" autocomplete="email" required placeholder="name@example.com">
+              <label for="Email">4. อีเมล</label>
+              <input id="Email" name="Email" type="email" maxlength="150" autocomplete="email" placeholder="name@example.com">
             </div>
             <div class="field">
-              <label for="HouseNo">5. บ้านเลขที่ <span class="required-star">*</span></label>
-              <input id="HouseNo" name="HouseNo" maxlength="100" autocomplete="address-line1" required placeholder="เช่น 99/12">
+              <label for="HouseNo">5. บ้านเลขที่</label>
+              <input id="HouseNo" name="HouseNo" maxlength="100" autocomplete="address-line1" placeholder="เช่น 99/12">
             </div>
             <div class="field">
               <label for="moo">6. หมู่</label>
               <input id="moo" name="moo" maxlength="50" placeholder="เช่น หมู่ 4 หรือ 4">
             </div>
             <div class="field">
-              <label for="Subdistrict">7. ตำบล/แขวง <span class="required-star">*</span></label>
-              <input id="Subdistrict" name="Subdistrict" maxlength="100" autocomplete="address-level3" required placeholder="กรอกตำบลหรือแขวง">
+              <label for="Subdistrict">7. ตำบล/แขวง</label>
+              <input id="Subdistrict" name="Subdistrict" maxlength="100" autocomplete="address-level3" placeholder="กรอกตำบลหรือแขวง">
             </div>
             <div class="field">
-              <label for="District">8. อำเภอ/เขต <span class="required-star">*</span></label>
-              <input id="District" name="District" maxlength="100" autocomplete="address-level2" required placeholder="กรอกอำเภอหรือเขต">
+              <label for="District">8. อำเภอ/เขต</label>
+              <input id="District" name="District" maxlength="100" autocomplete="address-level2" placeholder="กรอกอำเภอหรือเขต">
             </div>
             <div class="field">
-              <label for="Province">9. จังหวัด <span class="required-star">*</span></label>
-              <input id="Province" name="Province" type="text" maxlength="100" autocomplete="address-level1" required placeholder="กรอกชื่อจังหวัด">
+              <label for="Province">9. จังหวัด</label>
+              <input id="Province" name="Province" type="text" maxlength="100" autocomplete="address-level1" placeholder="กรอกชื่อจังหวัด">
             </div>
             <div class="field">
-              <label for="PastalCode">10. รหัสไปรษณีย์ <span class="required-star">*</span></label>
-              <input id="PastalCode" name="PastalCode" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" pattern="[0-9]{5}" required placeholder="5 หลัก เช่น 10110">
+              <label for="PastalCode">10. รหัสไปรษณีย์</label>
+              <input id="PastalCode" name="PastalCode" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" pattern="[0-9]{5}" placeholder="5 หลัก เช่น 10110">
             </div>
           </div>
         </section>
@@ -1125,6 +1125,21 @@
       }, 120000);
     }
 
+    // อ่านเวลาหมดอายุ (exp) จาก LINE ID Token เพื่อกันส่ง Token ที่หมดอายุแล้วไปยัง Apps Script
+    function getAtworkIdTokenExpiry_(token) {
+      try {
+        const parts = String(token || "").split(".");
+        if (parts.length !== 3 || !parts[1]) return 0;
+        const payloadBase64 = parts[1].replace(/-/g, "+").replace(/_/g, "/");
+        const paddedPayload = payloadBase64 + "=".repeat((4 - payloadBase64.length % 4) % 4);
+        const payloadText = atob(paddedPayload);
+        const payload = JSON.parse(payloadText);
+        return Number(payload.exp || 0) * 1000;
+      } catch (error) {
+        return 0;
+      }
+    }
+
     async function handleSubmit(event) {
       event.preventDefault();
       if (isSubmitting) return;
@@ -1133,8 +1148,17 @@
         if (firstInvalid) firstInvalid.focus();
         return;
       }
-      if (!liffReady || !liff.getIDToken()) {
+      const currentIdToken = liffReady ? liff.getIDToken() : null;
+      if (!currentIdToken) {
         showError("กรุณาเข้าสู่ระบบผ่าน LINE LIFF ก่อนส่งข้อมูล"); return;
+      }
+      const tokenExpiry = getAtworkIdTokenExpiry_(currentIdToken);
+      if (!tokenExpiry || tokenExpiry <= Date.now() + 120000) {
+        showError(
+          "เซสชัน LINE หมดอายุหรือใกล้หมดอายุแล้ว เพื่อป้องกันข้อมูลสูญหายกรุณาคัดลอกข้อมูลที่กรอกไว้ก่อน " +
+          "แล้วปิดแบบฟอร์มและเปิดใหม่จาก LINE OA ก่อนกดส่งอีกครั้ง"
+        );
+        return;
       }
       if (!openJobs.length || !positionSelect.value) {
         showError("ยังไม่สามารถตรวจสอบตำแหน่งงานที่เปิดรับได้ กรุณารอโหลดรายการงานหรือติดต่อเจ้าหน้าที่");
@@ -1188,7 +1212,7 @@
       const selectedOption = positionSelect.options[positionSelect.selectedIndex];
       data.ExpectedPosition = positionSelect.value;
       data.ExpectedPositionJobID = selectedOption ? (selectedOption.dataset.jobId || "") : "";
-      data.lineIdToken = liff.getIDToken();
+      data.lineIdToken = currentIdToken;
 
       const reader = new FileReader();
       reader.onload = function() {
