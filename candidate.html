@@ -691,7 +691,7 @@
           liff.login();
           return;
         }
-        if (!liff.getIDToken()) throw new Error("ไม่พบ LINE ID Token กรุณาตรวจสอบว่า LIFF เปิด scope openid แล้ว");
+        if (!liff.getAccessToken()) throw new Error("ไม่พบ LINE Access Token กรุณาปิดแบบฟอร์มแล้วเปิดใหม่จาก LINE OA และตรวจสอบการตั้งค่า LIFF");
         let profile = null;
         try { profile = await liff.getProfile(); }
         catch (error) { console.warn("อ่านโปรไฟล์ LINE ไม่สำเร็จ:", error); }
@@ -1125,21 +1125,6 @@
       }, 120000);
     }
 
-    // อ่านเวลาหมดอายุ (exp) จาก LINE ID Token เพื่อกันส่ง Token ที่หมดอายุแล้วไปยัง Apps Script
-    function getAtworkIdTokenExpiry_(token) {
-      try {
-        const parts = String(token || "").split(".");
-        if (parts.length !== 3 || !parts[1]) return 0;
-        const payloadBase64 = parts[1].replace(/-/g, "+").replace(/_/g, "/");
-        const paddedPayload = payloadBase64 + "=".repeat((4 - payloadBase64.length % 4) % 4);
-        const payloadText = atob(paddedPayload);
-        const payload = JSON.parse(payloadText);
-        return Number(payload.exp || 0) * 1000;
-      } catch (error) {
-        return 0;
-      }
-    }
-
     async function handleSubmit(event) {
       event.preventDefault();
       if (isSubmitting) return;
@@ -1148,16 +1133,11 @@
         if (firstInvalid) firstInvalid.focus();
         return;
       }
-      const currentIdToken = liffReady ? liff.getIDToken() : null;
-      if (!currentIdToken) {
-        showError("กรุณาเข้าสู่ระบบผ่าน LINE LIFF ก่อนส่งข้อมูล"); return;
-      }
-      const tokenExpiry = getAtworkIdTokenExpiry_(currentIdToken);
-      if (!tokenExpiry || tokenExpiry <= Date.now() + 120000) {
-        showError(
-          "เซสชัน LINE หมดอายุหรือใกล้หมดอายุแล้ว เพื่อป้องกันข้อมูลสูญหายกรุณาคัดลอกข้อมูลที่กรอกไว้ก่อน " +
-          "แล้วปิดแบบฟอร์มและเปิดใหม่จาก LINE OA ก่อนกดส่งอีกครั้ง"
-        );
+      // ใช้ Access Token ณ เวลาส่ง และให้ Code.gs ตรวจสอบความถูกต้องกับ LINE อีกครั้ง
+      // Access Token ของ LIFF มีอายุยาวกว่า ID Token จึงเหมาะกับแบบฟอร์มที่กรอกข้อมูลนาน
+      const currentAccessToken = liffReady ? liff.getAccessToken() : null;
+      if (!currentAccessToken) {
+        showError("ไม่พบ LINE Access Token กรุณาปิดแบบฟอร์มแล้วเปิดใหม่จาก LINE OA ก่อนส่งอีกครั้ง");
         return;
       }
       if (!openJobs.length || !positionSelect.value) {
@@ -1212,7 +1192,7 @@
       const selectedOption = positionSelect.options[positionSelect.selectedIndex];
       data.ExpectedPosition = positionSelect.value;
       data.ExpectedPositionJobID = selectedOption ? (selectedOption.dataset.jobId || "") : "";
-      data.lineIdToken = currentIdToken;
+      data.lineAccessToken = currentAccessToken;
 
       const reader = new FileReader();
       reader.onload = function() {
