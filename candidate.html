@@ -691,7 +691,7 @@
           liff.login();
           return;
         }
-        if (!liff.getAccessToken()) throw new Error("ไม่พบ LINE Access Token กรุณาปิดแบบฟอร์มแล้วเปิดใหม่จาก LINE OA และตรวจสอบการตั้งค่า LIFF");
+        if (!liff.getAccessToken()) throw new Error("ไม่พบ LINE Access Token กรุณาตรวจสอบว่า LIFF เข้าสู่ระบบสำเร็จแล้ว");
         let profile = null;
         try { profile = await liff.getProfile(); }
         catch (error) { console.warn("อ่านโปรไฟล์ LINE ไม่สำเร็จ:", error); }
@@ -1133,12 +1133,8 @@
         if (firstInvalid) firstInvalid.focus();
         return;
       }
-      // ใช้ Access Token ณ เวลาส่ง และให้ Code.gs ตรวจสอบความถูกต้องกับ LINE อีกครั้ง
-      // Access Token ของ LIFF มีอายุยาวกว่า ID Token จึงเหมาะกับแบบฟอร์มที่กรอกข้อมูลนาน
-      const currentAccessToken = liffReady ? liff.getAccessToken() : null;
-      if (!currentAccessToken) {
-        showError("ไม่พบ LINE Access Token กรุณาปิดแบบฟอร์มแล้วเปิดใหม่จาก LINE OA ก่อนส่งอีกครั้ง");
-        return;
+      if (!liffReady || !liff.getAccessToken()) {
+        showError("กรุณาเข้าสู่ระบบผ่าน LINE LIFF ก่อนส่งข้อมูล"); return;
       }
       if (!openJobs.length || !positionSelect.value) {
         showError("ยังไม่สามารถตรวจสอบตำแหน่งงานที่เปิดรับได้ กรุณารอโหลดรายการงานหรือติดต่อเจ้าหน้าที่");
@@ -1192,7 +1188,8 @@
       const selectedOption = positionSelect.options[positionSelect.selectedIndex];
       data.ExpectedPosition = positionSelect.value;
       data.ExpectedPositionJobID = selectedOption ? (selectedOption.dataset.jobId || "") : "";
-      data.lineAccessToken = currentAccessToken;
+      data.lineAccessToken = liff.getAccessToken();
+      if (!data.lineAccessToken) { showError("ไม่พบ LINE Access Token กรุณาปิดและเปิดแบบฟอร์มจาก LINE ใหม่"); return; }
 
       const reader = new FileReader();
       reader.onload = function() {
