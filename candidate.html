@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#142B43">
   <meta name="description" content="แบบฟอร์มข้อมูลผู้สมัครงาน ATWORK">
-  <title>@attwork | ข้อมูลผู้สมัครงาน</title>
+  <title>ATWORK | ข้อมูลผู้สมัครงาน</title>
 
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -75,7 +75,7 @@
       position: relative;
       isolation: isolate;
       overflow: hidden;
-      padding: 18px clamp(18px, 3vw, 30px) 19px;
+      padding: 13px clamp(16px, 2.5vw, 24px) 13px;
       background: linear-gradient(118deg, #2457D6 0%, #237FE8 53%, #00AFC5 100%);
       color: #fff;
     }
@@ -87,8 +87,8 @@
       border-radius: 50%;
       pointer-events: none;
     }
-    .hero::before { width: 240px; height: 240px; right: -110px; top: -155px; }
-    .hero::after { width: 165px; height: 165px; right: -70px; top: -112px; }
+    .hero::before { width: 180px; height: 180px; right: -90px; top: -120px; }
+    .hero::after { width: 125px; height: 125px; right: -62px; top: -84px; }
 
     .brand-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
     .brand-mark {
@@ -103,12 +103,14 @@
     }
     .brand-name { color: #fff; font-size: 13px; font-weight: 800; letter-spacing: 1.9px; line-height: 1.25; }
     .brand-caption { display: block; margin-top: 3px; color: #C4D0D9; font-size: 9px; letter-spacing: 1px; }
-    .eyebrow { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 6px; color: #FFF0B7; font-size: 11px; font-weight: 700; letter-spacing: .5px; }
-    .eyebrow::before { content: ""; width: 22px; height: 1px; background: #FFE07A; }
-    h1 { margin: 0; color: #fff; font-size: clamp(21px, 3vw, 25px); font-weight: 700; line-height: 1.3; letter-spacing: -.35px; }
-    .hero-copy { max-width: 520px; margin: 6px 0 0; color: #EFF8FF; font-size: 12px; line-height: 1.7; }
-    .hero-meta { display: flex; align-items: center; gap: 7px; margin-top: 9px; color: #F0FBFF; font-size: 10px; }
-    .hero-meta svg { color: #FFE07A; flex: 0 0 auto; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 3px; color: #FFF0B7; font-size: 9px; font-weight: 800; letter-spacing: .65px; }
+    .eyebrow::before { content: ""; width: 18px; height: 1px; background: #FFE07A; }
+    h1 { margin: 0; color: #fff; font-size: clamp(19px, 2.5vw, 23px); font-weight: 800; line-height: 1.25; letter-spacing: -.25px; }
+    .hero-copy { max-width: 520px; margin: 4px 0 0; color: #EFF8FF; font-size: 11px; line-height: 1.55; }
+    .hero-meta { display: flex; align-items: center; gap: 6px; margin-top: 5px; color: #F0FBFF; font-size: 9px; line-height: 1.5; }
+    .hero-meta svg { width: 14px; height: 14px; color: #FFE07A; flex: 0 0 auto; }
+    .hero-bottom-row { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; align-items: stretch; margin-top: 10px; }
+    .hero-bottom-row.profile-active { grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr); }
 
     .content { padding: 20px clamp(14px, 3vw, 28px) 26px; }
     .intro-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; margin-bottom: 12px; }
@@ -117,13 +119,13 @@
     .required-note { flex: 0 0 auto; padding: 5px 9px; border: 1px solid #E8DCD1; border-radius: 7px; background: #FCF8F4; color: #95664C; font-size: 10px; font-weight: 700; white-space: nowrap; }
 
     .line-status {
-      display: flex; align-items: flex-start; gap: 10px;
-      margin: 0 0 14px; padding: 12px 14px;
+      display: flex; align-items: center; gap: 8px;
+      min-width: 0; margin: 0; padding: 8px 10px;
       border: 1px solid #E9DDBD; border-radius: var(--radius-md);
       background: var(--amber-bg); color: var(--amber);
-      font-size: 12px; font-weight: 600; line-height: 1.65;
+      font-size: 10px; font-weight: 700; line-height: 1.5; overflow-wrap: anywhere;
     }
-    .status-icon { display: grid; width: 23px; height: 23px; flex: 0 0 23px; place-items: center; border-radius: 50%; background: rgba(136, 103, 44, .09); }
+    .status-icon { display: grid; width: 20px; height: 20px; flex: 0 0 20px; place-items: center; border-radius: 50%; background: rgba(136, 103, 44, .09); }
     .line-status.connected { border-color: #CFE5D7; background: var(--green-bg); color: var(--green); }
     .line-status.connected .status-icon { background: rgba(36, 102, 75, .09); }
     .line-status.error { border-color: #F0CECA; background: var(--red-bg); color: var(--red); }
@@ -131,25 +133,25 @@
 
     .profile-card {
       display: none;
-      align-items: center; gap: 14px;
-      margin: 0 0 28px; padding: 15px 17px;
-      border: 1px solid var(--line); border-radius: var(--radius-lg);
-      background: linear-gradient(115deg, #FAFBFC, #FFFFFF);
+      align-items: center; gap: 10px;
+      min-width: 0; margin: 0; padding: 8px 10px;
+      border: 1px solid rgba(255, 255, 255, .75); border-radius: 12px;
+      background: rgba(255, 255, 255, .97); box-shadow: 0 3px 10px rgba(10, 35, 70, .08);
     }
     .profile-card.visible { display: flex; }
     .avatar-frame {
       position: relative; display: grid; place-items: center;
-      width: 58px; height: 58px; flex: 0 0 58px; overflow: hidden;
+      width: 42px; height: 42px; flex: 0 0 42px; overflow: hidden;
       border: 2px solid #E7D9BB; border-radius: 50%;
       background: var(--blue-soft); color: var(--navy-2);
     }
     .avatar-frame img { display: none; width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-    .avatar-fallback { font-size: 18px; font-weight: 800; }
+    .avatar-fallback { font-size: 15px; font-weight: 800; }
     .profile-copy { min-width: 0; flex: 1; }
-    .profile-kicker { color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .35px; }
-    .profile-name { margin: 2px 0 1px; overflow-wrap: anywhere; color: var(--navy); font-size: 15px; font-weight: 800; line-height: 1.5; }
-    .profile-caption { color: var(--muted); font-size: 11px; }
-    .profile-badge { display: inline-flex; align-items: center; gap: 5px; align-self: flex-start; flex: 0 0 auto; padding: 5px 8px; border-radius: 20px; background: var(--green-bg); color: var(--green); font-size: 10px; font-weight: 700; }
+    .profile-kicker { color: var(--muted); font-size: 9px; font-weight: 800; letter-spacing: .2px; line-height: 1.4; }
+    .profile-name { margin: 1px 0; overflow-wrap: anywhere; color: var(--navy); font-size: 12px; font-weight: 800; line-height: 1.4; }
+    .profile-caption { color: var(--muted); font-size: 9px; line-height: 1.4; }
+    .profile-badge { display: inline-flex; align-items: center; gap: 4px; align-self: center; flex: 0 0 auto; padding: 4px 6px; border-radius: 20px; background: var(--green-bg); color: var(--green); font-size: 8px; font-weight: 800; }
     .profile-badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #3B9A69; }
 
     .form-section { margin-top: 14px; padding: 17px 18px 18px; border: 1px solid #E3E7EA; border-radius: 14px; background: linear-gradient(145deg, #FFFFFF 0%, #FCFCFB 100%); }
@@ -291,16 +293,18 @@
     @media (max-width: 620px) {
       body { padding: 9px 7px calc(18px + env(safe-area-inset-bottom)); }
       .shell { border-radius: 17px; }
-      .hero { padding: 16px 16px 17px; }
-      
-      .hero-copy { font-size: 11px; line-height: 1.7; }
+      .hero { padding: 12px 13px 12px; }
+      .hero-copy { font-size: 10px; line-height: 1.55; }
+      .hero-bottom-row, .hero-bottom-row.profile-active { grid-template-columns: minmax(0, 1fr); gap: 7px; margin-top: 8px; }
+      .line-status { padding: 7px 9px; font-size: 10px; }
+      .profile-card { padding: 8px 9px; }
       .content { padding: 17px 12px 20px; }
       .form-grid { gap: 14px 12px; }
       .form-section { padding: 14px 13px 15px; margin-top: 12px; }
-      .profile-card { gap: 11px; padding: 13px; }
-      .avatar-frame { width: 52px; height: 52px; flex-basis: 52px; }
-      .profile-name { font-size: 14px; }
-      .profile-badge { font-size: 9px; padding: 5px 6px; }
+      .profile-card { gap: 9px; padding: 8px 9px; }
+      .avatar-frame { width: 40px; height: 40px; flex-basis: 40px; }
+      .profile-name { font-size: 12px; }
+      .profile-badge { font-size: 8px; padding: 4px 6px; }
       .upload-box { padding: 14px; }
       .submit-button { min-height: 50px; }
     }
@@ -310,7 +314,7 @@
       .intro-row { display: block; }
       .required-note { display: inline-flex; margin-top: 10px; }
       .profile-badge { align-self: center; }
-      .hero { padding: 15px 13px 16px; }
+      .hero { padding: 11px 12px; }
       .content { padding: 15px 10px 18px; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -329,7 +333,7 @@
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 3 7.5 7 10 4-2.5 7-5.5 7-10V6l-7-3Z"></path><path d="m9 12 2 2 4-4"></path></svg>
         ข้อมูลของคุณจะถูกใช้เพื่อประกอบการติดต่อเรื่องงาน
       </div>
-
+      <div class="hero-bottom-row">
       <div id="lineStatus" class="line-status" role="status" aria-live="polite">
         <span class="status-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
@@ -350,20 +354,29 @@
         </div>
         <span class="profile-badge">เชื่อมต่อแล้ว</span>
       </section>
+      </div>
     </header>
 
-      
+    <section class="content">
+      <div class="intro-row">
+        <div>
+          <h2 class="intro-title">เริ่มต้นโปรไฟล์ผู้สมัคร</h2>
+          <p class="intro-subtitle">กรอกข้อมูลที่จำเป็น โดยช่องที่มี <span class="required-star">*</span> เป็นช่องบังคับ</p>
+        </div>
+        <span class="required-note">ข้อมูลส่วนตัว · เก็บเป็นความลับ</span>
+      </div>
+
       <form id="candidateForm" novalidate>
         <section class="form-section" aria-labelledby="personalHeading">
           <div class="section-heading">
             <span class="section-number">01</span>
-            <div><h2 id="personalHeading">ข้อมูลส่วนตัวและที่อยู่</h2></div>
+            <div><h2 id="personalHeading">ข้อมูลส่วนตัวและที่อยู่</h2><p>ข้อมูลสำหรับติดต่อและจัดทำ Resume</p></div>
           </div>
           <div class="form-grid">
             <div class="field full">
               <label for="FullName">1. ชื่อ-นามสกุล <span class="required-star">*</span></label>
-              <input id="FullName" name="FullName" maxlength="150" autocomplete="name" required placeholder="ชื่อและนามสกุล" aria-describedby="FullNameHint">
-
+              <input id="FullName" name="FullName" maxlength="150" autocomplete="name" required placeholder="กรอกชื่อและนามสกุล" aria-describedby="FullNameHint">
+              <small class="hint" id="FullNameHint">ใช้ชื่อจริงที่ต้องการให้แสดงใน Resume</small>
             </div>
             <div class="field">
               <label for="Age">2. อายุ (ปี) <span class="required-star">*</span></label>
@@ -375,32 +388,32 @@
               <small class="hint">กรอกตัวเลขให้ครบ และเก็บเลข 0 ด้านหน้าไว้</small>
             </div>
             <div class="field full">
-              <label for="Email">4. อีเมล<span class="required-star">*</span></label>
-              <input id="Email" name="Email" type="email" maxlength="150" autocomplete="email" placeholder="name@example.com" required>
+              <label for="Email">4. อีเมล</label>
+              <input id="Email" name="Email" type="email" maxlength="150" autocomplete="email" placeholder="name@example.com">
             </div>
             <div class="field">
-              <label for="HouseNo">5. บ้านเลขที่<span class="required-star">*</span></label>
-              <input id="HouseNo" name="HouseNo" maxlength="100" autocomplete="address-line1" placeholder="เช่น 99/12" required>
+              <label for="HouseNo">5. บ้านเลขที่</label>
+              <input id="HouseNo" name="HouseNo" maxlength="100" autocomplete="address-line1" placeholder="เช่น 99/12">
             </div>
             <div class="field">
               <label for="moo">6. หมู่</label>
               <input id="moo" name="moo" maxlength="50" placeholder="เช่น หมู่ 4 หรือ 4">
             </div>
             <div class="field">
-              <label for="Subdistrict">7. ตำบล/แขวง<span class="required-star">*</span></label>
-              <input id="Subdistrict" name="Subdistrict" maxlength="100" autocomplete="address-level3" placeholder="กรอกตำบลหรือแขวง" required>
+              <label for="Subdistrict">7. ตำบล/แขวง</label>
+              <input id="Subdistrict" name="Subdistrict" maxlength="100" autocomplete="address-level3" placeholder="กรอกตำบลหรือแขวง">
             </div>
             <div class="field">
-              <label for="District">8. อำเภอ/เขต<span class="required-star">*</span></label>
-              <input id="District" name="District" maxlength="100" autocomplete="address-level2" placeholder="กรอกอำเภอหรือเขต" required>
+              <label for="District">8. อำเภอ/เขต</label>
+              <input id="District" name="District" maxlength="100" autocomplete="address-level2" placeholder="กรอกอำเภอหรือเขต">
             </div>
             <div class="field">
-              <label for="Province">9. จังหวัด<span class="required-star">*</span></label>
-              <input id="Province" name="Province" type="text" maxlength="100" autocomplete="address-level1" placeholder="กรอกชื่อจังหวัด" required>
+              <label for="Province">9. จังหวัด</label>
+              <input id="Province" name="Province" type="text" maxlength="100" autocomplete="address-level1" placeholder="กรอกชื่อจังหวัด">
             </div>
             <div class="field">
-              <label for="PastalCode">10. รหัสไปรษณีย์<span class="required-star">*</span></label>
-              <input id="PastalCode" name="PastalCode" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" pattern="[0-9]{5}" placeholder="5 หลัก เช่น 10110" required>
+              <label for="PastalCode">10. รหัสไปรษณีย์</label>
+              <input id="PastalCode" name="PastalCode" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" pattern="[0-9]{5}" placeholder="5 หลัก เช่น 10110">
             </div>
           </div>
         </section>
@@ -408,7 +421,7 @@
         <section class="form-section" aria-labelledby="experienceHeading">
           <div class="section-heading">
             <span class="section-number">02</span>
-            <div><h2 id="experienceHeading">การศึกษาและความสามารถ</h2</div>
+            <div><h2 id="experienceHeading">การศึกษาและความสามารถ</h2><p>ข้อมูลที่ระบบจะนำไปจัดหน้า Resume ให้อัตโนมัติ</p></div>
           </div>
           <div class="form-grid">
             <div class="field full">
@@ -442,9 +455,9 @@
             <div class="field full">
               <div class="choice-help">
                 <label style="margin:0" id="skillsLabel">13. ทักษะ <span class="required-star">*</span></label>
-                <span id="skillCount" class="choice-count" aria-live="polite" required>เลือก 0 / 5</span>
+                <span id="skillCount" class="choice-count" aria-live="polite">เลือก 0 / 5</span>
               </div>
-              <p class="hint" style="margin:0 0 12px">เลือกทักษะที่ตรงกับตัวเองอย่างน้อย 3 และไม่เกิน 5 รายการ</p>
+              <p class="hint" style="margin:0 0 10px">เลือกทักษะที่ตรงกับตัวเองอย่างน้อย 3 และไม่เกิน 5 รายการ</p>
               <div id="skillsGrid" class="skill-grid" role="group" aria-labelledby="skillsLabel">
                 <label class="skill-option"><input type="checkbox" name="SkillOption" value="การใช้คอมพิวเตอร์พื้นฐาน"><span>การใช้คอมพิวเตอร์พื้นฐาน</span></label>
                 <label class="skill-option"><input type="checkbox" name="SkillOption" value="Microsoft Office"><span>Microsoft Office</span></label>
@@ -469,7 +482,7 @@
                 <label style="margin:0" for="languageName0">14. ภาษาและระดับความสามารถ</label>
                 <span id="languageCount" class="choice-count" aria-live="polite">0 / 3 ภาษา</span>
               </div>
-              <small class="hint" style="margin:0 0 12px">เพิ่มภาษาได้สูงสุด 3 ภาษา กรอกชื่อภาษาและเลือกระดับฟัง พูด อ่าน และเขียนให้ครบ หากไม่ต้องการระบุภาษา สามารถเว้นว่างได้</small>
+              <small class="hint" style="margin:0 0 10px">เพิ่มภาษาได้สูงสุด 3 ภาษา กรอกชื่อภาษาและเลือกระดับฟัง พูด อ่าน และเขียนให้ครบ หากไม่ต้องการระบุภาษา สามารถเว้นว่างได้</small>
               <div id="languageList" class="language-list"></div>
               <button id="addLanguageButton" class="secondary-button" type="button">+ เพิ่มภาษา</button>
               <small id="languageLimitMessage" class="hint limit-warning" role="status" aria-live="polite" hidden></small>
@@ -480,7 +493,7 @@
         <section class="form-section" aria-labelledby="jobHeading">
           <div class="section-heading">
             <span class="section-number">03</span>
-            <div><h2 id="jobHeading">ตำแหน่งงานและเงินเดือน</h2><p>ตำแหน่งจะโหลดจากรายการงานในระบบ </p></div>
+            <div><h2 id="jobHeading">ตำแหน่งงานและเงินเดือน</h2><p>ตำแหน่งจะโหลดจากรายการงานที่เปิดรับในระบบ ATWORK</p></div>
           </div>
           <div class="form-grid">
             <div class="field full">
@@ -491,8 +504,8 @@
               <div id="jobLoadStatus" class="job-load-status" role="status" aria-live="polite">กำลังเชื่อมต่อรายการตำแหน่งงาน</div>
             </div>
             <div class="field full">
-              <label for="ExpectedSalary">16. เงินเดือนที่คาดหวัง (บาท/เดือน)<span class="required-star">*</span></label>
-              <input id="ExpectedSalary" name="ExpectedSalary" type="number" inputmode="numeric" min="0" max="10000000" step="500" placeholder="เช่น 18000" required>
+              <label for="ExpectedSalary">16. เงินเดือนที่คาดหวัง (บาท/เดือน)</label>
+              <input id="ExpectedSalary" name="ExpectedSalary" type="number" inputmode="numeric" min="0" max="10000000" step="500" placeholder="เช่น 18000">
               <small class="hint">กรอกเป็นตัวเลขบาทต่อเดือน สามารถเว้นว่างไว้ได้หากยังไม่กำหนด</small>
             </div>
           </div>
@@ -501,7 +514,7 @@
         <section class="form-section" aria-labelledby="photoHeading">
           <div class="section-heading">
             <span class="section-number">04</span>
-            <div><h2 id="photoHeading">17. รูปผู้สมัครงาน</h2></div>
+            <div><h2 id="photoHeading">17. รูปผู้สมัครงาน</h2><p>รูปนี้จะใช้ประกอบ Resume ที่ระบบสร้างให้</p></div>
           </div>
           <div class="upload-box">
             <div class="upload-heading">
@@ -536,14 +549,14 @@
       </form>
     </section>
 
-    <footer class="footer">@attwork · CANDIDATE PORTAL</footer>
+    <footer class="footer">ATWORK · CANDIDATE PORTAL</footer>
   </main>
 
   <!-- หน้าต่างสถานะการบันทึกข้อมูลและสร้าง Resume -->
   <div id="submissionModal" class="submission-modal" hidden aria-hidden="true">
     <div class="modal-backdrop" aria-hidden="true"></div>
     <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDescription">
-      <div class="modal-brand">@attwork · CANDIDATE PORTAL</div>
+      <div class="modal-brand">ATWORK · CANDIDATE PORTAL</div>
       <div id="progressWrap" class="progress-wrap">
         <svg class="progress-svg" viewBox="0 0 120 120" aria-hidden="true">
           <circle class="progress-track" cx="60" cy="60" r="48"></circle>
@@ -661,6 +674,8 @@
         profilePicture.src = profile.pictureUrl;
       }
       profileCard.classList.add("visible");
+      const heroBottomRow = document.querySelector(".hero-bottom-row");
+      if (heroBottomRow) heroBottomRow.classList.add("profile-active");
     }
 
     async function initializeAtworkLiff() {
