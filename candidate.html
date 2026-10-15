@@ -376,11 +376,11 @@
             </div>
             <div class="field full">
               <label for="Email">4. อีเมล<span class="required-star">*</span></label>
-              <input id="Email" name="Email" type="email" maxlength="150" autocomplete="email" placeholder="name@example.com">
+              <input id="Email" name="Email" type="email" maxlength="150" autocomplete="email" placeholder="name@example.com" required>
             </div>
             <div class="field">
               <label for="HouseNo">5. บ้านเลขที่<span class="required-star">*</span></label>
-              <input id="HouseNo" name="HouseNo" maxlength="100" autocomplete="address-line1" placeholder="เช่น 99/12">
+              <input id="HouseNo" name="HouseNo" maxlength="100" autocomplete="address-line1" placeholder="เช่น 99/12" required>
             </div>
             <div class="field">
               <label for="moo">6. หมู่</label>
@@ -388,19 +388,19 @@
             </div>
             <div class="field">
               <label for="Subdistrict">7. ตำบล/แขวง<span class="required-star">*</span></label>
-              <input id="Subdistrict" name="Subdistrict" maxlength="100" autocomplete="address-level3" placeholder="กรอกตำบลหรือแขวง">
+              <input id="Subdistrict" name="Subdistrict" maxlength="100" autocomplete="address-level3" placeholder="กรอกตำบลหรือแขวง" required>
             </div>
             <div class="field">
               <label for="District">8. อำเภอ/เขต<span class="required-star">*</span></label>
-              <input id="District" name="District" maxlength="100" autocomplete="address-level2" placeholder="กรอกอำเภอหรือเขต">
+              <input id="District" name="District" maxlength="100" autocomplete="address-level2" placeholder="กรอกอำเภอหรือเขต" required>
             </div>
             <div class="field">
               <label for="Province">9. จังหวัด<span class="required-star">*</span></label>
-              <input id="Province" name="Province" type="text" maxlength="100" autocomplete="address-level1" placeholder="กรอกชื่อจังหวัด">
+              <input id="Province" name="Province" type="text" maxlength="100" autocomplete="address-level1" placeholder="กรอกชื่อจังหวัด" required>
             </div>
             <div class="field">
               <label for="PastalCode">10. รหัสไปรษณีย์<span class="required-star">*</span></label>
-              <input id="PastalCode" name="PastalCode" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" pattern="[0-9]{5}" placeholder="5 หลัก เช่น 10110">
+              <input id="PastalCode" name="PastalCode" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" pattern="[0-9]{5}" placeholder="5 หลัก เช่น 10110" required>
             </div>
           </div>
         </section>
@@ -442,7 +442,7 @@
             <div class="field full">
               <div class="choice-help">
                 <label style="margin:0" id="skillsLabel">13. ทักษะ <span class="required-star">*</span></label>
-                <span id="skillCount" class="choice-count" aria-live="polite">เลือก 0 / 5</span>
+                <span id="skillCount" class="choice-count" aria-live="polite" required>เลือก 0 / 5</span>
               </div>
               <p class="hint" style="margin:0 0 12px">เลือกทักษะที่ตรงกับตัวเองอย่างน้อย 3 และไม่เกิน 5 รายการ</p>
               <div id="skillsGrid" class="skill-grid" role="group" aria-labelledby="skillsLabel">
@@ -466,7 +466,7 @@
             </div>
             <div class="field full">
               <div class="choice-help">
-                <label style="margin:0" for="languageName0">14. ภาษาและระดับความสามารถ<span class="required-star">*</span></label>
+                <label style="margin:0" for="languageName0">14. ภาษาและระดับความสามารถ</label>
                 <span id="languageCount" class="choice-count" aria-live="polite">0 / 3 ภาษา</span>
               </div>
               <small class="hint" style="margin:0 0 12px">เพิ่มภาษาได้สูงสุด 3 ภาษา กรอกชื่อภาษาและเลือกระดับฟัง พูด อ่าน และเขียนให้ครบ หากไม่ต้องการระบุภาษา สามารถเว้นว่างได้</small>
@@ -492,7 +492,7 @@
             </div>
             <div class="field full">
               <label for="ExpectedSalary">16. เงินเดือนที่คาดหวัง (บาท/เดือน)<span class="required-star">*</span></label>
-              <input id="ExpectedSalary" name="ExpectedSalary" type="number" inputmode="numeric" min="0" max="10000000" step="500" placeholder="เช่น 18000">
+              <input id="ExpectedSalary" name="ExpectedSalary" type="number" inputmode="numeric" min="0" max="10000000" step="500" placeholder="เช่น 18000" required>
               <small class="hint">กรอกเป็นตัวเลขบาทต่อเดือน สามารถเว้นว่างไว้ได้หากยังไม่กำหนด</small>
             </div>
           </div>
