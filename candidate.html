@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#142B43">
   <meta name="description" content="แบบฟอร์มข้อมูลผู้สมัครงาน ATWORK">
-  <title>ATWORK | ข้อมูลผู้สมัครงาน</title>
+  <title>@attwork | ข้อมูลผู้สมัครงาน</title>
 
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -329,16 +329,6 @@
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 3 7.5 7 10 4-2.5 7-5.5 7-10V6l-7-3Z"></path><path d="m9 12 2 2 4-4"></path></svg>
         ข้อมูลของคุณจะถูกใช้เพื่อประกอบการติดต่อเรื่องงาน
       </div>
-    </header>
-
-    <section class="content">
-      <div class="intro-row">
-        <div>
-          <h2 class="intro-title">เริ่มต้นโปรไฟล์ผู้สมัคร</h2>
-          <p class="intro-subtitle">กรอกข้อมูลที่จำเป็น โดยช่องที่มี <span class="required-star">*</span> เป็นช่องบังคับ</p>
-        </div>
-        <span class="required-note">ข้อมูลส่วนตัว · เก็บเป็นความลับ</span>
-      </div>
 
       <div id="lineStatus" class="line-status" role="status" aria-live="polite">
         <span class="status-icon" aria-hidden="true">
@@ -360,18 +350,20 @@
         </div>
         <span class="profile-badge">เชื่อมต่อแล้ว</span>
       </section>
+    </header>
 
+      
       <form id="candidateForm" novalidate>
         <section class="form-section" aria-labelledby="personalHeading">
           <div class="section-heading">
             <span class="section-number">01</span>
-            <div><h2 id="personalHeading">ข้อมูลส่วนตัวและที่อยู่</h2><p>ข้อมูลสำหรับติดต่อและจัดทำ Resume</p></div>
+            <div><h2 id="personalHeading">ข้อมูลส่วนตัวและที่อยู่</h2></div>
           </div>
           <div class="form-grid">
             <div class="field full">
               <label for="FullName">1. ชื่อ-นามสกุล <span class="required-star">*</span></label>
-              <input id="FullName" name="FullName" maxlength="150" autocomplete="name" required placeholder="กรอกชื่อและนามสกุล" aria-describedby="FullNameHint">
-              <small class="hint" id="FullNameHint">ใช้ชื่อจริงที่ต้องการให้แสดงใน Resume</small>
+              <input id="FullName" name="FullName" maxlength="150" autocomplete="name" required placeholder="ชื่อและนามสกุล" aria-describedby="FullNameHint">
+
             </div>
             <div class="field">
               <label for="Age">2. อายุ (ปี) <span class="required-star">*</span></label>
@@ -383,11 +375,11 @@
               <small class="hint">กรอกตัวเลขให้ครบ และเก็บเลข 0 ด้านหน้าไว้</small>
             </div>
             <div class="field full">
-              <label for="Email">4. อีเมล</label>
+              <label for="Email">4. อีเมล<span class="required-star">*</span></label>
               <input id="Email" name="Email" type="email" maxlength="150" autocomplete="email" placeholder="name@example.com">
             </div>
             <div class="field">
-              <label for="HouseNo">5. บ้านเลขที่</label>
+              <label for="HouseNo">5. บ้านเลขที่<span class="required-star">*</span></label>
               <input id="HouseNo" name="HouseNo" maxlength="100" autocomplete="address-line1" placeholder="เช่น 99/12">
             </div>
             <div class="field">
@@ -395,19 +387,19 @@
               <input id="moo" name="moo" maxlength="50" placeholder="เช่น หมู่ 4 หรือ 4">
             </div>
             <div class="field">
-              <label for="Subdistrict">7. ตำบล/แขวง</label>
+              <label for="Subdistrict">7. ตำบล/แขวง<span class="required-star">*</span></label>
               <input id="Subdistrict" name="Subdistrict" maxlength="100" autocomplete="address-level3" placeholder="กรอกตำบลหรือแขวง">
             </div>
             <div class="field">
-              <label for="District">8. อำเภอ/เขต</label>
+              <label for="District">8. อำเภอ/เขต<span class="required-star">*</span></label>
               <input id="District" name="District" maxlength="100" autocomplete="address-level2" placeholder="กรอกอำเภอหรือเขต">
             </div>
             <div class="field">
-              <label for="Province">9. จังหวัด</label>
+              <label for="Province">9. จังหวัด<span class="required-star">*</span></label>
               <input id="Province" name="Province" type="text" maxlength="100" autocomplete="address-level1" placeholder="กรอกชื่อจังหวัด">
             </div>
             <div class="field">
-              <label for="PastalCode">10. รหัสไปรษณีย์</label>
+              <label for="PastalCode">10. รหัสไปรษณีย์<span class="required-star">*</span></label>
               <input id="PastalCode" name="PastalCode" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" pattern="[0-9]{5}" placeholder="5 หลัก เช่น 10110">
             </div>
           </div>
@@ -416,7 +408,7 @@
         <section class="form-section" aria-labelledby="experienceHeading">
           <div class="section-heading">
             <span class="section-number">02</span>
-            <div><h2 id="experienceHeading">การศึกษาและความสามารถ</h2><p>ข้อมูลที่ระบบจะนำไปจัดหน้า Resume ให้อัตโนมัติ</p></div>
+            <div><h2 id="experienceHeading">การศึกษาและความสามารถ</h2</div>
           </div>
           <div class="form-grid">
             <div class="field full">
@@ -452,7 +444,7 @@
                 <label style="margin:0" id="skillsLabel">13. ทักษะ <span class="required-star">*</span></label>
                 <span id="skillCount" class="choice-count" aria-live="polite">เลือก 0 / 5</span>
               </div>
-              <p class="hint" style="margin:0 0 10px">เลือกทักษะที่ตรงกับตัวเองอย่างน้อย 3 และไม่เกิน 5 รายการ</p>
+              <p class="hint" style="margin:0 0 12px">เลือกทักษะที่ตรงกับตัวเองอย่างน้อย 3 และไม่เกิน 5 รายการ</p>
               <div id="skillsGrid" class="skill-grid" role="group" aria-labelledby="skillsLabel">
                 <label class="skill-option"><input type="checkbox" name="SkillOption" value="การใช้คอมพิวเตอร์พื้นฐาน"><span>การใช้คอมพิวเตอร์พื้นฐาน</span></label>
                 <label class="skill-option"><input type="checkbox" name="SkillOption" value="Microsoft Office"><span>Microsoft Office</span></label>
@@ -477,7 +469,7 @@
                 <label style="margin:0" for="languageName0">14. ภาษาและระดับความสามารถ</label>
                 <span id="languageCount" class="choice-count" aria-live="polite">0 / 3 ภาษา</span>
               </div>
-              <small class="hint" style="margin:0 0 10px">เพิ่มภาษาได้สูงสุด 3 ภาษา กรอกชื่อภาษาและเลือกระดับฟัง พูด อ่าน และเขียนให้ครบ หากไม่ต้องการระบุภาษา สามารถเว้นว่างได้</small>
+              <small class="hint" style="margin:0 0 12px">เพิ่มภาษาได้สูงสุด 3 ภาษา กรอกชื่อภาษาและเลือกระดับฟัง พูด อ่าน และเขียนให้ครบ หากไม่ต้องการระบุภาษา สามารถเว้นว่างได้</small>
               <div id="languageList" class="language-list"></div>
               <button id="addLanguageButton" class="secondary-button" type="button">+ เพิ่มภาษา</button>
               <small id="languageLimitMessage" class="hint limit-warning" role="status" aria-live="polite" hidden></small>
@@ -488,7 +480,7 @@
         <section class="form-section" aria-labelledby="jobHeading">
           <div class="section-heading">
             <span class="section-number">03</span>
-            <div><h2 id="jobHeading">ตำแหน่งงานและเงินเดือน</h2><p>ตำแหน่งจะโหลดจากรายการงานที่เปิดรับในระบบ ATWORK</p></div>
+            <div><h2 id="jobHeading">ตำแหน่งงานและเงินเดือน</h2><p>ตำแหน่งจะโหลดจากรายการงานในระบบ </p></div>
           </div>
           <div class="form-grid">
             <div class="field full">
@@ -499,7 +491,7 @@
               <div id="jobLoadStatus" class="job-load-status" role="status" aria-live="polite">กำลังเชื่อมต่อรายการตำแหน่งงาน</div>
             </div>
             <div class="field full">
-              <label for="ExpectedSalary">16. เงินเดือนที่คาดหวัง (บาท/เดือน)</label>
+              <label for="ExpectedSalary">16. เงินเดือนที่คาดหวัง (บาท/เดือน)<span class="required-star">*</span></label>
               <input id="ExpectedSalary" name="ExpectedSalary" type="number" inputmode="numeric" min="0" max="10000000" step="500" placeholder="เช่น 18000">
               <small class="hint">กรอกเป็นตัวเลขบาทต่อเดือน สามารถเว้นว่างไว้ได้หากยังไม่กำหนด</small>
             </div>
@@ -509,7 +501,7 @@
         <section class="form-section" aria-labelledby="photoHeading">
           <div class="section-heading">
             <span class="section-number">04</span>
-            <div><h2 id="photoHeading">17. รูปผู้สมัครงาน</h2><p>รูปนี้จะใช้ประกอบ Resume ที่ระบบสร้างให้</p></div>
+            <div><h2 id="photoHeading">17. รูปผู้สมัครงาน</h2></div>
           </div>
           <div class="upload-box">
             <div class="upload-heading">
@@ -544,14 +536,14 @@
       </form>
     </section>
 
-    <footer class="footer">ATWORK · CANDIDATE PORTAL</footer>
+    <footer class="footer">@attwork · CANDIDATE PORTAL</footer>
   </main>
 
   <!-- หน้าต่างสถานะการบันทึกข้อมูลและสร้าง Resume -->
   <div id="submissionModal" class="submission-modal" hidden aria-hidden="true">
     <div class="modal-backdrop" aria-hidden="true"></div>
     <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDescription">
-      <div class="modal-brand">ATWORK · CANDIDATE PORTAL</div>
+      <div class="modal-brand">@attwork · CANDIDATE PORTAL</div>
       <div id="progressWrap" class="progress-wrap">
         <svg class="progress-svg" viewBox="0 0 120 120" aria-hidden="true">
           <circle class="progress-track" cx="60" cy="60" r="48"></circle>
