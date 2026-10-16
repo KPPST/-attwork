@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#142B43">
   <meta name="description" content="แบบฟอร์มแจ้งความต้องการบุคลากร ATWORK สำหรับนายจ้าง">
-  <title>ATWORK | แจ้งความต้องการบุคลากร</title>
+  <title>@ATTWORK | แจ้งความต้องการบุคลากร</title>
 
   <!-- LIFF SDK: ใช้ LIFF ID ของ Employer ไม่ใช่ Candidate -->
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
@@ -400,16 +400,43 @@
     <section class="content">
       <form id="jobRequestForm" novalidate>
         <section class="form-section" aria-labelledby="companyHeading">
-          <div class="section-heading"><span class="section-number">01</span><div><h2 id="companyHeading">ข้อมูลบริษัทและผู้ประสานงาน</h2><p>ข้อมูลสำหรับติดต่อกลับเกี่ยวกับคำขอ</p></div></div>
+          <div class="section-heading"><span class="section-number">01</span><div><h2 id="companyHeading">ข้อมูลบริษัทและผู้ประสานงาน</h2></div></div>
           <div class="form-grid">
-            <div class="field full"><label for="CompanyName">ชื่อบริษัท / สถานประกอบการ <span class="required-star">*</span></label><input id="CompanyName" name="CompanyName" maxlength="200" autocomplete="organization" required placeholder="กรอกชื่อบริษัทหรือสถานประกอบการ"></div>
-            <div class="field"><label for="ContactName">ชื่อผู้ประสานงาน <span class="required-star">*</span></label><input id="ContactName" name="ContactName" maxlength="150" autocomplete="name" required placeholder="ชื่อ-นามสกุล"></div>
-            <div class="field"><label for="ContactPhone">เบอร์โทรศัพท์ <span class="required-star">*</span></label><input id="ContactPhone" name="ContactPhone" type="tel" inputmode="tel" maxlength="20" autocomplete="tel" required placeholder="เช่น 0812345678"><small class="hint">ใส่ตัวเลขและเครื่องหมาย + - ( ) ได้</small></div>
-            <div class="field full"><label for="ContactEmail">อีเมลผู้ประสานงาน</label><input id="ContactEmail" name="ContactEmail" type="email" maxlength="150" autocomplete="email" placeholder="name@company.com"><small class="hint">เว้นว่างได้ หากไม่สะดวกระบุอีเมล</small></div>
+            <div class="field full"><label for="CompanyName">ชื่อบริษัท / สถานประกอบการ <span class="required-star">*</span></label>
+              <input id="CompanyName" name="CompanyName" maxlength="200" autocomplete="organization" required placeholder="กรอกชื่อบริษัทหรือสถานประกอบการ"></div>
+            <div class="field"><label for="ContactName">ชื่อผู้ประสานงาน <span class="required-star">*</span></label>
+              <input id="ContactName" name="ContactName" maxlength="150" autocomplete="name" required placeholder="ชื่อ-นามสกุล"></div>
+            <div class="field"><label for="ContactPhone">เบอร์โทรศัพท์ <span class="required-star">*</span></label>
+              <input id="ContactPhone" name="ContactPhone" type="tel" inputmode="tel" maxlength="20" autocomplete="tel" required placeholder="เช่น 0812345678"></div>
+            <div class="field full"><label for="ContactEmail">อีเมลผู้ประสานงาน <span class="required-star">*</span></label>
+              <input id="ContactEmail" name="ContactEmail" type="email" maxlength="150" autocomplete="email" required placeholder="name@company.com"></div>
           </div>
         </section>
+
+         <section class="form-section" aria-labelledby="scheduleHeading">
+          <div class="section-heading"><span class="section-number">02</span><div><h2 id="scheduleHeading">ค่าตอบแทนและเวลาทำงาน</h2></div></div>
+          <div class="form-grid">
+            <div class="field"><label for="SalaryType">รูปแบบค่าตอบแทน</label>
+              <select id="SalaryType" name="SalaryType">
+                <option value="">เลือกรูปแบบ (ถ้ามี)</option>
+                <option value="รายวัน">รายวัน</option>
+                <option value="รายเดือน">รายเดือน</option>
+                <option value="รายชั่วโมง">รายชั่วโมง</option>
+                <option value="ตามตกลง">ตามตกลง</option>
+              </select></div>
+            <div class="field"><label for="SalaryRange">อัตราค่าตอบแทน / ช่วงเงินเดือน</label>
+              <input id="SalaryRange" name="SalaryRange" maxlength="150" placeholder="เช่น 400–500 บาท/วัน/เดือน"></div>
+            <div class="field"><label for="WorkDate">วัน / รูปแบบวันทำงาน</label>
+              <input id="WorkDate" name="WorkDate" maxlength="100" placeholder="เช่น จันทร์–เสาร์ หรือทำงานเป็นกะ"></div>
+            <div class="field"><label for="StartTime">เวลาเริ่มงาน</label>
+              <input id="StartTime" name="StartTime" type="text" maxlength="50" placeholder="เช่น 08:00 น."></div>
+            <div class="field"><label for="EndTime">เวลาเลิกงาน</label>
+              <input id="EndTime" name="EndTime" type="text" maxlength="50" placeholder="เช่น 17:00 น."></div>
+          </div>
+        </section>
+        
         <section class="form-section" aria-labelledby="jobHeading">
-          <div class="section-heading"><span class="section-number">02</span><div><h2 id="jobHeading">รายละเอียดตำแหน่งงาน</h2><p>ระบุลักษณะงานและจำนวนบุคลากรที่ต้องการ</p></div></div>
+          <div class="section-heading"><span class="section-number">03</span><div><h2 id="jobHeading">รายละเอียดตำแหน่งงาน</h2><p>ระบุลักษณะงานและจำนวนบุคลากรที่ต้องการ</p></div></div>
           <div class="form-grid">
             <div class="field full"><label for="JobTitle">ตำแหน่งงานที่ต้องการ <span class="required-star">*</span></label><input id="JobTitle" name="JobTitle" maxlength="200" required placeholder="เช่น พนักงานคลังสินค้า"></div>
             <div class="field"><label for="JobType">ประเภทงาน <span class="required-star">*</span></label><select id="JobType" name="JobType" required><option value="">เลือกประเภทงาน</option><option value="งานประจำ">งานประจำ</option><option value="งานชั่วคราว">งานชั่วคราว</option><option value="งานรายวัน">งานรายวัน</option><option value="งานสัญญาจ้าง">งานสัญญาจ้าง</option><option value="งานพาร์ตไทม์">งานพาร์ตไทม์</option><option value="อื่น ๆ">อื่น ๆ</option></select></div>
@@ -420,16 +447,8 @@
             <div class="field full"><label for="Qualifications">คุณสมบัติที่ต้องการ</label><textarea id="Qualifications" name="Qualifications" maxlength="3000" placeholder="เช่น วุฒิการศึกษา ประสบการณ์ ทักษะ หรือคุณสมบัติเฉพาะ (ถ้ามี)"></textarea></div>
           </div>
         </section>
-        <section class="form-section" aria-labelledby="scheduleHeading">
-          <div class="section-heading"><span class="section-number">03</span><div><h2 id="scheduleHeading">ค่าตอบแทนและเวลาทำงาน</h2><p>ระบุข้อมูลเบื้องต้นเพื่อประกอบการประสานงาน</p></div></div>
-          <div class="form-grid">
-            <div class="field"><label for="SalaryType">รูปแบบค่าตอบแทน</label><select id="SalaryType" name="SalaryType"><option value="">เลือกรูปแบบ (ถ้ามี)</option><option value="รายวัน">รายวัน</option><option value="รายเดือน">รายเดือน</option><option value="รายชั่วโมง">รายชั่วโมง</option><option value="ตามตกลง">ตามตกลง</option><option value="อื่น ๆ">อื่น ๆ</option></select></div>
-            <div class="field"><label for="SalaryRange">อัตราค่าตอบแทน / ช่วงเงินเดือน</label><input id="SalaryRange" name="SalaryRange" maxlength="150" placeholder="เช่น 400–500 บาท/วัน"></div>
-            <div class="field"><label for="WorkDate">วัน / รูปแบบวันทำงาน</label><input id="WorkDate" name="WorkDate" maxlength="100" placeholder="เช่น จันทร์–เสาร์ หรือทำงานเป็นกะ"></div>
-            <div class="field"><label for="StartTime">เวลาเริ่มงาน</label><input id="StartTime" name="StartTime" type="text" maxlength="50" placeholder="เช่น 08:00 น."></div>
-            <div class="field"><label for="EndTime">เวลาเลิกงาน</label><input id="EndTime" name="EndTime" type="text" maxlength="50" placeholder="เช่น 17:00 น."></div>
-          </div>
-        </section>
+        
+       
 
         <div class="privacy-note"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"></path></svg><span>โปรดตรวจสอบข้อมูลก่อนส่ง คำขอจะถูกบันทึกเพื่อให้ทีม ATWORK ตรวจสอบและประสานงานต่อ ข้อมูลนี้ยังไม่ใช่การยืนยันว่าตำแหน่งงานเปิดรับแล้ว</span></div>
         <div class="actions"><button id="submitButton" class="submit-button" type="submit" disabled><span class="button-label">กำลังเชื่อมต่อ LINE...</span><span class="button-spinner" aria-hidden="true"></span><span class="button-arrow" aria-hidden="true">→</span></button><div id="message" role="status" aria-live="polite"></div></div>
