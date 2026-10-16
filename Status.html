@@ -261,7 +261,7 @@
       setValue('candidateName', candidate.fullName);
       el('avatar').textContent = safeText(candidate.fullName, 'A').trim().charAt(0) || 'A';
       setValue('candidateId', candidate.candidateId ? 'รหัสผู้สมัคร: ' + candidate.candidateId : '');
-      setValue('Status', candidate.candidateStatus);
+      setValue('Status', candidate.Status);
       // timeNow is a live client-side clock; it is deliberately not read from the sheet.
       setValue('resumeStatus', candidate.resumeStatus);
       setValue('expectedPosition', candidate.expectedPosition);
