@@ -329,6 +329,53 @@
       html { scroll-behavior: auto; }
       *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
     }
+
+    /* แยกส่วนหัวสีฟ้าออกจากเนื้อหาด้านล่าง */
+.hero {
+  border-radius: var(--radius-xl);
+  margin-bottom: 14px;
+}
+
+/* ซ่อนกล่องแจ้งสถานะ LINE อันแรก */
+.hero-bottom-row > .line-status {
+  display: none !important;
+}
+
+/* ให้กล่องโปรไฟล์คงขนาดเดิมและชิดซ้าย */
+.hero-bottom-row,
+.hero-bottom-row.profile-active {
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.hero-bottom-row > .profile-card,
+.hero-bottom-row.profile-active > .profile-card {
+  flex: 0 1 380px;
+  width: 380px;
+  max-width: 100%;
+  margin: 0;
+}
+
+/* มือถือ */
+@media (max-width: 620px) {
+  .hero-bottom-row,
+  .hero-bottom-row.profile-active {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 8px;
+  }
+
+  .hero-bottom-row > .profile-card,
+  .hero-bottom-row.profile-active > .profile-card {
+    flex: 0 1 380px;
+    width: 380px;
+    max-width: 100%;
+  }
+} 
+    
   </style>
 </head>
 <body>
