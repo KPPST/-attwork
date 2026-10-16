@@ -163,7 +163,8 @@
           </div>
         </div>
         <div class="cards">
-          <div class="metric"><div class="metric-label">สถานะเพิ่มเติม</div><div class="metric-value" id="Status">-</div></div>
+          <div class="metric"><div class="metric-label">เวลาปัจจุบัน (ประเทศไทย)</div><div class="metric-value" id="timeNow" aria-live="off">กำลังอ่านเวลา…</div></div>
+          <div class="metric"><div class="metric-label">สถานะผู้สมัคร</div><div class="metric-value" id="candidateStatus">-</div></div>
           <div class="metric"><div class="metric-label">สถานะ Resume PDF</div><div class="metric-value" id="resumeStatus">-</div></div>
           <div class="metric"><div class="metric-label">ตำแหน่งที่สนใจ</div><div class="metric-value" id="expectedPosition">-</div></div>
           <div class="metric"><div class="metric-label">อัปเดตข้อมูลล่าสุด</div><div class="metric-value" id="updatedAt">-</div></div>
@@ -172,7 +173,7 @@
         <div id="applicationsList"></div>
       </section>
     </div>
-    <footer class="foot">@ATTWORK · ระบบตรวจสอบสถานะการสมัครงาน</footer>
+    <footer class="foot">ATWORK · ระบบตรวจสอบสถานะการสมัครงาน</footer>
   </main>
 
   <iframe name="attworkStatusFrame" id="attworkStatusFrame" title="ช่องทางส่งคำขอที่ซ่อนอยู่" style="display:none" aria-hidden="true"></iframe>
@@ -221,6 +222,30 @@
       return text || (fallback || '-');
     }
     function setValue(id, value) { el(id).textContent = safeText(value); }
+
+    // Live clock in Thailand time. Updates every second and does not depend on the Google Sheet.
+    function updateLiveClock() {
+      const clock = el('timeNow');
+      if (!clock) return;
+      try {
+        clock.textContent = new Intl.DateTimeFormat('th-TH', {
+          timeZone: 'Asia/Bangkok',
+          day: '2-digit',
+          month: 'short',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hourCycle: 'h23'
+        }).format(new Date());
+      } catch (error) {
+        // Fallback if the browser's Intl formatter is unavailable.
+        clock.textContent = new Date().toLocaleString('th-TH', { hour12: false });
+      }
+    }
+
+    updateLiveClock();
+    window.setInterval(updateLiveClock, 1000);
     function renderStatus(data) {
       if (!data || data.success !== true) {
         setMessage(safeText(data && data.message, 'ตรวจสอบสถานะไม่สำเร็จ กรุณาลองใหม่อีกครั้ง'), 'error');
@@ -236,9 +261,8 @@
       setValue('candidateName', candidate.fullName);
       el('avatar').textContent = safeText(candidate.fullName, 'A').trim().charAt(0) || 'A';
       setValue('candidateId', candidate.candidateId ? 'รหัสผู้สมัคร: ' + candidate.candidateId : '');
-      setValue('Status', candidate.status);
-      setValue('timeNow', candidate.timeNow);
       setValue('candidateStatus', candidate.candidateStatus);
+      // timeNow is a live client-side clock; it is deliberately not read from the sheet.
       setValue('resumeStatus', candidate.resumeStatus);
       setValue('expectedPosition', candidate.expectedPosition);
       setValue('updatedAt', candidate.updatedAt);
@@ -285,9 +309,8 @@
         renderStatus(data);
       } catch (error) {
         console.error('[ATWORK STATUS] render error', error);
-        setMessage('ได้รับคำตอบจากระบบแล้ว แต่แสดงผลไม่สำเร็จ กรุณารีโหลดหน้า หากเกิดซ้ำให้ส่งภาพหน้าจอให้เจ้าหน้าที่', 'error');
+        setMessage('ได้รับคำตอบจากระบบแล้ว แต่แสดงผลไม่สำเร็จ กรุณารีเฟรชหน้าและลองใหม่', 'error');
       } finally {
-        // ปลดสถานะกำลังโหลดเสมอ แม้มีข้อผิดพลาดระหว่างแสดงผล
         setBusy(false);
       }
     });
