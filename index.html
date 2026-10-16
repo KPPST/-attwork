@@ -110,11 +110,49 @@
       color: #F1E5C9;
       font-size: 18px; font-weight: 800; letter-spacing: -.5px;
     }
-    .brand-name { color: #fff; font-size: 13px; font-weight: 800; letter-spacing: 1.9px; line-height: 1.25; }
-    .brand-caption { display: block; margin-top: 3px; color: #C4D0D9; font-size: 9px; letter-spacing: 1px; }
-    .eyebrow { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 3px; color: #FFF0B7; font-size: 9px; font-weight: 800; letter-spacing: .65px; }
-    .eyebrow::before { content: ""; width: 18px; height: 1px; background: #FFE07A; }
-    h1 { margin: 0; color: #fff; font-size: clamp(19px, 2.5vw, 23px); font-weight: 800; line-height: 1.25; letter-spacing: -.25px; }
+    .brand-name { 
+      color: #fff;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 1.9px;
+      line-height: 1.25;
+    }
+    
+    .brand-caption { 
+      display: block;
+      margin-top: 3px;
+      color: #C4D0D9;
+      font-size: 9px;
+      letter-spacing: 1px;
+    }
+    
+    .eyebrow { 
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 3px;
+      color: #FFF0B7;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .65px;
+    }
+    
+    .eyebrow::before { 
+      content: "";
+      width: 18px;
+      height: 1px;
+      background: #FFE07A;
+    }
+    
+    h1 { 
+      margin: 0;
+      color: #fff;
+      font-size: clamp(19px, 2.5vw, 23px);
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: -.25px;
+    }
+    
     .hero-copy { max-width: 520px; margin: 4px 0 0; color: #EFF8FF; font-size: 11px; line-height: 1.55; }
     .hero-meta { display: flex; align-items: center; gap: 6px; margin-top: 5px; color: #F0FBFF; font-size: 9px; line-height: 1.5; }
     .hero-meta svg { width: 14px; height: 14px; color: #FFE07A; flex: 0 0 auto; }
@@ -237,6 +275,21 @@
     .modal-card { position: relative; width: min(100%, 370px); padding: 27px 23px 22px; border: 1px solid rgba(255,255,255,.75); border-radius: 20px; background: #fff; box-shadow: 0 24px 80px rgba(10, 25, 40, .28); text-align: center; animation: modalIn .2s ease-out; }
     @keyframes modalIn { from { opacity: 0; transform: translateY(8px) scale(.985); } to { opacity: 1; transform: translateY(0) scale(1); } }
     .modal-brand { margin-bottom: 17px; color: #9A6A00; font-size: 10px; font-weight: 800; letter-spacing: 1.8px; }
+    /* วงกลมโหลดระหว่างส่งคำขอ */
+    .modal-spinner {
+      display: block;
+      width: 46px;
+      height: 46px;
+      margin: 0 auto 17px;
+      border: 4px solid #E8EEF6;
+      border-top-color: #287DEB;
+      border-radius: 50%;
+      animation: spin .8s linear infinite;
+        }
+  
+    .modal-spinner[hidden] {
+      display: none !important;
+        }
     .progress-wrap { position: relative; width: 142px; height: 142px; margin: 0 auto 17px; }
     .progress-svg { display: block; width: 142px; height: 142px; transform: rotate(-90deg); }
     .progress-track, .progress-ring { fill: none; stroke-width: 8; }
@@ -500,7 +553,11 @@
     const modalReference = document.getElementById("modalReference");
     const modalReferenceCode = document.getElementById("modalReferenceCode");
     const modalCloseButton = document.getElementById("modalCloseButton");
+    const positionSelect = document.getElementById("JobTitle");
+    const jobLoadStatus = document.getElementById("jobLoadStatus");
 
+    let openJobs = [];
+    let openJobsLoading = false;
     let liffReady = false;
     let isSubmitting = false;
     let pendingRequestId = "";
@@ -549,14 +606,153 @@
       if (heroBottomRow) heroBottomRow.classList.add("profile-active");
     }
 
-    function updateSubmitAvailability() {
-      const canSubmit = liffReady && !isSubmitting;
-      setButtonState(
-        canSubmit ? "ส่งใบแจ้งความต้องการบุคลากร" : (isSubmitting ? "กำลังส่งคำขอ..." : "กำลังเชื่อมต่อ LINE..."),
-        !canSubmit,
-        false
-      );
+    function handleJobLoadError(text) {
+  openJobs = [];
+  openJobsLoading = false;
+
+  positionSelect.disabled = true;
+  positionSelect.replaceChildren(
+    new Option("โหลดตำแหน่งงานไม่สำเร็จ", "")
+  );
+
+  jobLoadStatus.classList.add("error");
+  jobLoadStatus.textContent = text;
+
+  updateSubmitAvailability();
+}
+
+function loadOpenJobs() {
+  openJobsLoading = true;
+  positionSelect.disabled = true;
+
+  jobLoadStatus.classList.remove("error");
+  jobLoadStatus.textContent = "กำลังโหลดตำแหน่งงานที่เปิดรับ...";
+
+  positionSelect.replaceChildren(
+    new Option("กำลังโหลดตำแหน่งงานที่เปิดรับ...", "")
+  );
+
+  const callbackName = "atworkEmployerOpenJobsCallback";
+  const script = document.createElement("script");
+  let finished = false;
+
+  const timeout = window.setTimeout(function () {
+    if (finished) return;
+
+    finished = true;
+    cleanup();
+
+    handleJobLoadError(
+      "ใช้เวลาโหลดตำแหน่งงานนานเกินไป กรุณาลองเปิดหน้าเว็บใหม่"
+    );
+  }, 15000);
+
+  function cleanup() {
+    window.clearTimeout(timeout);
+    script.remove();
+
+    try {
+      delete window[callbackName];
+    } catch (_) {
+      window[callbackName] = undefined;
     }
+  }
+
+  window[callbackName] = function (response) {
+    if (finished) return;
+    finished = true;
+    cleanup();
+
+    if (!response || response.success !== true) {
+      handleJobLoadError(
+        response && response.message
+          ? response.message
+          : "ระบบไม่สามารถโหลดรายการตำแหน่งงานได้"
+      );
+      return;
+    }
+
+    openJobs = (Array.isArray(response.jobs) ? response.jobs : [])
+      .map(function (job) {
+        return {
+          jobId: String(job.jobId || "").trim(),
+          title: String(job.title || "").trim()
+        };
+      })
+      .filter(function (job) {
+        return job.title;
+      });
+
+    if (openJobs.length === 0) {
+      handleJobLoadError(
+        response.message || "ขณะนี้ไม่มีตำแหน่งงานที่เปิดรับ"
+      );
+      return;
+    }
+
+    positionSelect.replaceChildren(
+      new Option("เลือกตำแหน่งงานที่ต้องการ", "")
+    );
+
+    openJobs.forEach(function (job) {
+      const option = new Option(job.title, job.title);
+      option.dataset.jobId = job.jobId;
+      positionSelect.add(option);
+    });
+
+    openJobsLoading = false;
+    positionSelect.disabled = false;
+
+    jobLoadStatus.classList.remove("error");
+    jobLoadStatus.textContent =
+      "โหลดตำแหน่งงานที่เปิดรับแล้ว " +
+      openJobs.length +
+      " รายการ";
+
+    updateSubmitAvailability();
+  };
+
+  script.onerror = function () {
+    if (finished) return;
+    finished = true;
+    cleanup();
+
+    handleJobLoadError(
+      "เชื่อมต่อรายการตำแหน่งงานไม่ได้ กรุณาตรวจสอบ Apps Script"
+    );
+  };
+
+  script.src =
+    ATWORK_APPS_SCRIPT_URL +
+    "?action=getOpenJobs&callback=" +
+    encodeURIComponent(callbackName) +
+    "&_=" +
+    Date.now();
+
+  document.head.appendChild(script);
+}
+
+    function updateSubmitAvailability() {
+      const canSubmit =
+      liffReady &&
+      openJobs.length > 0 &&
+      !isSubmitting;
+
+      let label;
+
+      if (!liffReady) {
+      label = "กำลังเชื่อมต่อ LINE...";
+      } else if (isSubmitting) {
+      label = "กำลังส่งคำขอ...";
+      } else if (openJobsLoading) {
+      label = "กำลังโหลดตำแหน่งงาน...";
+      } else if (openJobs.length === 0) {
+      label = "ไม่พบตำแหน่งงานที่เปิดรับ";
+      } else {
+      label = "ส่งใบแจ้งความต้องการบุคลากร";
+      }
+      setButtonState(label, !canSubmit, false);
+      }
 
     async function initializeAtworkLiff() {
       if (!ATWORK_LIFF_ID) {
@@ -792,8 +988,9 @@
       sendJobRequestToAppsScript(data);
     });
 
-    setButtonState("กำลังเชื่อมต่อ LINE...", true, false);
-    initializeAtworkLiff();
+   setButtonState("กำลังเชื่อมต่อ LINE...", true, false);
+   loadOpenJobs();
+   initializeAtworkLiff();
   </script>
 </body>
 </html>
