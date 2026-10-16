@@ -417,15 +417,11 @@
           <div class="section-heading"><span class="section-number">02</span><div><h2 id="scheduleHeading">ตำแหน่งงาน ค่าตอบแทนและเวลาทำงาน</h2></div></div>
           <div class="form-grid">
             <div class="field full"><label for="JobTitle">ตำแหน่งงานที่ต้องการ <span class="required-star">*</span></label>
-             <select id="JobTitle" name="title" required>
-                <option value="">เลือกประเภทงาน</option>
-                <option value="งานประจำ">งานประจำ</option>
-                <option value="งานชั่วคราว">งานชั่วคราว</option>
-                <option value="งานรายวัน">งานรายวัน</option>
-                <option value="งานสัญญาจ้าง">งานสัญญาจ้าง</option>
-                <option value="งานพาร์ตไทม์">งานพาร์ตไทม์</option>
-                <option value="อื่น ๆ">อื่น ๆ</option>
-              </select></div>
+             <select id="JobTitle" name="JobTitle" required disabled>
+                <option value="">กำลังโหลดตำแหน่งงานที่เปิดรับ...</option>
+              </select>
+              <div id="jobLoadStatus" class="job-load-status" role="status" aria-live="polite">กำลังเชื่อมต่อรายการตำแหน่งงาน</div>
+            </div>
             <div class="field"><label for="SalaryRange">อัตราค่าตอบแทน / ช่วงเงินเดือน <span class="required-star">*</span></label>
               <input id="SalaryRange" name="SalaryRange" maxlength="150" required placeholder="เช่น 400–500 บาท/วัน/เดือน"></div>
             <div class="field"><label for="Headcount">จำนวนบุคลากร <span class="required-star">*</span></label>
