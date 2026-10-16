@@ -6,7 +6,8 @@
   <meta name="theme-color" content="#142B43">
   <meta name="description" content="แบบฟอร์มแจ้งความต้องการบุคลากร ATWORK สำหรับนายจ้าง">
   <title>@ATTWORK|แจ้งความต้องการบุคลากร</title>
-  
+
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -78,7 +79,7 @@
       background:linear-gradient(118deg,#2457D6 0%,#237FE8 53%,#00AFC5 100%);color:#fff
         }
     
-   .hero::before { width: 180px; height: 180px; right: -90px; top: -120px; }
+    .hero::before { width: 180px; height: 180px; right: -90px; top: -120px; }
     .hero::after { width: 125px; height: 125px; right: -62px; top: -84px; }
 
     .brand-row { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
@@ -319,6 +320,43 @@
     <header class="hero">
       <div class="eyebrow">EMPLOYER REGISTRATION</div>
       <h1>ใบแจ้งความต้องการบุคลากร</h1>
+
+      <div class="eyebrow">EMPLOYER REGISTRATION</div>
+<h1>ใบแจ้งความต้องการบุคลากร</h1>
+
+<div class="hero-bottom-row" id="heroBottomRow">
+  <div id="lineStatus" class="line-status" role="status" aria-live="polite">
+    <span class="status-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="15" height="15"
+        fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round">
+        <circle cx="12" cy="12" r="9"></circle>
+        <path d="M12 7v5l3 2"></path>
+      </svg>
+    </span>
+    <span id="lineStatusText">กำลังเชื่อมต่อบัญชี LINE...</span>
+  </div>
+
+  <section id="lineProfileCard" class="profile-card"
+    aria-label="โปรไฟล์ LINE ของผู้ประสานงาน">
+    <div class="avatar-frame">
+      <span id="profileFallback" class="avatar-fallback"
+        aria-hidden="true">L</span>
+      <img id="profilePicture" alt="รูปโปรไฟล์ LINE"
+        referrerpolicy="no-referrer">
+    </div>
+
+    <div class="profile-copy">
+      <div class="profile-kicker">เข้าสู่ระบบด้วย LINE แล้ว</div>
+      <p id="profileName" class="profile-name">ผู้ใช้ LINE</p>
+      <div class="profile-caption">
+        บัญชี LINE ที่ใช้ติดต่อกับ ATWORK
+      </div>
+    </div>
+
+    <span class="profile-badge">เชื่อมต่อแล้ว</span>
+  </section>
+</div>
     </header>
 
     <section class="content">
@@ -381,8 +419,9 @@
      * ATWORK — แบบฟอร์มแจ้งความต้องการบุคลากร (นายจ้าง)
      * GitHub Pages -> Apps Script doPost(action=submitJobRequest)
      ************************************************************/
-    const ATWORK_APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzjLTf5pExf4UrFWjSvadcM4G3bCqugaY1kSuq0I6ajIYorWO9hBOO_r9F3pT0j1G00/exec";
-    const ALLOWED_RESPONSE_ORIGINS = ["https://script.google.com"];
+  const ATWORK_LIFF_ID = "2011995684-UH8aLBvG";
+  const ATWORK_APPS_SCRIPT_URL ="https://script.google.com/macros/s/AKfycbzjLTf5pExf4UrFWjSvadcM4G3bCqugaY1kSuq0I6ajIYorWO9hBOO_r9F3pT0j1G00/exec";
+  const ALLOWED_RESPONSE_ORIGINS = ["https://script.google.com"];
 
     const form = document.getElementById("jobRequestForm");
     const button = document.getElementById("submitButton");
