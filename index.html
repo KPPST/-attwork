@@ -414,10 +414,22 @@
         </section>
 
          <section class="form-section" aria-labelledby="scheduleHeading">
-          <div class="section-heading"><span class="section-number">02</span><div><h2 id="scheduleHeading">ค่าตอบแทนและเวลาทำงาน</h2></div></div>
+          <div class="section-heading"><span class="section-number">02</span><div><h2 id="scheduleHeading">ตำแหน่งงาน ค่าตอบแทนและเวลาทำงาน</h2></div></div>
           <div class="form-grid">
+            <div class="field full"><label for="JobTitle">ตำแหน่งงานที่ต้องการ <span class="required-star">*</span></label>
+             <select id="JobTitle" name="title" required>
+                <option value="">เลือกประเภทงาน</option>
+                <option value="งานประจำ">งานประจำ</option>
+                <option value="งานชั่วคราว">งานชั่วคราว</option>
+                <option value="งานรายวัน">งานรายวัน</option>
+                <option value="งานสัญญาจ้าง">งานสัญญาจ้าง</option>
+                <option value="งานพาร์ตไทม์">งานพาร์ตไทม์</option>
+                <option value="อื่น ๆ">อื่น ๆ</option>
+              </select></div>
             <div class="field"><label for="SalaryRange">อัตราค่าตอบแทน / ช่วงเงินเดือน <span class="required-star">*</span></label>
               <input id="SalaryRange" name="SalaryRange" maxlength="150" required placeholder="เช่น 400–500 บาท/วัน/เดือน"></div>
+            <div class="field"><label for="Headcount">จำนวนบุคลากร <span class="required-star">*</span></label>
+              <input id="Headcount" name="Headcount" type="number" inputmode="numeric" min="1" max="100000" step="1" required placeholder="เช่น 10"></div>
             <div class="field"><label for="WorkDate">วัน / รูปแบบวันทำงาน <span class="required-star">*</span></label>
               <input id="WorkDate" name="WorkDate" maxlength="100" required placeholder="เช่น จันทร์–เสาร์ หรือทำงานเป็นกะ"></div>
             <div class="field"><label for="StartTime">เวลาเริ่มงาน <span class="required-star">*</span></label>
@@ -430,20 +442,6 @@
         <section class="form-section" aria-labelledby="jobHeading">
           <div class="section-heading"><span class="section-number">03</span><div><h2 id="jobHeading">รายละเอียดตำแหน่งงาน</h2><p>ระบุลักษณะงานและจำนวนบุคลากรที่ต้องการ</p></div></div>
           <div class="form-grid">
-            <div class="field full"><label for="JobTitle">ตำแหน่งงานที่ต้องการ <span class="required-star">*</span></label>
-              <input id="JobTitle" name="JobTitle" maxlength="200" required placeholder="เช่น พนักงานคลังสินค้า"></div>
-            <div class="field"><label for="JobType">ประเภทงาน <span class="required-star">*</span></label>
-              <select id="JobType" name="JobType" required>
-                <option value="">เลือกประเภทงาน</option>
-                <option value="งานประจำ">งานประจำ</option>
-                <option value="งานชั่วคราว">งานชั่วคราว</option>
-                <option value="งานรายวัน">งานรายวัน</option>
-                <option value="งานสัญญาจ้าง">งานสัญญาจ้าง</option>
-                <option value="งานพาร์ตไทม์">งานพาร์ตไทม์</option>
-                <option value="อื่น ๆ">อื่น ๆ</option>
-              </select></div>
-            <div class="field"><label for="Headcount">จำนวนบุคลากร <span class="required-star">*</span></label>
-              <input id="Headcount" name="Headcount" type="number" inputmode="numeric" min="1" max="100000" step="1" required placeholder="เช่น 10"></div>
             <div class="field"><label for="Province">จังหวัดที่ปฏิบัติงาน <span class="required-star">*</span></label>
               <input id="Province" name="Province" maxlength="100" required autocomplete="address-level1" placeholder="เช่น สมุทรปราการ"></div>
             <div class="field"><label for="WorkLocation">สถานที่ / พื้นที่ทำงาน <span class="required-star">*</span></label>
@@ -455,8 +453,6 @@
               <textarea id="Qualifications" name="Qualifications" maxlength="5000" required  placeholder="เช่น วุฒิการศึกษา ประสบการณ์ ทักษะ หรือคุณสมบัติเฉพาะ (ถ้ามี)"></textarea></div>
           </div>
         </section>
-        
-       
 
         <div class="privacy-note"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2">
         </rect><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"></path></svg><span>โปรดตรวจสอบข้อมูลก่อนส่ง</span></div>
