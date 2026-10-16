@@ -163,8 +163,8 @@
           </div>
         </div>
         <div class="cards">
-          <div class="metric"><div class="metric-label">เวลา</div><div class="metric-value" id="Time Now">-</div></div>
-          <div class="metric"><div class="metric-label">สถานะผู้สมัคร</div><div class="metric-value" id="Status">-</div></div>
+          <div class="metric"><div class="metric-label">สถานะผ</div><div class="metric-value" id="Status">-</div></div>
+          <div class="metric"><div class="metric-label">สถานะผู้สมัคร</div><div class="metric-value" id="CandidateStatus">-</div></div>
           <div class="metric"><div class="metric-label">สถานะ Resume PDF</div><div class="metric-value" id="resumeStatus">-</div></div>
           <div class="metric"><div class="metric-label">ตำแหน่งที่สนใจ</div><div class="metric-value" id="expectedPosition">-</div></div>
           <div class="metric"><div class="metric-label">อัปเดตข้อมูลล่าสุด</div><div class="metric-value" id="updatedAt">-</div></div>
@@ -173,7 +173,7 @@
         <div id="applicationsList"></div>
       </section>
     </div>
-    <footer class="foot">ATWORK · ระบบตรวจสอบสถานะการสมัครงาน</footer>
+    <footer class="foot">@ATTWORK · ระบบตรวจสอบสถานะการสมัครงาน</footer>
   </main>
 
   <iframe name="attworkStatusFrame" id="attworkStatusFrame" title="ช่องทางส่งคำขอที่ซ่อนอยู่" style="display:none" aria-hidden="true"></iframe>
@@ -237,6 +237,7 @@
       setValue('candidateName', candidate.fullName);
       el('avatar').textContent = safeText(candidate.fullName, 'A').trim().charAt(0) || 'A';
       setValue('candidateId', candidate.candidateId ? 'รหัสผู้สมัคร: ' + candidate.candidateId : '');
+      setValue('Status', candidate.Status);
       setValue('candidateStatus', candidate.candidateStatus);
       setValue('resumeStatus', candidate.resumeStatus);
       setValue('expectedPosition', candidate.expectedPosition);
