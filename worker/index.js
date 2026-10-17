@@ -150,7 +150,7 @@ const FLEX_EMPLOYER = {
           style: "primary",
           color: "#1749A2",
           action: {
-            type: "postback",
+            type: "uri",
             label: "แจ้งความต้องการบุคลากร",
             uri: "https://kppst.github.io/-attwork/"
           }
@@ -223,6 +223,8 @@ export default {
       let messages = null;
 
       // Flex Message จะแสดงเมื่อกด Rich Menu แบบ Postback
+      
+      // รองรับ Rich Menu แบบ Postback และ Message
       if (
         event.type === "postback" &&
         event.postback?.data
@@ -233,7 +235,7 @@ export default {
 
         const action = params.get("action");
 
-        // เลือก Flex Message ตามฝั่งที่กด
+        // เปิด Flex Message ตามฝั่งที่เลือก
         if (action === "open_menu") {
           const role = params.get("role");
 
@@ -244,11 +246,11 @@ export default {
           }
         }
 
-        // เมนูที่ยังอยู่ระหว่างพัฒนา
+        // เมนูที่กำลังปรับปรุงระบบ
         if (action === "under_construction") {
           const menuNames = {
-            view_jobs: "ดูตำแหน่งงานว่าง",
-            quotation: "ขอใบเสนอราคา"
+            view_jobs: "ตำแหน่งงานที่เปิดรับ",
+            quotation: "ขอใบเสนอราคา",
           };
 
           const menuName =
@@ -263,6 +265,21 @@ export default {
                 "กรุณากลับมาใช้บริการอีกครั้งภายหลัง"
             }
           ];
+        }
+      } else if (
+        event.type === "message" &&
+        event.message?.type === "text"
+      ) {
+        const text = event.message.text.trim();
+
+        // Rich Menu ฝั่งผู้หางาน
+        if (text === "เมนูผู้หางาน") {
+          messages = [FLEX_MESSAGE];
+        }
+
+        // Rich Menu ฝั่งบริษัท
+        else if (text === "เมนูบริษัท") {
+          messages = [FLEX_EMPLOYER];
         }
       }
 
