@@ -1,3 +1,93 @@
+const FLEX_MESSAGE = {
+  type: "flex",
+  altText: "@ATTWORK เมนูสำหรับผู้หางาน",
+  contents: {
+    type: "bubble",
+    size: "mega",
+    header: {
+      type: "box",
+      layout: "vertical",
+      backgroundColor: "#1749A2",
+      paddingAll: "20px",
+      contents: [
+        {
+          type: "text",
+          text: "@ATTWORK",
+          color: "#FFFFFF",
+          weight: "bold",
+          size: "xl"
+        },
+        {
+          type: "text",
+          text: "สำหรับผู้หางาน",
+          color: "#DCEBFF",
+          size: "sm",
+          margin: "sm",
+          wrap: true
+        }
+      ]
+    },
+    body: {
+      type: "box",
+      layout: "vertical",
+      spacing: "md",
+      paddingAll: "20px",
+      contents: [
+        {
+          type: "text",
+          text: "ยินดีต้อนรับผู้หางาน 👋",
+          weight: "bold",
+          size: "xl",
+          wrap: true
+        },
+        {
+          type: "text",
+          text: "เลือกบริการที่ต้องการใช้งาน",
+          size: "sm",
+          color: "#666666",
+          wrap: true
+        }
+      ]
+    },
+    footer: {
+      type: "box",
+      layout: "vertical",
+      spacing: "md",
+      paddingAll: "20px",
+      contents: [
+        {
+          type: "button",
+          style: "primary",
+          action: {
+            type: "postback",
+            label: "ตำแหน่งงานที่เปิดรับ",
+            data: "action=under_construction&menu=view_jobs"
+          }
+        },
+        {
+          type: "button",
+          style: "secondary",
+          action: {
+            type: "uri",
+            label: "สมัครงาน,สร้าง RESUME",
+            uri: "https://kppst.github.io/-attwork/candidate.html"
+          }
+        },
+        {
+          type: "button",
+          style: "secondary",
+          action: {
+            type: "uri",
+            label: "ตรวจสอบสถานะ",
+            uri: "https://kppst.github.io/-attwork/Status.html"
+          }
+        }
+      ]
+    }
+  }
+};
+
+
 const FLEX_EMPLOYER = {
   type: "flex",
   altText: "@ATTWORK เมนูสำหรับบริษัท",
@@ -42,7 +132,7 @@ const FLEX_EMPLOYER = {
         },
         {
           type: "text",
-          text: "เลือกบริการสำหรับผู้หาสมัครงาน",
+          text: "เลือกบริการสำหรับบริษัทผู้รับสมัครงาน",
           size: "sm",
           color: "#666666",
           wrap: true
@@ -61,8 +151,8 @@ const FLEX_EMPLOYER = {
           color: "#1749A2",
           action: {
             type: "postback",
-            label: "ดูตำแหน่งงานว่าง",
-            data: "action=under_construction&menu=View_Jobs"
+            label: "แจ้งความต้องการบุคลากร",
+            uri: "https://kppst.github.io/-attwork/"
           }
         },
         {
@@ -70,17 +160,8 @@ const FLEX_EMPLOYER = {
           style: "secondary",
           action: {
             type: "postback",
-            label: "จัดการตำแหน่งงาน",
-            data: "action=under_construction&menu=View_Jobs"
-          }
-        },
-        {
-          type: "button",
-          style: "secondary",
-          action: {
-            type: "postback",
-            label: "ดูรายชื่อผู้สมัคร",
-            data: "action=under_construction&menu=applicants"
+            label: "ขอใบเสนอราคา",
+            data: "action=under_construction&menu=quotation"
           }
         }
       ]
@@ -93,19 +174,22 @@ export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
+    // ตรวจสอบสถานะ Worker ผ่าน GET
     if (request.method === "GET") {
       return Response.json({
-        app: "ATWORK",
+        app: "ATTWORK",
         status: "online"
       });
     }
 
+    // อนุญาตเฉพาะ GET และ POST
     if (request.method !== "POST") {
       return new Response("Method Not Allowed", {
         status: 405
       });
     }
 
+    // อ่าน body ต้นฉบับเพื่อใช้ตรวจสอบ Signature
     const body = await request.text();
     const signature =
       request.headers.get("x-line-signature");
@@ -132,114 +216,98 @@ export default {
       });
     }
 
-    // LINE ส่ง Verify webhook โดยมี events เป็น array ว่างได้
-    
+    // ประมวลผลเหตุการณ์จาก LINE
+    for (const event of data.events || []) {
+      if (!event.replyToken) continue;
 
-for (const event of data.events || []) {
-  if (!event.replyToken) continue;
+      let messages = null;
 
-  let messages = null;
+      // Flex Message จะแสดงเมื่อกด Rich Menu แบบ Postback
+      if (
+        event.type === "postback" &&
+        event.postback?.data
+      ) {
+        const params = new URLSearchParams(
+          event.postback.data
+        );
 
-  // กรณีกดปุ่มแบบ Postback
-  if (event.type === "postback") {
-    const params = new URLSearchParams(
-      event.postback?.data || ""
-    );
+        const action = params.get("action");
 
-    const action = params.get("action");
+        // เลือก Flex Message ตามฝั่งที่กด
+        if (action === "open_menu") {
+          const role = params.get("role");
 
-    // เปิด Flex ตามฝั่งที่เลือก
-    if (action === "open_menu") {
-      const role = params.get("role");
-
-      if (role === "jobseeker") {
-        messages = [FLEX_MESSAGE];
-      } else if (role === "employer") {
-        messages = [FLEX_EMPLOYER];
-      }
-    }
-
-    // เมนูที่ยังพัฒนาไม่เสร็จ
-    if (action === "under_construction") {
-      const menuNames = {
-        job_posting: "ประกาศรับสมัครงาน",
-    
-      };
-
-      const menuName =
-        menuNames[params.get("menu")] || "เมนูนี้";
-
-      messages = [
-        {
-          type: "text",
-          text:
-            `${menuName} กำลังปรับปรุงระบบ 🚧\n\n` +
-            "ขออภัยในความไม่สะดวก " +
-            "กรุณากลับมาใช้บริการอีกครั้งภายหลัง"
+          if (role === "jobseeker") {
+            messages = [FLEX_MESSAGE];
+          } else if (role === "employer") {
+            messages = [FLEX_EMPLOYER];
+          }
         }
-      ];
-    }
-  }
 
-  // รองรับ Rich Menu ที่ตั้ง Action เป็น Message ด้วย
-  else if (
-    event.type === "message" &&
-    event.message?.type === "text"
-  ) {
-    const text = event.message.text.trim();
+        // เมนูที่ยังอยู่ระหว่างพัฒนา
+        if (action === "under_construction") {
+          const menuNames = {
+            view_jobs: "ดูตำแหน่งงานว่าง",
+            quotation: "ขอใบเสนอราคา"
+          };
 
-    if (
-      [
-        "ATWORK_JOBSEEKER_MENU",
-        "เมนูผู้หางาน"
-      ].includes(text)
-    ) {
-      messages = [FLEX_MESSAGE];
-    } else if (
-      [
-        "ATWORK_EMPLOYER_MENU",
-        "เมนูบริษัท"
-      ].includes(text)
-    ) {
-      messages = [FLEX_EMPLOYER];
-    }
-  }
-  // ข้อความอื่นที่ไม่ใช่คำสั่งจาก Rich Menu จะไม่เรียก Flex
-  if (!messages) continue;
+          const menuName =
+            menuNames[params.get("menu")] || "เมนูนี้";
 
-  try {
-    const response = await fetch(
-      "https://api.line.me/v2/bot/message/reply",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization":
-            `Bearer ${env.LINE_CHANNEL_ACCESS_TOKEN}`
-        },
-        body: JSON.stringify({
-          replyToken: event.replyToken,
-          messages
-        })
+          messages = [
+            {
+              type: "text",
+              text:
+                `${menuName} กำลังปรับปรุงระบบ 🚧\n\n` +
+                "ขออภัยในความไม่สะดวก\n" +
+                "กรุณากลับมาใช้บริการอีกครั้งภายหลัง"
+            }
+          ];
+        }
       }
-    );
 
-    if (!response.ok) {
-      console.error(
-        "LINE Reply API failed:",
-        response.status,
-        await response.text()
-      );
+      // ไม่ส่งข้อความ หากไม่ได้กดคำสั่งที่รองรับ
+      if (!messages) continue;
+
+      // ส่งข้อความตอบกลับผ่าน LINE Reply API
+      try {
+        const response = await fetch(
+          "https://api.line.me/v2/bot/message/reply",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization":
+                `Bearer ${env.LINE_CHANNEL_ACCESS_TOKEN}`
+            },
+            body: JSON.stringify({
+              replyToken: event.replyToken,
+              messages
+            })
+          }
+        );
+
+        if (!response.ok) {
+          console.error(
+            "LINE Reply API failed:",
+            response.status,
+            await response.text()
+          );
+        }
+      } catch (error) {
+        console.error("LINE request failed:", error);
+      }
     }
-  } catch (error) {
-    console.error("LINE request failed:", error);
-  }
-}
 
-    return new Response("OK", { status: 200 });
+    // ตอบกลับ LINE Webhook
+    return new Response("OK", {
+      status: 200
+    });
   }
 };
 
+
+// ตรวจสอบลายเซ็นจาก LINE
 async function verifySignature(
   body,
   signature,
