@@ -1,6 +1,7 @@
+
 const FLEX_MESSAGE = {
   type: "flex",
-  altText: "ยินดีต้อนรับสู่ ATWORK ระบบสมัครงานออนไลน์",
+  altText: "@ATTWORK เมนูระบบสมัครงาน",
   contents: {
     type: "bubble",
     size: "mega",
@@ -19,7 +20,7 @@ const FLEX_MESSAGE = {
         },
         {
           type: "text",
-          text: "ระบบสมัครงานออนไลน์",
+          text: "สำหรับผู้หางาน",
           color: "#DCEBFF",
           size: "sm",
           margin: "sm"
@@ -41,8 +42,8 @@ const FLEX_MESSAGE = {
         },
         {
           type: "text",
-          text: "คุณต้องการทำรายการใด?",
-          size: "md",
+          text: "เลือกบริการที่คุณต้องการ",
+          size: "sm",
           color: "#666666",
           wrap: true
         }
@@ -51,7 +52,7 @@ const FLEX_MESSAGE = {
     footer: {
       type: "box",
       layout: "vertical",
-      spacing: "sm",
+      spacing: "md",
       paddingAll: "20px",
       contents: [
         {
@@ -60,7 +61,17 @@ const FLEX_MESSAGE = {
           color: "#1749A2",
           action: {
             type: "uri",
-            label: "สมัครงาน",
+            label: "ตำแหน่งงานที่เปิดรับ",
+            uri: "https://kppst.github.io/-attwork/"
+          }
+        },
+        {
+          type: "button",
+          style: "primary",
+          color: "#287DEB",
+          action: {
+            type: "uri",
+            label: "สมัครงาน,สร้าง Resume",
             uri: "https://kppst.github.io/-attwork/candidate.html"
           }
         },
@@ -77,6 +88,7 @@ const FLEX_MESSAGE = {
     }
   }
 };
+
 
 export default {
   async fetch(request, env) {
