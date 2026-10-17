@@ -46,13 +46,38 @@
     .hero-copy { max-width:700px; margin:7px 0 0; color:#EFF8FF; font-size:12px; line-height:1.75; }
     .hero-bottom { display:flex; align-items:center; flex-wrap:wrap; gap:10px; margin-top:16px; }
     .hero-meta { display:flex; align-items:center; gap:8px; padding:7px 11px; border:1px solid #ffffff35; border-radius:10px; background:#ffffff12; color:#f3fbff; font-size:10px; }
-    .line-state { display:flex; align-items:center; gap:9px; max-width:100%; min-width:230px; padding:7px 10px; border:1px solid #ffffff45; border-radius:11px; background:#ffffff12; color:#fff; }
-    .line-state.connected { border-color:#CFE5D7; background:var(--green-bg); color:var(--green); }
-    .line-state.error { border-color:#F0CECA; background:var(--red-bg); color:var(--red); }
-    .line-icon { display:grid; width:31px;height:31px; flex:0 0 31px; place-items:center; border-radius:50%; background:#ffffff20; font-size:14px; font-weight:800; }
-    .line-state.connected .line-icon { background:rgba(36,102,75,.09); } .line-state.error .line-icon { background:rgba(167,68,64,.09); }
-    .line-copy { min-width:0; flex:1; } .state-title { font-size:10px; font-weight:800; line-height:1.4; } .subtle { margin-top:2px; font-size:9px; line-height:1.5; opacity:.9; overflow-wrap:anywhere; }
-    .line-button { min-height:36px; padding:7px 10px; border:1px solid #ffffff6b; border-radius:8px; background:#fff; color:var(--navy); font-size:10px; font-weight:800; white-space:nowrap; }
+    /* การ์ดเข้าสู่ระบบ LINE: แสดงรูปโปรไฟล์จริงเมื่อ LIFF ส่ง pictureUrl กลับมา */
+    .line-state { display:grid; grid-template-columns:48px minmax(0,1fr) auto; align-items:center; gap:11px; width:min(100%,570px); min-width:0; padding:10px 12px; border:1px solid rgba(255,255,255,.48); border-radius:15px; background:rgba(255,255,255,.13); color:#fff; box-shadow:inset 0 1px rgba(255,255,255,.12); backdrop-filter:blur(9px); transition:background .18s,border-color .18s,box-shadow .18s; }
+    .line-state.connected { border-color:#CDE8D6; background:rgba(255,255,255,.97); color:var(--ink); box-shadow:0 8px 24px rgba(12,46,75,.13); }
+    .line-state.error { border-color:#F0CECA; background:rgba(255,248,247,.97); color:var(--red); }
+    .line-avatar-shell { position:relative; display:grid; width:48px; height:48px; flex:0 0 48px; place-items:center; overflow:hidden; border:2px solid rgba(255,255,255,.76); border-radius:50%; background:linear-gradient(135deg,#06C755,#00AFC5); color:#fff; box-shadow:0 3px 11px rgba(8,40,65,.16); }
+    .line-avatar-fallback { display:grid; width:100%; height:100%; place-items:center; font-size:14px; font-weight:800; letter-spacing:.4px; }
+    .line-avatar-img { display:none; width:100%; height:100%; object-fit:cover; border-radius:50%; }
+    .line-state.connected .line-avatar-shell { border-color:#D2F0DC; }
+    .line-copy { min-width:0; }
+    .line-heading-row { display:flex; align-items:center; flex-wrap:wrap; gap:6px; }
+    .state-title { font-size:11px; font-weight:800; line-height:1.45; }
+    .subtle { margin-top:3px; font-size:9px; line-height:1.55; opacity:.92; overflow-wrap:anywhere; }
+    .line-profile-name { margin-top:2px; color:var(--navy); font-size:11px; font-weight:800; line-height:1.45; overflow-wrap:anywhere; }
+    .line-profile-name[hidden] { display:none !important; }
+    .line-state.connected .state-title { color:var(--green); }
+    .line-state.connected .subtle { color:#637487; }
+    .line-state.error .state-title { color:var(--red); }
+    .line-state.error .subtle { color:#795C5A; }
+    .line-state.pending .state-title { color:#fff; }
+    .line-state.pending .subtle { color:#F0F8FF; }
+    .line-status-pill { display:inline-flex; align-items:center; gap:5px; padding:3px 7px; border:1px solid rgba(255,255,255,.28); border-radius:999px; background:rgba(255,255,255,.1); color:inherit; font-size:8px; font-weight:800; white-space:nowrap; }
+    .line-status-pill::before { content:""; width:5px; height:5px; border-radius:50%; background:#FFD166; }
+    .line-state.connected .line-status-pill { border-color:#CFE5D7; background:var(--green-bg); color:var(--green); }
+    .line-state.connected .line-status-pill::before { background:#3DA16B; }
+    .line-state.error .line-status-pill { border-color:#F0CECA; background:var(--red-bg); color:var(--red); }
+    .line-state.error .line-status-pill::before { background:#C75C53; }
+    .line-button { display:inline-flex; align-items:center; justify-content:center; gap:6px; min-height:38px; padding:8px 12px; border:1px solid #fff; border-radius:10px; background:#fff; color:#1749A2; box-shadow:0 3px 10px rgba(10,35,70,.1); font-size:10px; font-weight:800; white-space:nowrap; transition:transform .15s,background .15s,box-shadow .15s; }
+    .line-button:hover { transform:translateY(-1px); box-shadow:0 6px 15px rgba(10,35,70,.16); }
+    .line-button:focus-visible { outline:3px solid #FFE07A; outline-offset:3px; }
+    .line-state.connected .line-button { border-color:#BBDCC7; background:#F3FBF5; color:var(--green); }
+    .line-state.error .line-button { border-color:#E7B9B5; background:#fff; color:var(--red); }
+    .line-button:disabled { opacity:.65; cursor:wait; transform:none; }
     .content { padding:16px 0 24px; }
     .intro-row { display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin-bottom:12px; }
     .intro-title { margin:0; color:var(--navy); font-size:17px; font-weight:800; }
@@ -137,6 +162,7 @@
     .toast.show { opacity:1; transform:translate(-50%,0); }
     @media(max-width:900px) { .layout { grid-template-columns:minmax(270px,.9fr) minmax(0,1.1fr); } .detail-body { padding:16px; } .detail-facts { grid-template-columns:1fr; } }
     @media(max-width:700px) { body { padding:9px 7px calc(18px + env(safe-area-inset-bottom)); } .topbar { gap:8px; margin-bottom:12px; } .brand-mark { width:38px;height:38px;flex-basis:38px; } .brand-name { font-size:12px; } .brand-caption { font-size:8px; } .top-link { padding:8px 9px; font-size:10px; } .hero { padding:15px 13px; border-radius:17px; } .hero-copy { font-size:10px; } .layout { grid-template-columns:1fr; } .job-list { max-height:410px; } .detail { min-height:0; } .detail-facts { grid-template-columns:repeat(3,minmax(0,1fr)); } .detail-bottom .btn { width:100%; } .detail-body { padding:14px; } .toolbar { flex-wrap:wrap; } .searchbox { flex-basis:100%; } .filter { flex:1;max-width:none;min-width:0; } .content { padding:13px 0 18px; } }
+    @media(max-width:560px) { .line-state { grid-template-columns:42px minmax(0,1fr); gap:9px; padding:9px; } .line-avatar-shell { width:42px;height:42px; } .line-button { grid-column:1 / -1; width:100%; min-height:37px; } }
     @media(max-width:420px) { .brand-caption { letter-spacing:.5px; } .intro-row { display:block; } .required-note { display:inline-flex; margin-top:8px; } .detail-facts { grid-template-columns:1fr; } .full-facts { grid-template-columns:1fr; } .modal-content { padding:13px; } .modal-job-heading h3 { font-size:19px; } .line-state { min-width:0; width:100%; } .hero-bottom { align-items:stretch; } }
     @media(prefers-reduced-motion:reduce) { html{scroll-behavior:auto} *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important} }
   </style>
@@ -157,10 +183,18 @@
         <p class="hero-copy">ค้นหาตำแหน่งงานที่เหมาะกับคุณ ดูรายละเอียดก่อนสมัคร และไปยังระบบผู้สมัครเพื่อสร้างหรือใช้ Resume ของคุณ</p>
         <div class="hero-bottom">
           <div class="hero-meta"><strong id="heroJobCount">—</strong><span>ตำแหน่งที่เปิดรับ</span></div>
-          <div class="line-state" id="lineState" role="status" aria-live="polite">
-            <span class="line-icon" aria-hidden="true">L</span><div class="line-copy"><div class="state-title" id="lineTitle">กำลังตรวจสอบการเชื่อมต่อ LINE</div><div class="subtle" id="lineSubtitle">คุณสามารถดูรายการงานได้ระหว่างนี้</div></div>
-            <button class="line-button" id="lineButton" type="button">เชื่อมต่อ LINE</button>
-          </div>
+          <section class="line-state pending" id="lineState" aria-label="บัญชี LINE" aria-live="polite">
+            <span class="line-avatar-shell" aria-hidden="true">
+              <span class="line-avatar-fallback" id="lineAvatarFallback">LINE</span>
+              <img class="line-avatar-img" id="lineAvatar" alt="" referrerpolicy="no-referrer">
+            </span>
+            <div class="line-copy">
+              <div class="line-heading-row"><div class="state-title" id="lineTitle">กำลังตรวจสอบการเชื่อมต่อ LINE</div><span class="line-status-pill" id="lineStatusPill">กำลังตรวจสอบ</span></div>
+              <div class="line-profile-name" id="lineProfileName" hidden></div>
+              <div class="subtle" id="lineSubtitle">คุณสามารถค้นหาตำแหน่งงานได้ระหว่างนี้</div>
+            </div>
+            <button class="line-button" id="lineButton" data-action="login" type="button">เข้าสู่ระบบ LINE</button>
+          </section>
         </div>
       </div>
     </header>
@@ -201,6 +235,7 @@
     // LIFF ของผู้สมัครงาน (ไม่ใช่ LIFF นายจ้าง)
     const CANDIDATE_LIFF_ID = '2011995684-Db7RXwnB';
     const CANDIDATE_LIFF_URL = 'https://liff.line.me/' + CANDIDATE_LIFF_ID;
+    // API getOpenJobs ต้องอ่าน Job_Requests โดยตรง (ไม่อ่าน/จับคู่ Open_Positions)
     const API_URL = 'https://script.google.com/macros/s/AKfycbzjLTf5pExf4UrFWjSvadcM4G3bCqugaY1kSuq0I6ajIYorWO9hBOO_r9F3pT0j1G00/exec';
     const $ = id => document.getElementById(id);
     const state = { jobs: [], selectedId: '', saved: new Set(), lineReady: false, lineProfile: null, modalJob: null };
@@ -239,7 +274,11 @@
         workLocation: String(firstValue(raw,['workLocation','WorkLocation','location','Location']) || ''),
         jobType: String(firstValue(raw,['jobType','JobType','employmentType','EmploymentType','type','Type']) || ''),
         salary: String(firstValue(raw,['salary','Salary','salaryRange','SalaryRange','compensation','Compensation']) || ''),
+        salaryType: String(firstValue(raw,['salaryType','SalaryType','payType','PayType','ประเภทค่าจ้าง']) || ''),
         headcount: String(firstValue(raw,['headcount','Headcount','quantity','Quantity']) || ''),
+        workDate: String(firstValue(raw,['workDate','WorkDate','วันทำงาน']) || ''),
+        startTime: String(firstValue(raw,['startTime','StartTime','เวลาเริ่มงาน']) || ''),
+        endTime: String(firstValue(raw,['endTime','EndTime','เวลาเลิกงาน']) || ''),
         publishedDate: String(firstValue(raw,['publishedDate','PublishedDate','createdAt','CreatedAt','datePublished','DatePublished']) || ''),
         category: String(firstValue(raw,['category','Category','jobCategory','JobCategory']) || ''),
         reference: String(firstValue(raw,['reference','Reference','referenceId','ReferenceID','jobId','JobID']) || jobId),
@@ -262,66 +301,145 @@
       toastTimer = setTimeout(() => $('toast').classList.remove('show'), 2400);
     }
     function displayMissing(value) { return value ? esc(value) : 'ยังไม่มีข้อมูลจากระบบ'; }
-    function updateLineUi(stateName, title, subtitle) {
-      const box = $('lineState'); box.classList.remove('connected','error');
-      if (stateName === 'connected') box.classList.add('connected');
-      if (stateName === 'error') box.classList.add('error');
-      $('lineTitle').textContent = title; $('lineSubtitle').textContent = subtitle;
-      $('lineButton').textContent = stateName === 'connected' ? 'เปลี่ยนบัญชี' : 'เชื่อมต่อ LINE';
+    function renderLineProfile(profile) {
+      const avatar = $('lineAvatar');
+      const fallback = $('lineAvatarFallback');
+      const profileName = $('lineProfileName');
+      const name = String(profile && profile.displayName || '').trim();
+
+      avatar.onload = function() {
+        avatar.style.display = 'block';
+        fallback.style.display = 'none';
+      };
+      avatar.onerror = function() {
+        avatar.style.display = 'none';
+        fallback.style.display = 'grid';
+      };
+      avatar.removeAttribute('src');
+      avatar.style.display = 'none';
+      fallback.style.display = 'grid';
+      fallback.textContent = name ? Array.from(name)[0] : 'LINE';
+
+      profileName.textContent = name;
+      profileName.hidden = !name;
+      if (profile && profile.pictureUrl) avatar.src = profile.pictureUrl;
     }
+
+    function updateLineUi(stateName, title, subtitle) {
+      const box = $('lineState');
+      box.classList.remove('connected', 'error', 'pending');
+      box.classList.add(stateName === 'connected' ? 'connected' : stateName === 'error' ? 'error' : 'pending');
+      $('lineTitle').textContent = title;
+      $('lineSubtitle').textContent = subtitle;
+      $('lineStatusPill').textContent = stateName === 'connected' ? 'เชื่อมต่อแล้ว' : stateName === 'error' ? 'ต้องตรวจสอบ' : 'ยังไม่เข้าสู่ระบบ';
+      const button = $('lineButton');
+      if (stateName === 'connected') {
+        button.textContent = 'ออกจากระบบ';
+        button.dataset.action = 'logout';
+      } else if (button.dataset.action !== 'open-candidate') {
+        button.textContent = 'เข้าสู่ระบบ LINE';
+        button.dataset.action = 'login';
+      }
+    }
+
     async function initLiff() {
       if (!window.liff) {
-        updateLineUi('error','โหลด LIFF SDK ไม่สำเร็จ','ตรวจสอบอินเทอร์เน็ต แล้วลองเปิดหน้าใหม่');
+        renderLineProfile(null);
+        $('lineButton').dataset.action = 'open-candidate';
+        updateLineUi('error', 'โหลด LINE LIFF ไม่สำเร็จ', 'ตรวจสอบอินเทอร์เน็ต แล้วเปิดระบบสมัครงานผ่าน LINE');
+        $('lineButton').textContent = 'เปิดระบบ LINE';
         return;
       }
       try {
         await liff.init({ liffId: CANDIDATE_LIFF_ID });
         liffInitialized = true;
-        if (liff.isLoggedIn() || liff.isInClient()) {
-          const profile = await liff.getProfile().catch(() => null);
-          state.lineReady = Boolean(liff.getAccessToken() || liff.isInClient());
-          state.lineProfile = profile;
-          if (state.lineReady) {
-            updateLineUi('connected', profile ? 'เชื่อมต่อ LINE แล้ว · ' + profile.displayName : 'เชื่อมต่อ LINE แล้ว','พร้อมไปยังระบบสมัครงานและสร้าง Resume');
-            $('lineButton').textContent = 'ออกจากบัญชี';
-            $('lineButton').dataset.action = 'logout';
-          } else {
-            updateLineUi('error','เข้าสู่ระบบ LINE ไม่สำเร็จ','กดเชื่อมต่อ LINE เพื่อเข้าสู่ระบบอีกครั้ง');
+
+        const loggedIn = (typeof liff.isLoggedIn === 'function' && liff.isLoggedIn()) ||
+          (typeof liff.isInClient === 'function' && liff.isInClient());
+        if (!loggedIn) {
+          state.lineReady = false;
+          state.lineProfile = null;
+          renderLineProfile(null);
+          updateLineUi('pending', 'เชื่อมต่อบัญชี LINE', 'เข้าสู่ระบบเพื่อใช้ระบบสมัครงานและสร้าง Resume ได้สะดวกขึ้น');
+          return;
+        }
+
+        let profile = null;
+        try {
+          profile = await liff.getProfile();
+        } catch (profileError) {
+          console.warn('อ่านโปรไฟล์ LINE ไม่สำเร็จ ตรวจสอบ LIFF scope profile:', profileError);
+        }
+        const accessToken = typeof liff.getAccessToken === 'function' ? liff.getAccessToken() : null;
+        state.lineReady = Boolean(accessToken || (typeof liff.isInClient === 'function' && liff.isInClient()));
+        state.lineProfile = profile;
+        renderLineProfile(profile);
+
+        if (state.lineReady) {
+          updateLineUi('connected', 'เชื่อมต่อ LINE สำเร็จ', profile && profile.displayName
+            ? 'สวัสดี ' + profile.displayName + ' · พร้อมไปยังระบบสมัครงาน'
+            : 'เข้าสู่ระบบแล้ว แต่ยังอ่านรูปโปรไฟล์ไม่ได้');
+          if (!profile || !profile.pictureUrl) {
+            $('lineSubtitle').textContent = 'เข้าสู่ระบบแล้ว · หากต้องการแสดงรูป ให้เปิด LIFF scope profile ใน LINE Developers';
           }
         } else {
-          updateLineUi('pending','ยังไม่ได้เชื่อมต่อ LINE','คุณดูตำแหน่งงานได้ และเข้าสู่ระบบเมื่อต้องการสมัคร');
+          updateLineUi('error', 'ยืนยันบัญชี LINE ไม่สำเร็จ', 'กดเข้าสู่ระบบอีกครั้ง หรือเปิดหน้านี้ผ่าน LINE');
         }
       } catch (error) {
         console.error('ATWORK LIFF initialization failed:', error);
+        liffInitialized = false;
+        state.lineReady = false;
+        state.lineProfile = null;
+        renderLineProfile(null);
         $('lineButton').dataset.action = 'open-candidate';
-        updateLineUi('error','หน้านี้ยังเชื่อม LINE โดยตรงไม่ได้','ใช้ปุ่มด้านขวาเพื่อเปิดระบบสมัครงานผ่าน LIFF แทน');
+        updateLineUi('error', 'เชื่อม LINE จากหน้านี้ไม่ได้', 'เปิด LIFF ของระบบผู้สมัครเพื่อเข้าสู่ระบบและดูโปรไฟล์');
         $('lineButton').textContent = 'เปิดระบบสมัครงาน';
       }
     }
-    $('lineButton').addEventListener('click', () => {
-      if ($('lineButton').dataset.action === 'open-candidate' || !liffInitialized) {
+
+    $('lineButton').addEventListener('click', async function() {
+      const action = $('lineButton').dataset.action || 'login';
+      if (action === 'open-candidate' || !window.liff) {
         window.location.href = CANDIDATE_LIFF_URL;
         return;
       }
-      if (!window.liff) { window.location.href = CANDIDATE_LIFF_URL; return; }
-      if ($('lineButton').dataset.action === 'logout') {
-        try { liff.logout(); } catch (_) {}
-        state.lineReady = false; state.lineProfile = null;
-        $('lineButton').dataset.action = '';
-        updateLineUi('pending','ออกจากบัญชี LINE แล้ว','คุณยังสามารถดูตำแหน่งงานได้');
+      if (action === 'logout') {
+        try {
+          if (typeof liff.logout === 'function') liff.logout();
+        } catch (error) {
+          console.warn('ออกจาก LINE ไม่สำเร็จ:', error);
+        }
+        state.lineReady = false;
+        state.lineProfile = null;
+        renderLineProfile(null);
+        $('lineButton').dataset.action = 'login';
+        updateLineUi('pending', 'ออกจากบัญชี LINE แล้ว', 'คุณยังค้นหาและดูตำแหน่งงานได้ตามปกติ');
         return;
       }
       try {
-        if (!liff.isLoggedIn()) {
-          liff.login({ redirectUri: window.location.href });
-        } else {
-          initLiff();
+        $('lineButton').disabled = true;
+        $('lineButton').textContent = 'กำลังเปิด LINE...';
+        if (!liffInitialized) {
+          window.location.href = CANDIDATE_LIFF_URL;
+          return;
         }
+        if (typeof liff.isLoggedIn === 'function' && !liff.isLoggedIn() &&
+            !(typeof liff.isInClient === 'function' && liff.isInClient())) {
+          liff.login({ redirectUri: window.location.href });
+          return;
+        }
+        await initLiff();
       } catch (error) {
         console.error('ATWORK LIFF login failed:', error);
         showToast('เริ่มเข้าสู่ระบบ LINE ไม่สำเร็จ กรุณาลองใหม่');
+      } finally {
+        $('lineButton').disabled = false;
+        if ($('lineButton').dataset.action !== 'logout' && $('lineButton').dataset.action !== 'open-candidate') {
+          $('lineButton').textContent = 'เข้าสู่ระบบ LINE';
+        }
       }
     });
+
     function getFilteredJobs() {
       const query = $('searchInput').value.trim().toLocaleLowerCase();
       const type = $('typeFilter').value;
@@ -375,9 +493,9 @@
       const saved = state.saved.has(job.jobId);
       $('detailBody').innerHTML = '<div class="detail-topline"><span class="status-chip">'+esc(job.status)+'</span><div class="detail-actions-top"><button type="button" class="small-icon '+(saved?'saved':'')+'" id="saveCurrent" title="บันทึกงาน" aria-label="บันทึกงาน">'+icons.bookmark+'</button><button type="button" class="small-icon" id="shareCurrent" title="แชร์งาน" aria-label="แชร์งาน">'+icons.share+'</button></div></div>'+
         '<h2 class="detail-title">'+esc(job.title)+'</h2><div class="detail-company"><strong>'+esc(text(job.companyName,'บริษัทผู้ประกาศงาน'))+'</strong><span class="detail-separator">•</span><span>'+esc(text(job.province,'จังหวัดไม่ระบุ'))+'</span></div>'+
-        '<div class="detail-facts">'+fact(icons.pin,'ที่ตั้ง (จังหวัด)',job.province)+fact(icons.briefcase,'ประเภทงาน',job.jobType)+fact(icons.money,'ค่าตอบแทน',job.salary)+'</div>'+
-        '<div class="detail-sep"></div><h3 class="section-title"><span class="section-mark">'+icons.briefLarge+'</span>ข้อมูลตำแหน่งงาน</h3><p class="detail-copy">หมวดหมู่: '+displayMissing(job.category)+'\nวันที่เผยแพร่: '+esc(formatDate(job.publishedDate))+'\nรหัสอ้างอิง: '+esc(text(job.reference,job.jobId))+'\nจำนวนที่รับ: '+displayMissing(job.headcount)+'</p>'+
-        section('✓','คุณสมบัติผู้สมัคร',job.qualifications)+section('≡','หน้าที่และความรับผิดชอบ',job.description)+
+        '<div class="detail-facts">'+fact(icons.pin,'สถานที่ทำงาน',job.workLocation || job.province)+fact(icons.briefcase,'ประเภทงาน',job.jobType)+fact(icons.money,'ค่าตอบแทน',job.salary)+'</div>'+
+        '<div class="detail-sep"></div><h3 class="section-title"><span class="section-mark">'+icons.briefLarge+'</span>ข้อมูลตำแหน่งงาน</h3><p class="detail-copy">หมวดหมู่: '+displayMissing(job.category)+'\nวันที่เผยแพร่: '+esc(formatDate(job.publishedDate))+'\nรหัสอ้างอิง: '+esc(text(job.reference,job.jobId))+'\nจำนวนที่รับ: '+displayMissing(job.headcount)+'\nวันทำงาน: '+displayMissing(job.workDate)+'\nเวลาทำงาน: '+displayMissing(job.startTime)+' – '+displayMissing(job.endTime)+'\nประเภทค่าจ้าง: '+displayMissing(job.salaryType)+'</p>'+
+        section('✓','คุณสมบัติผู้สมัคร',job.qualifications)+section('≡','หน้าที่และความรับผิดชอบ',job.description)+section('✦','สวัสดิการ',job.benefits)+
         '<div class="detail-bottom"><button class="btn btn-primary" type="button" id="fullDetailsButton">ดูรายละเอียดทั้งหมด / สมัครงาน →</button><button class="btn btn-secondary" type="button" id="quickApplyButton">สมัครงาน / สร้าง Resume</button></div>'+
         '<div class="page-note"><span aria-hidden="true">ⓘ</span><span>รายละเอียดที่แสดงมาจากข้อมูลที่ API ส่งกลับ หากบางช่องว่าง หมายถึง API ยังไม่ได้ส่งข้อมูลส่วนนั้นมา</span></div>';
       $('saveCurrent').addEventListener('click',()=>toggleSave(job));
@@ -408,9 +526,10 @@
     function openDetailsModal(job) {
       state.modalJob = job;
       $('modalContent').innerHTML = '<div class="modal-job-heading"><span class="status-chip">'+esc(job.status)+'</span><h3>'+esc(job.title)+'</h3><div class="detail-company"><strong>'+esc(text(job.companyName,'บริษัทผู้ประกาศงาน'))+'</strong><span class="detail-separator">•</span><span>'+esc(text(job.province,'จังหวัดไม่ระบุ'))+'</span></div></div>'+
-        '<div class="full-facts">'+detailValue('1. ตำแหน่งที่เปิดรับ',job.title)+detailValue('2. ที่ตั้ง (จังหวัด)',job.province)+detailValue('3. ประเภทงาน',job.jobType)+detailValue('4. วันที่เผยแพร่',formatDate(job.publishedDate))+detailValue('5. หมวดหมู่',job.category)+detailValue('6. รหัสอ้างอิง',text(job.reference,job.jobId))+'</div>'+
+        '<div class="full-facts">'+detailValue('1. ตำแหน่งที่เปิดรับ',job.title)+detailValue('2. จังหวัด',job.province)+detailValue('3. สถานที่ทำงาน',job.workLocation)+detailValue('4. ประเภทงาน',job.jobType)+detailValue('5. ค่าตอบแทน',job.salary)+detailValue('6. จำนวนที่รับ',job.headcount)+detailValue('7. ประเภทค่าจ้าง',job.salaryType)+detailValue('8. วันทำงาน',job.workDate)+detailValue('9. เวลาเริ่มงาน',job.startTime)+detailValue('10. เวลาเลิกงาน',job.endTime)+detailValue('11. วันที่เผยแพร่',formatDate(job.publishedDate))+detailValue('12. หมวดหมู่',job.category)+detailValue('13. รหัสอ้างอิง',text(job.reference,job.jobId))+'</div>'+
         '<div class="detail-sep"></div><h3 class="section-title"><span class="section-mark">✓</span>7. คุณสมบัติผู้สมัคร</h3><p class="detail-copy '+(!job.qualifications?'missing':'')+'">'+displayMissing(job.qualifications)+'</p>'+
         '<div class="detail-sep"></div><h3 class="section-title"><span class="section-mark">≡</span>8. หน้าที่และความรับผิดชอบ</h3><p class="detail-copy '+(!job.description?'missing':'')+'">'+displayMissing(job.description)+'</p>'+
+        '<div class="detail-sep"></div><h3 class="section-title"><span class="section-mark">✦</span>9. สวัสดิการ</h3><p class="detail-copy '+(!job.benefits?'missing':'')+'">'+displayMissing(job.benefits)+'</p>'+
         '<div class="resume-box"><h4>Resume ของคุณ</h4><p>คุณสามารถไปยังระบบผู้สมัครเพื่อใช้ Resume ที่สร้างไว้หรือสร้าง Resume ใหม่ได้ หากต้องการอัปโหลดไฟล์เอง ระบบจำเป็นต้องเชื่อม API อัปโหลดก่อน</p><label for="resumeFile" style="display:block;margin-bottom:6px;font-size:10px;font-weight:800">เลือกไฟล์ Resume (PDF, DOC, DOCX)</label><input id="resumeFile" type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"><div id="fileName" class="file-name">ยังไม่ได้เลือกไฟล์</div><div class="upload-state" id="uploadState">การเลือกไฟล์ในขั้นตอนนี้ยังไม่อัปโหลดไฟล์ไปยังเซิร์ฟเวอร์</div></div>'+
         '<div class="notice">ⓘ การสมัครและการสร้าง Resume จะดำเนินการต่อในระบบผู้สมัคร ATWORK หลังจากเข้าสู่ LIFF</div>';
       $('detailModal').hidden = false; $('detailModal').setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
@@ -424,13 +543,13 @@
       if (!bytes) return '0 B'; const units=['B','KB','MB','GB']; const i=Math.min(Math.floor(Math.log(bytes)/Math.log(1024)),3); return (bytes/Math.pow(1024,i)).toFixed(i?1:0)+' '+units[i];
     }
     function closeModal() { $('detailModal').hidden=true; $('detailModal').setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
-    function goToCandidate(job) {
-      if (!state.lineReady && window.liff && liff.isLoggedIn && !liff.isLoggedIn()) {
-        showToast('กำลังเปิดหน้าสมัครงาน กรุณาเข้าสู่ระบบ LINE หากระบบร้องขอ');
+    function goToCandidate() {
+      if (!state.lineReady) {
+        showToast('กำลังเปิดระบบสมัครงานผ่าน LINE');
       }
-      const url = new URL(CANDIDATE_LIFF_URL);
-      if (job) { url.searchParams.set('jobId',job.jobId); url.searchParams.set('jobTitle',job.title); }
-      window.location.href = url.href;
+      // หน้า View-Job อ่านจาก Job_Requests ส่วนแบบฟอร์มเลือกตำแหน่งอ่าน Open_Positions
+      // จึงไม่ส่ง RequestID/ชื่อตำแหน่งข้ามไปเป็น JobID ของอีกชีต
+      window.location.href = CANDIDATE_LIFF_URL;
     }
     function showLoadError(message) {
       $('jobList').innerHTML = '<div class="empty"><div class="empty-icon">!</div><strong style="display:block;color:#A74440;margin-bottom:4px">โหลดรายการตำแหน่งงานไม่สำเร็จ</strong>'+esc(message)+'<div style="margin-top:13px"><button class="btn btn-secondary" id="retryLoad" type="button">ลองอีกครั้ง</button></div></div>';
