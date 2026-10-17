@@ -60,7 +60,7 @@ const FLEX_MESSAGE = {
           style: "primary",
           color: "#1749A2",
           action: {
-            type: "uri",
+            type: "postback",
             label: "ตำแหน่งงานที่เปิดรับ",
             data: "action=under_construction&menu=ตำแหน่งงานที่เปิดรับ"
           }
