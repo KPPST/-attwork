@@ -387,6 +387,8 @@
     <header class="hero">
       <div class="eyebrow">EMPLOYER REGISTRATION</div>
       <h1>ใบแจ้งความต้องการบุคลากร</h1>
+      <p class="hero-copy">กรอกข้อมูลให้ครบเพื่อให้ได้รับคุบลากรตามเป้าหมาบขององค์กร</p>
+      <div class="hero-meta"></div>
       <div class="hero-bottom-row" id="heroBottomRow">
         <div id="lineStatus" class="line-status" role="status" aria-live="polite">
           <span class="status-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span>
@@ -419,8 +421,9 @@
          <section class="form-section" aria-labelledby="scheduleHeading">
           <div class="section-heading"><span class="section-number">02</span><div><h2 id="scheduleHeading">ตำแหน่งงาน ค่าตอบแทนและเวลาทำงาน</h2></div></div>
           <div class="form-grid">
-            <div class="field full"><label for="JobTitle">ตำแหน่งงานที่ต้องการ <span class="required-star">*</span></label>
-             <select id="JobTitle" name="JobTitle" required disabled>
+            <div class="field full">
+              <label for="JobTitle">ตำแหน่งงานที่ต้องการ <span class="required-star">*</span></label>
+               <select id="JobTitle" name="JobTitle" required disabled>
                 <option value="">กำลังโหลดตำแหน่งงานที่เปิดรับ...</option>
               </select>
               <div id="jobLoadStatus" class="job-load-status" role="status" aria-live="polite">กำลังเชื่อมต่อรายการตำแหน่งงาน</div>
@@ -453,23 +456,43 @@
           </div>
         </section>
 
-        <div class="privacy-note"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2">
-        </rect><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"></path></svg><span>โปรดตรวจสอบข้อมูลก่อนส่ง</span></div>
-        <div class="actions"><button id="submitButton" class="submit-button" type="submit" disabled><span class="button-label">กำลังเชื่อมต่อ LINE...</span>
-          <span class="button-spinner" aria-hidden="true"></span><span class="button-arrow" aria-hidden="true">→</span></button><div id="message" role="status" aria-live="polite"></div></div>
+        <div class="privacy-note">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"></path></svg>
+          <span>โปรดตรวจสอบข้อมูลก่อนส่ง ระบบใช้ LINE เพื่อยืนยันบัญชีผู้สมัคร ข้อมูละถูกส่งไปยังระบบ โปรดตรวจสอบข้อมูลก่อนส่ง ระบบใช้ LINE เพื่อยืนยันบัญชีผู้สมัคร ข้อมูลจะถูกส่งไปยังระบบ @ATTWORK  </span></div>
+        </div>
+        
+        <div class="actions">
+          <button id="submitButton" class="submit-button" type="submit" disabled>
+            <span class="button-label">กำลังเชื่อมต่อ LINE...</span>
+            <span class="button-spinner" aria-hidden="true"></span>
+            <span class="button-arrow" aria-hidden="true">→</span>
+          </button>
+          <div id="message" role="status" aria-live="polite"></div>
+        </div>
       </form>
     </section>
+    
     <footer class="footer">ATWORK · EMPLOYER PORTAL</footer>
   </main>
 
-  <div id="submissionModal" class="submission-modal" hidden aria-hidden="true">
+   <div id="submissionModal" class="submission-modal" hidden aria-hidden="true">
     <div class="modal-backdrop" aria-hidden="true"></div>
     <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDescription">
-      <div class="modal-brand">@ATTWORK · EMPLOYER PORTAL</div>
-      <div id="modalSpinner" class="modal-spinner" aria-hidden="true"></div>
-      <div id="modalStateIcon" class="modal-state-icon" hidden aria-hidden="true"><svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"></path></svg></div>
-      <p id="modalEyebrow" class="modal-eyebrow">กำลังดำเนินการ</p><h2 id="modalTitle" class="modal-title">กำลังส่งคำขอ</h2><p id="modalDescription" class="modal-description">กำลังส่งข้อมูลไปยังระบบ @ATTWORK โปรดอย่าปิดหน้าต่างนี้</p>
-      <div id="modalReference" class="modal-reference" hidden><span class="modal-reference-label">เลขอ้างอิงคำขอ</span><strong id="modalReferenceCode" class="modal-reference-code"></strong></div>
+      <div class="modal-brand">@ATTWORK · CANDIDATE PORTAL</div>
+      <div id="progressWrap" class="progress-wrap">
+        <svg class="progress-svg" viewBox="0 0 120 120" aria-hidden="true">
+          <circle class="progress-track" cx="60" cy="60" r="48"></circle>
+          <circle id="progressRing" class="progress-ring" cx="60" cy="60" r="48"></circle>
+        </svg>
+        <div class="progress-center"><strong id="progressPercent" class="progress-percent">0%</strong><span class="progress-estimate">ความคืบหน้าโดยประมาณ</span></div>
+      </div>
+      <div id="modalStateIcon" class="modal-state-icon" hidden aria-hidden="true">
+        <svg id="modalStateSvg" viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"></path></svg>
+      </div>
+      <p id="modalEyebrow" class="modal-eyebrow">กำลังดำเนินการ</p>
+      <h2 id="modalTitle" class="modal-title">กำลังบันทึกข้อมูลผู้สมัคร</h2>
+      <p id="modalDescription" class="modal-description">โปรดอย่าปิดหน้าต่างนี้ ระบบกำลังบันทึกข้อมูลแ</p>
+      <div id="modalReference" class="modal-reference" hidden><span class="modal-reference-label">เลขอ้างอิงผู้สมัคร</span><strong id="modalReferenceCode" class="modal-reference-code"></strong></div>
       <button id="modalCloseButton" class="modal-close" type="button" hidden>ปิดหน้าต่าง</button>
     </section>
   </div>
@@ -506,13 +529,29 @@
     const positionSelect = document.getElementById("JobTitle");
     const jobLoadStatus = document.getElementById("jobLoadStatus");
 
-    let openJobs = [];
-    let openJobsLoading = false;
+    const submissionModal = document.getElementById("submissionModal");
+    const progressWrap = document.getElementById("progressWrap");
+    const progressRing = document.getElementById("progressRing");
+    const progressPercent = document.getElementById("progressPercent");
+    const progressEstimate = document.querySelector(".progress-estimate");
+    const modalStateIcon = document.getElementById("modalStateIcon");
+    const modalEyebrow = document.getElementById("modalEyebrow");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalDescription = document.getElementById("modalDescription");
+    const modalReference = document.getElementById("modalReference");
+    const modalReferenceCode = document.getElementById("modalReferenceCode");
+    const modalCloseButton = document.getElementById("modalCloseButton");
+    const CIRCLE_CIRCUMFERENCE = 2 * Math.PI * 48;
+
     let liffReady = false;
     let isSubmitting = false;
     let pendingRequestId = "";
     let submitTimeout = null;
-
+    let progressTimer = null;
+    let displayProgress = 0;
+    let openJobs = [];
+    let openJobsLoading = false;
+    
     const responseFrame = document.createElement("iframe");
     responseFrame.name = "atworkJobRequestFrame";
     responseFrame.title = "ผลการส่งคำขอนายจ้าง";
@@ -552,158 +591,9 @@
         profilePicture.src = profile.pictureUrl;
       }
       profileCard.classList.add("visible");
-      const heroBottomRow = document.getElementById("heroBottomRow");
+      const heroBottomRow = document.getElementById(".hero-Bottom-Row");
       if (heroBottomRow) heroBottomRow.classList.add("profile-active");
     }
-
-    function updateSubmitAvailability() {
-      const canSubmit =
-        liffReady &&
-        openJobs.length > 0 &&
-        !isSubmitting;
-
-      let label;
-
-      if (!liffReady) {
-        label = "กำลังเชื่อมต่อ LINE...";
-      } else if (isSubmitting) {
-        label = "กำลังส่งคำขอ...";
-      } else if (openJobsLoading) {
-        label = "กำลังโหลดตำแหน่งงาน...";
-      } else if (openJobs.length === 0) {
-        label = "ไม่พบตำแหน่งงานที่เปิดรับ";
-      } else {
-        label = "ส่งใบแจ้งความต้องการบุคลากร";
-      }
-
-      setButtonState(label, !canSubmit, false);
-  }
-
-    function handleJobLoadError(text) {
-      openJobs = [];
-      openJobsLoading = false;
-
-      positionSelect.disabled = true;
-      positionSelect.replaceChildren(
-        new Option("โหลดตำแหน่งงานไม่สำเร็จ", "")
-      );
-
-      jobLoadStatus.classList.add("error");
-      jobLoadStatus.textContent = text;
-
-      updateSubmitAvailability();
-}
-
-    function loadOpenJobs() {
-      openJobsLoading = true;
-      positionSelect.disabled = true;
-
-      jobLoadStatus.classList.remove("error");
-      jobLoadStatus.textContent = "กำลังโหลดตำแหน่งงานที่เปิดรับ...";
-
-      positionSelect.replaceChildren(
-        new Option("กำลังโหลดตำแหน่งงานที่เปิดรับ...", "")
-      );
-
-      const callbackName = "atworkEmployerOpenJobsCallback";
-      const script = document.createElement("script");
-      let finished = false;
-
-      const timeout = window.setTimeout(function () {
-        if (finished) return;
-
-        finished = true;
-        cleanup();
-
-        handleJobLoadError(
-          "ใช้เวลาโหลดตำแหน่งงานนานเกินไป กรุณาลองเปิดหน้าเว็บใหม่"
-        );
-      }, 15000);
-
-    function cleanup() {
-      window.clearTimeout(timeout);
-      script.remove();
-
-      try {
-        delete window[callbackName];
-      } catch (_) {
-        window[callbackName] = undefined;
-      }
-    }
-
-    window[callbackName] = function (response) {
-      if (finished) return;
-      finished = true;
-      cleanup();
-
-      if (!response || response.success !== true) {
-        handleJobLoadError(
-          response && response.message
-            ? response.message
-            : "ระบบไม่สามารถโหลดรายการตำแหน่งงานได้"
-        );
-        return;
-      }
-
-      openJobs = (Array.isArray(response.jobs) ? response.jobs : [])
-        .map(function (job) {
-          return {
-            jobId: String(job.jobId || "").trim(),
-            title: String(job.title || "").trim()
-          };
-        })
-        .filter(function (job) {
-          return job.title;
-        });
-
-      if (openJobs.length === 0) {
-        handleJobLoadError(
-          response.message || "ขณะนี้ไม่มีตำแหน่งงานที่เปิดรับ"
-        );
-        return;
-      }
-
-      positionSelect.replaceChildren(
-        new Option("เลือกตำแหน่งงานที่ต้องการ", "")
-      );
-
-      openJobs.forEach(function (job) {
-        const option = new Option(job.title, job.title);
-        option.dataset.jobId = job.jobId;
-        positionSelect.add(option);
-      });
-
-      openJobsLoading = false;
-      positionSelect.disabled = false;
-
-      jobLoadStatus.classList.remove("error");
-      jobLoadStatus.textContent =
-        "โหลดตำแหน่งงานที่เปิดรับแล้ว " +
-        openJobs.length +
-        " รายการ";
-
-      updateSubmitAvailability();
-    };
-
-    script.onerror = function () {
-      if (finished) return;
-      finished = true;
-      cleanup();
-
-      handleJobLoadError(
-        "เชื่อมต่อรายการตำแหน่งงานไม่ได้ กรุณาตรวจสอบ Apps Script"
-      );
-    };
-
-    script.src =
-      ATWORK_APPS_SCRIPT_URL +
-      "?action=getOpenJobs&callback=" +
-      encodeURIComponent(callbackName) +
-      "&_=" +
-      Date.now();
-
-    document.head.appendChild(script);
-  }
 
     async function initializeAtworkLiff() {
       if (!ATWORK_LIFF_ID) {
@@ -712,73 +602,191 @@
         return;
       }
       try {
-        setLineStatus("pending", "กำลังเชื่อมต่อบัญชี LINE...");
         await liff.init({ liffId: ATWORK_LIFF_ID });
         if (!liff.isLoggedIn() && !liff.isInClient()) {
-          // ใช้รูปแบบเดียวกับหน้า Candidate: ให้ LIFF พาไปเข้าสู่ระบบ แล้วกลับมายังหน้าเดิม
+          // ใช้ redirect เริ่มต้นของ LIFF เพื่อลดปัญหา URL ไม่ตรงกับ Endpoint URL
           liff.login();
           return;
         }
-        if (!liff.getAccessToken()) {
-          throw new Error("ไม่พบ LINE Access Token กรุณาตรวจสอบว่าเข้าสู่ระบบ LINE สำเร็จแล้ว");
-        }
+        if (!liff.getAccessToken()) throw new Error("ไม่พบ LINE Access Token กรุณาปิดแบบฟอร์มแล้วเปิดใหม่จาก LINE OA และตรวจสอบการตั้งค่า LIFF");
         let profile = null;
-        try {
-          profile = await liff.getProfile();
-        } catch (error) {
-          console.warn("อ่านโปรไฟล์ LINE ไม่สำเร็จ:", error);
-        }
+        try { profile = await liff.getProfile(); }
+        catch (error) { console.warn("อ่านโปรไฟล์ LINE ไม่สำเร็จ:", error); }
         showProfile(profile || { displayName: "ผู้ใช้ LINE" });
         setLineStatus("connected", profile
-          ? "เชื่อมต่อ LINE สำเร็จ สามารถกรอกและส่งคำขอได้"
-          : "เข้าสู่ระบบ LINE แล้ว แต่ไม่สามารถอ่านโปรไฟล์ได้");
+          ? "เชื่อมต่อ LINE สำเร็จ สามารถกรอกและส่งข้อมูลผู้สมัครได้"
+          : "ยืนยันการเข้าสู่ระบบ LINE แล้ว แต่ยังแสดงรูปโปรไฟล์ไม่ได้");
         liffReady = true;
         updateSubmitAvailability();
       } catch (error) {
         liffReady = false;
         profileCard.classList.remove("visible");
-        setLineStatus("error", error && error.message
-          ? "เชื่อมต่อ LINE ไม่สำเร็จ: " + error.message
-          : "เชื่อมต่อ LINE ไม่สำเร็จ กรุณาเปิดฟอร์มผ่าน LINE อีกครั้ง");
+        setLineStatus("error", error && error.message ? "เชื่อมต่อ LINE ไม่สำเร็จ: " + error.message : "เชื่อมต่อ LINE ไม่สำเร็จ กรุณาเปิดฟอร์มผ่าน LINE อีกครั้ง");
         setButtonState("เชื่อมต่อ LINE ไม่สำเร็จ", true, false);
-        console.error("ATWORK Employer LIFF:", error);
       }
     }
 
+    function updateSubmitAvailability() {
+      const canSubmit = liffReady && openJobs.length > 0 && !isSubmitting;
+      setButtonState(label, !canSubmit, false);
+      
+      let label;
+      if (!liffReady) {label = "กำลังเชื่อมต่อ LINE...";} 
+      else if (isSubmitting) {label = "กำลังส่งคำขอ...";} 
+      else if (openJobsLoading) {label = "กำลังโหลดตำแหน่งงาน...";} 
+      else if (openJobs.length === 0) {label = "ไม่พบตำแหน่งงานที่เปิดรับ";} 
+      else {label = "ส่งใบแจ้งความต้องการบุคลากร";}
+    }
+
+    // สัญญาการเชื่อมต่อกับ Code.gs: GET ?action=getOpenPositions&callback=<ชื่อ callback>
+    // Code.gs ต้องส่ง JSONP { success:true, jobs:[{jobId:"...", title:"..."}] }
+    function loadOpenJobs() {
+      positionSelect.disabled = true;
+      jobLoadStatus.classList.remove("error");
+      jobLoadStatus.textContent = "กำลังโหลดตำแหน่งงานที่เปิดรับ...";
+      positionSelect.replaceChildren(new Option("กำลังโหลดตำแหน่งงานที่เปิดรับ...", ""));
+      const callbackName = "atworkOpenJobsCallback";
+      let finished = false;
+      const script = document.createElement("script");
+      const timeout = window.setTimeout(function() {
+        if (finished) return;
+        finished = true;
+        cleanup();
+        handleJobLoadError("โหลดตำแหน่งงานไม่สำเร็จ กรุณาลองเปิดหน้าเว็บใหม่ หรือติดต่อเจ้าหน้าที่");
+      }, 15000);
+      function cleanup() {
+        window.clearTimeout(timeout);
+        script.remove();
+        try { delete window[callbackName]; } catch (_) { window[callbackName] = undefined; }
+      }
+      window[callbackName] = function(response) {
+        if (finished) return;
+        finished = true;
+        cleanup();
+        const jobs = response && Array.isArray(response.positions)
+          ? response.positions
+          : (response && Array.isArray(response.jobs) ? response.jobs : []);
+        if (!response || response.success !== true || !jobs.length) {
+          handleJobLoadError(response && response.message ? response.message : "ขณะนี้ไม่มีตำแหน่งงานที่เปิดรับ หรือระบบยังไม่ได้เชื่อมรายการงาน");
+          return;
+        }
+        openJobs = jobs.map(function(job) {
+          const title = String(job.title || job.positionTitle || job.PositionTitle || job.jobTitle || job.JobTitle || "").trim();
+          const jobId = String(job.jobId || job.JobID || job.id || "").trim();
+          return { title: title, jobId: jobId };
+        }).filter(function(job) { return job.title; });
+        if (!openJobs.length) {
+          handleJobLoadError("พบรายการงานแต่ไม่มีชื่อตำแหน่งที่ใช้งานได้ กรุณาตรวจสอบข้อมูลในฐานข้อมูล");
+          return;
+        }
+        positionSelect.replaceChildren(new Option("เลือกตำแหน่งงานที่ต้องการ", ""));
+        openJobs.forEach(function(job) {
+          const option = new Option(job.title, job.title);
+          option.dataset.jobId = job.jobId;
+          positionSelect.add(option);
+        });
+        positionSelect.disabled = false;
+        jobLoadStatus.classList.remove("error");
+        jobLoadStatus.textContent = "โหลดแล้ว " + openJobs.length + " ตำแหน่ง จากรายการงานที่เปิดรับในระบบ";
+        updateSubmitAvailability();
+      };
+      script.onerror = function() {
+        if (finished) return;
+        finished = true;
+        cleanup();
+        handleJobLoadError("ยังเชื่อมต่อรายการตำแหน่งงานไม่ได้ ต้องตั้งค่า endpoint getOpenPositions ใน Code.gs ก่อน");
+      };
+      script.src = ATWORK_APPS_SCRIPT_URL + "?action=getOpenPositions&callback=" + encodeURIComponent(callbackName) + "&_=" + Date.now();
+      document.head.appendChild(script);
+    }
+
+    function handleJobLoadError(text) {
+      openJobs = [];
+      positionSelect.disabled = true;
+      positionSelect.replaceChildren(new Option("โหลดตำแหน่งงานไม่สำเร็จ", ""));
+      jobLoadStatus.classList.add("error");
+      jobLoadStatus.textContent = text;
+      updateSubmitAvailability();
+    }
+    function updateProgress(value) {
+      displayedProgress = Math.max(0, Math.min(100, value));
+      progressPercent.textContent = Math.round(displayedProgress) + "%";
+      progressRing.style.strokeDasharray = String(CIRCLE_CIRCUMFERENCE);
+      progressRing.style.strokeDashoffset = String(CIRCLE_CIRCUMFERENCE * (1 - displayedProgress / 100));
+    }
+    function stopProgressTimer() {
+      if (progressTimer) { window.clearInterval(progressTimer); progressTimer = null; }
+    }
+    function startEstimatedProgress() {
+      stopProgressTimer();
+      progressTimer = window.setInterval(function() {
+        if (displayedProgress < 48) displayedProgress += 2.4;
+        else if (displayedProgress < 70) displayedProgress += 1.1;
+        else if (displayedProgress < 82) displayedProgress += 0.45;
+        else if (displayedProgress < 90) displayedProgress += 0.16;
+        else if (displayedProgress < 92) displayedProgress += 0.035;
+        updateProgress(Math.min(displayedProgress, 92));
+        if (displayedProgress < 22) modalDescription.textContent = "กำลังเตรียมข้อมูลและตรวจสอบรูปผู้สมัคร โปรดรอสักครู่";
+        else if (displayedProgress < 60) modalDescription.textContent = "กำลังส่งข้อมูลไปยังระบบ ATWORK";
+        else if (displayedProgress < 84) modalDescription.textContent = "กำลังบันทึกโปรไฟล์และสร้าง Resume PDF";
+        else modalDescription.textContent = "กำลังรอระบบยืนยันผลและลิงก์ Resume เพื่อป้องกันข้อมูลซ้ำ";
+      }, 260);
+    }
     function openProgressModal() {
       submissionModal.hidden = false;
       submissionModal.setAttribute("aria-hidden", "false");
       document.body.classList.add("modal-open");
-      modalSpinner.hidden = false;
+      progressWrap.hidden = false;
+      progressRing.classList.remove("is-complete");
       modalStateIcon.hidden = true;
       modalStateIcon.classList.remove("error");
       modalReference.hidden = true;
       modalReferenceCode.textContent = "";
+      modalResumeLink.hidden = true;
+      modalResumeLink.removeAttribute("href");
       modalCloseButton.hidden = true;
       modalEyebrow.textContent = "ATWORK · EMPLOYER PORTAL";
-      modalTitle.textContent = "กำลังบันทึกคำขอ";
-      modalDescription.textContent = "กำลังส่งข้อมูลไปยังระบบ ATWORK โปรดอย่าปิดหน้าต่างนี้";
+      progressEstimate.textContent = "ความคืบหน้าโดยประมาณ";
+      modalTitle.textContent = "กำลังบันทึกข้อมูลผู้สมัคร";
+      modalDescription.textContent = "กำลังเตรียมข้อมูล โปรดอย่าปิดหน้าต่างนี้";
+      updateProgress(0);
+      startEstimatedProgress();
     }
-
     function closeProgressModal() {
+      stopProgressTimer();
       submissionModal.hidden = true;
       submissionModal.setAttribute("aria-hidden", "true");
       document.body.classList.remove("modal-open");
       if (button && !button.disabled) button.focus();
     }
-
     function showModalError(text) {
-      modalSpinner.hidden = true;
+      stopProgressTimer();
+      progressWrap.hidden = true;
       modalStateIcon.hidden = false;
       modalStateIcon.classList.add("error");
       modalStateIcon.innerHTML = '<svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"></path></svg>';
       modalEyebrow.textContent = "โปรดตรวจสอบ";
-      modalTitle.textContent = "ส่งคำขอไม่สำเร็จ";
+      modalTitle.textContent = "ยังส่งข้อมูลไม่สำเร็จ";
       modalDescription.textContent = text;
       modalReference.hidden = true;
       modalCloseButton.hidden = false;
       modalCloseButton.textContent = "ปิดหน้าต่าง";
     }
+    function showModalSuccess(result) {
+      stopProgressTimer();
+      progressWrap.hidden = false;
+      progressRing.classList.add("is-complete");
+      updateProgress(100);
+      modalStateIcon.hidden = true;
+      modalStateIcon.classList.remove("error");
+      modalEyebrow.textContent = "เสร็จเรียบร้อย";
+      progressEstimate.textContent = "บันทึกข้อมูลสำเร็จ";
+      modalTitle.textContent = "ส่งข้อมูลผู้สมัครสำเร็จ";
+    }
+    modalCloseButton.addEventListener("click", closeProgressModal);
+    window.addEventListener("keydown", function(event) {
+      if (event.key === "Escape" && !submissionModal.hidden && !isSubmitting) closeProgressModal();
+    });
 
     function showError(text) {
       message.className = "error";
@@ -788,50 +796,31 @@
       updateSubmitAvailability();
       if (!submissionModal.hidden) showModalError(text);
     }
-
     function showSuccess(result) {
       message.className = "success";
-      message.style.display = "block";
-      message.textContent = "บันทึกใบแจ้งความต้องการบุคลากรสำเร็จ";
-      modalSpinner.hidden = true;
-      modalStateIcon.hidden = false;
-      modalStateIcon.classList.remove("error");
-      modalStateIcon.innerHTML = '<svg viewBox="0 0 24 24" width="27" height="27" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 4 4L19 6"></path></svg>';
-      modalEyebrow.textContent = "เสร็จเรียบร้อย";
-      modalTitle.textContent = "ส่งคำขอสำเร็จ";
-      modalDescription.textContent = result.message || "บันทึกใบแจ้งความต้องการบุคลากรเรียบร้อยแล้ว ทีมงานจะตรวจสอบข้อมูลต่อไป";
-      modalReference.hidden = false;
-      modalReferenceCode.textContent = result.requestId || result.RequestID || result.RequestId || "โปรดติดต่อทีมงานเพื่อขอเลขอ้างอิง";
-      modalCloseButton.hidden = false;
-      modalCloseButton.textContent = "เรียบร้อย";
+      message.style.display = "none";
+      message.textContent = "บันทึกใบแจ้งความต้องการ";
       form.reset();
       isSubmitting = false;
       updateSubmitAvailability();
+      showModalSuccess(result);
     }
 
-    modalCloseButton.addEventListener("click", closeProgressModal);
-    window.addEventListener("keydown", function (event) {
-      if (event.key === "Escape" && !submissionModal.hidden && !isSubmitting) closeProgressModal();
-    });
-
-    window.addEventListener("message", function (event) {
-      const isGoogleOrigin = ALLOWED_RESPONSE_ORIGINS.includes(event.origin) || event.origin.endsWith(".googleusercontent.com");
+    window.addEventListener("message", function(event) {
+      const isGoogleOrigin = event.origin === "https://script.google.com" || event.origin.endsWith(".googleusercontent.com");
       if (!isGoogleOrigin) return;
       const result = event.data;
       if (!result || result.type !== "ATWORK_JOB_REQUEST_RESULT" || !pendingRequestId || String(result.requestId) !== pendingRequestId) return;
-      if (submitTimeout) { window.clearTimeout(submitTimeout); submitTimeout = null; }
+      if (submitTimeout) { clearTimeout(submitTimeout); submitTimeout = null; }
       pendingRequestId = "";
-      if (!result.success) {
-        showError(result.message || "บันทึกคำขอไม่สำเร็จ กรุณาตรวจสอบข้อมูลแล้วลองใหม่");
-        return;
-      }
+      if (!result.success) { showError(result.message || "บันทึกคำขอไม่สำเร็จ กรุณาตรวจสอบข้อมูลแล้วลองใหม่"); return; }
       showSuccess(result);
     });
 
-    function sendJobRequestToAppsScript(data) {
+  
+    function sendCandidateToAppsScript(data) {
       const requestId = window.crypto && typeof window.crypto.randomUUID === "function"
-        ? window.crypto.randomUUID()
-        : Date.now() + "-" + Math.random().toString(36).slice(2);
+        ? window.crypto.randomUUID() : Date.now() + "-" + Math.random().toString(36).slice(2);
       pendingRequestId = requestId;
       const requestForm = document.createElement("form");
       requestForm.method = "POST";
@@ -839,110 +828,70 @@
       requestForm.target = "atworkJobRequestFrame";
       requestForm.acceptCharset = "UTF-8";
       requestForm.style.display = "none";
-      const fields = {
-        action: "submitJobRequest",
-        requestId: requestId,
-        parentOrigin: window.location.origin,
-        payload: JSON.stringify(data)
-      };
-      Object.keys(fields).forEach(function (key) {
+      const fields = { action: "submitJobRequest", requestId: requestId, parentOrigin: window.location.origin, payload: JSON.stringify(data) };
+      Object.keys(fields).forEach(function(key) {
         const input = document.createElement("input");
-        input.type = "hidden";
-        input.name = key;
-        input.value = fields[key];
+        input.type = "hidden"; input.name = key; input.value = fields[key];
         requestForm.appendChild(input);
       });
       document.body.appendChild(requestForm);
-      try {
-        requestForm.submit();
-      } catch (error) {
-        pendingRequestId = "";
-        requestForm.remove();
-        showError("ส่งข้อมูลไปยังระบบไม่สำเร็จ กรุณาลองใหม่");
-        return;
+      try { requestForm.submit(); }
+      catch (error) {
+        pendingRequestId = ""; requestForm.remove();
+        showError("ส่งข้อมูลไปยังระบบไม่สำเร็จ กรุณาลองใหม่"); return;
       }
       requestForm.remove();
-      if (submitTimeout) window.clearTimeout(submitTimeout);
-      submitTimeout = window.setTimeout(function () {
+      if (submitTimeout) clearTimeout(submitTimeout);
+      submitTimeout = setTimeout(function() {
         if (pendingRequestId !== requestId) return;
-        pendingRequestId = "";
-        submitTimeout = null;
-        showError("ระบบยังไม่ตอบกลับภายใน 120 วินาที คำขออาจถูกบันทึกแล้ว โปรดตรวจสอบชีต Job_Requests ก่อนกดส่งซ้ำ");
+        pendingRequestId = ""; submitTimeout = null;
+        showError("ระบบยังไม่ตอบกลับภายใน 120 วินาที ข้อมูลอาจถูกบันทึกแล้ว โปรดตรวจสอบ Candidates ก่อนกดส่งซ้ำเพื่อป้องกันข้อมูลซ้ำ");
       }, 120000);
     }
 
-    form.addEventListener("submit", function (event) {
+     async function handleSubmit(event) {
       event.preventDefault();
       if (isSubmitting) return;
-
-      if (!liffReady || !liff.getAccessToken()) {
-        showError("กรุณาเข้าสู่ระบบผ่าน LINE ก่อนส่งคำขอ");
-        return;
-      }
-
       if (!form.reportValidity()) {
         const firstInvalid = form.querySelector(":invalid");
         if (firstInvalid) firstInvalid.focus();
         return;
       }
-
-      const phoneInput = document.getElementById("ContactPhone");
-      const phone = phoneInput.value.trim();
-      if (!/^[0-9+\-\s()]{8,20}$/.test(phone)) {
-        phoneInput.focus();
-        phoneInput.setAttribute("aria-invalid", "true");
-        showError("รูปแบบเบอร์โทรศัพท์ผู้ประสานงานไม่ถูกต้อง");
-        return;
-      } else {
-        phoneInput.removeAttribute("aria-invalid");
-      }
-
-      const emailInput = document.getElementById("ContactEmail");
-      const email = emailInput.value.trim();
-      if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        emailInput.focus();
-        emailInput.setAttribute("aria-invalid", "true");
-        showError("รูปแบบอีเมลผู้ประสานงานไม่ถูกต้อง");
-        return;
-      } else {
-        emailInput.removeAttribute("aria-invalid");
-      }
-
-      const count = Number(document.getElementById("Headcount").value);
-      if (!Number.isInteger(count) || count < 1 || count > 100000) {
-        document.getElementById("Headcount").focus();
-        showError("จำนวนบุคลากรต้องเป็นจำนวนเต็มตั้งแต่ 1 ถึง 100,000 คน");
+      // ใช้ Access Token ณ เวลาส่ง และให้ Code.gs ตรวจสอบความถูกต้องกับ LINE อีกครั้ง
+      // Access Token ของ LIFF มีอายุยาวกว่า ID Token จึงเหมาะกับแบบฟอร์มที่กรอกข้อมูลนาน
+      const currentAccessToken = liffReady ? liff.getAccessToken() : null;
+      if (!currentAccessToken) {
+        showError("ไม่พบ LINE Access Token กรุณาปิดแบบฟอร์มแล้วเปิดใหม่จาก LINE OA ก่อนส่งอีกครั้ง");
         return;
       }
-
-      const accessToken = liff.getAccessToken();
-      if (!accessToken) {
-        liffReady = false;
-        setLineStatus("error", "ไม่พบข้อมูลการเข้าสู่ระบบ LINE กรุณาเปิดแบบฟอร์มใหม่");
-        showError("กรุณาเข้าสู่ระบบ LINE ใหม่ก่อนส่งคำขอ");
-        return;
+      if (!openJobs.length || !positionSelect.value) {
+        showError("ยังไม่สามารถตรวจสอบตำแหน่งงานที่เปิดรับได้ กรุณารอโหลดรายการงานหรือติดต่อเจ้าหน้าที่");
+        positionSelect.focus(); return;
       }
-
+      
       const data = {};
-      new FormData(form).forEach(function (value, key) {
-        data[key] = typeof value === "string" ? value.trim() : value;
+      new FormData(form).forEach(function(value, key) {
+        if (value instanceof File || key === "SkillOption" || key === "PhotoFile") return;
+        data[key] = value;
       });
-      data.Headcount = count;
-      data.lineAccessToken = accessToken;
+      
+      const selectedOption = positionSelect.options[positionSelect.selectedIndex];
+    }
 
-      isSubmitting = true;
-      setButtonState("กำลังส่งคำขอ...", true, true);
-      message.className = "";
-      message.style.display = "none";
-      message.textContent = "";
-      openProgressModal();
-      sendJobRequestToAppsScript(data);
-    });
-
-    setButtonState("กำลังเชื่อมต่อ LINE...", true, false);
-
+    form.addEventListener("submit", handleSubmit);
     loadOpenJobs();
     initializeAtworkLiff();
+    updateSkillCount();
   </script>
 </body>
 </html>
+
+
+  
+    
+      
+  
+
+
+
+    
