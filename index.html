@@ -595,34 +595,43 @@
       if (heroBottomRow) heroBottomRow.classList.add("profile-active");
     }
 
-    async function initializeAtworkLiff() {
+   async function initializeAtworkLiff() {
       if (!ATWORK_LIFF_ID) {
         setLineStatus("error", "ยังไม่ได้ตั้งค่า LIFF ID กรุณาตรวจสอบการตั้งค่าระบบ");
         setButtonState("LINE ยังไม่พร้อมใช้งาน", true, false);
         return;
       }
       try {
+        setLineStatus("pending", "กำลังเชื่อมต่อบัญชี LINE...");
         await liff.init({ liffId: ATWORK_LIFF_ID });
         if (!liff.isLoggedIn() && !liff.isInClient()) {
-          // ใช้ redirect เริ่มต้นของ LIFF เพื่อลดปัญหา URL ไม่ตรงกับ Endpoint URL
+          // ใช้รูปแบบเดียวกับหน้า Candidate: ให้ LIFF พาไปเข้าสู่ระบบ แล้วกลับมายังหน้าเดิม
           liff.login();
           return;
         }
-        if (!liff.getAccessToken()) throw new Error("ไม่พบ LINE Access Token กรุณาปิดแบบฟอร์มแล้วเปิดใหม่จาก LINE OA และตรวจสอบการตั้งค่า LIFF");
+        if (!liff.getAccessToken()) {
+          throw new Error("ไม่พบ LINE Access Token กรุณาตรวจสอบว่าเข้าสู่ระบบ LINE สำเร็จแล้ว");
+        }
         let profile = null;
-        try { profile = await liff.getProfile(); }
-        catch (error) { console.warn("อ่านโปรไฟล์ LINE ไม่สำเร็จ:", error); }
+        try {
+          profile = await liff.getProfile();
+        } catch (error) {
+          console.warn("อ่านโปรไฟล์ LINE ไม่สำเร็จ:", error);
+        }
         showProfile(profile || { displayName: "ผู้ใช้ LINE" });
         setLineStatus("connected", profile
-          ? "เชื่อมต่อ LINE สำเร็จ สามารถกรอกและส่งข้อมูลผู้สมัครได้"
-          : "ยืนยันการเข้าสู่ระบบ LINE แล้ว แต่ยังแสดงรูปโปรไฟล์ไม่ได้");
+          ? "เชื่อมต่อ LINE สำเร็จ สามารถกรอกและส่งคำขอได้"
+          : "เข้าสู่ระบบ LINE แล้ว แต่ไม่สามารถอ่านโปรไฟล์ได้");
         liffReady = true;
         updateSubmitAvailability();
       } catch (error) {
         liffReady = false;
         profileCard.classList.remove("visible");
-        setLineStatus("error", error && error.message ? "เชื่อมต่อ LINE ไม่สำเร็จ: " + error.message : "เชื่อมต่อ LINE ไม่สำเร็จ กรุณาเปิดฟอร์มผ่าน LINE อีกครั้ง");
+        setLineStatus("error", error && error.message
+          ? "เชื่อมต่อ LINE ไม่สำเร็จ: " + error.message
+          : "เชื่อมต่อ LINE ไม่สำเร็จ กรุณาเปิดฟอร์มผ่าน LINE อีกครั้ง");
         setButtonState("เชื่อมต่อ LINE ไม่สำเร็จ", true, false);
+        console.error("ATWORK Employer LIFF:", error);
       }
     }
 
