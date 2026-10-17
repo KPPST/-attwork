@@ -57,7 +57,7 @@ const FLEX_MESSAGE = {
       contents: [
         {
           type: "button",
-          style: "primary",
+          style: "secondary",
           action: {
             type: "postback",
             label: "ตำแหน่งงานที่เปิดรับ",
@@ -66,7 +66,7 @@ const FLEX_MESSAGE = {
         },
         {
           type: "button",
-          style: "secondary",
+          style: "primary",
           action: {
             type: "uri",
             label: "สมัครงาน,สร้าง RESUME",
@@ -75,7 +75,7 @@ const FLEX_MESSAGE = {
         },
         {
           type: "button",
-          style: "secondary",
+          style: "primary",
           action: {
             type: "uri",
             label: "ตรวจสอบสถานะ",
@@ -148,7 +148,6 @@ const FLEX_EMPLOYER = {
         {
           type: "button",
           style: "primary",
-          color: "#1749A2",
           action: {
             type: "uri",
             label: "แจ้งความต้องการบุคลากร",
@@ -260,9 +259,13 @@ export default {
             {
               type: "text",
               text:
-                `${menuName} กำลังปรับปรุงระบบ 🚧\n\n` +
-                "ขออภัยในความไม่สะดวก\n" +
-                "กรุณากลับมาใช้บริการอีกครั้งภายหลัง"
+                `🚧 กำลังปรับปรุงระบบ 🚧
+
+              ปุ่ม: ${menuName}
+              สถานะ: กำลังปรับปรุง
+
+              ขออภัยในความไม่สะดวก
+              กรุณากลับมาใช้บริการอีกครั้งภายหลัง`
             }
           ];
         }
