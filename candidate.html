@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#142B43">
   <meta name="description" content="แบบฟอร์มข้อมูลผู้สมัครงาน ATWORK">
-  <title>ATWORK | ข้อมูลผู้สมัครงาน</title>
+  <title> @ATTWORK | ข้อมูลผู้สมัครงาน</title>
 
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -329,10 +329,6 @@
       <div class="eyebrow">CANDIDATE REGISTRATION</div>
       <h1>ข้อมูลผู้สมัครงาน</h1>
       <p class="hero-copy">กรอกข้อมูลให้ครบเพื่อสร้างโปรไฟล์ผู้สมัครและ Resume ของคุณโดยอัตโนมัติ</p>
-      <div class="hero-meta">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 3 7.5 7 10 4-2.5 7-5.5 7-10V6l-7-3Z"></path><path d="m9 12 2 2 4-4"></path></svg>
-        ข้อมูลของคุณจะถูกใช้เพื่อประกอบการติดต่อเรื่องงาน
-      </div>
       <div class="hero-bottom-row">
       <div id="lineStatus" class="line-status" role="status" aria-live="polite">
         <span class="status-icon" aria-hidden="true">
@@ -360,10 +356,8 @@
     <section class="content">
       <div class="intro-row">
         <div>
-          <h2 class="intro-title">เริ่มต้นโปรไฟล์ผู้สมัคร</h2>
-          <p class="intro-subtitle">กรอกข้อมูลที่จำเป็น โดยช่องที่มี <span class="required-star">*</span> เป็นช่องบังคับ</p>
+          <h2 class="intro-title">โปรไฟล์ผู้สมัคร</h2>
         </div>
-        <span class="required-note">ข้อมูลส่วนตัว · เก็บเป็นความลับ</span>
       </div>
 
       <form id="candidateForm" novalidate>
@@ -376,44 +370,51 @@
             <div class="field full">
               <label for="FullName">1. ชื่อ-นามสกุล <span class="required-star">*</span></label>
               <input id="FullName" name="FullName" maxlength="150" autocomplete="name" required placeholder="กรอกชื่อและนามสกุล" aria-describedby="FullNameHint">
-              <small class="hint" id="FullNameHint">ใช้ชื่อจริงที่ต้องการให้แสดงใน Resume</small>
             </div>
+            
             <div class="field">
               <label for="Age">2. อายุ (ปี) <span class="required-star">*</span></label>
               <input id="Age" name="Age" type="number" inputmode="numeric" min="1" max="120" step="1" required placeholder="เช่น 25">
             </div>
+            
             <div class="field">
               <label for="Phone">3. เบอร์โทรศัพท์ <span class="required-star">*</span></label>
-              <input id="Phone" name="Phone" type="tel" inputmode="tel" maxlength="20" autocomplete="tel" required placeholder="เช่น 0812345678">
-              <small class="hint">กรอกตัวเลขให้ครบ และเก็บเลข 0 ด้านหน้าไว้</small>
+              <input id="Phone" name="Phone" type="tel" inputmode="tel" maxlength="10" autocomplete="tel" required placeholder="เช่น 0812345678">
             </div>
+            
             <div class="field full">
-              <label for="Email">4. อีเมล</label>
-              <input id="Email" name="Email" type="email" maxlength="150" autocomplete="email" placeholder="name@example.com">
+              <label for="Email">4. อีเมล <span class="required-star">*</span></label>
+              <input id="Email" name="Email" type="email" maxlength="150" autocomplete="email" required placeholder="name@example.com">
             </div>
+            
             <div class="field">
-              <label for="HouseNo">5. บ้านเลขที่</label>
-              <input id="HouseNo" name="HouseNo" maxlength="100" autocomplete="address-line1" placeholder="เช่น 99/12">
+              <label for="HouseNo">5. บ้านเลขที่ <span class="required-star">*</span></label>
+              <input id="HouseNo" name="HouseNo" maxlength="100" autocomplete="address-line1" required placeholder="เช่น 99/12">
             </div>
+            
             <div class="field">
               <label for="moo">6. หมู่</label>
               <input id="moo" name="moo" maxlength="50" placeholder="เช่น หมู่ 4 หรือ 4">
             </div>
+            
             <div class="field">
-              <label for="Subdistrict">7. ตำบล/แขวง</label>
-              <input id="Subdistrict" name="Subdistrict" maxlength="100" autocomplete="address-level3" placeholder="กรอกตำบลหรือแขวง">
+              <label for="Subdistrict">7. ตำบล/แขวง <span class="required-star">*</span></label>
+              <input id="Subdistrict" name="Subdistrict" maxlength="100" autocomplete="address-level3" required placeholder="กรอกตำบลหรือแขวง">
             </div>
+            
             <div class="field">
-              <label for="District">8. อำเภอ/เขต</label>
-              <input id="District" name="District" maxlength="100" autocomplete="address-level2" placeholder="กรอกอำเภอหรือเขต">
+              <label for="District">8. อำเภอ/เขต <span class="required-star">*</span></label>
+              <input id="District" name="District" maxlength="100" autocomplete="address-level2" required placeholder="กรอกอำเภอหรือเขต">
             </div>
+            
             <div class="field">
-              <label for="Province">9. จังหวัด</label>
-              <input id="Province" name="Province" type="text" maxlength="100" autocomplete="address-level1" placeholder="กรอกชื่อจังหวัด">
+              <label for="Province">9. จังหวัด <span class="required-star">*</span></label>
+              <input id="Province" name="Province" type="text" maxlength="100" autocomplete="address-level1" required placeholder="กรอกชื่อจังหวัด">
             </div>
+            
             <div class="field">
-              <label for="PastalCode">10. รหัสไปรษณีย์</label>
-              <input id="PastalCode" name="PastalCode" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" pattern="[0-9]{5}" placeholder="5 หลัก เช่น 10110">
+              <label for="PastalCode">10. รหัสไปรษณีย์ <span class="required-star">*</span></label>
+              <input id="PastalCode" name="PastalCode" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" pattern="[0-9]{5}" required placeholder="5 หลัก เช่น 10110">
             </div>
           </div>
         </section>
