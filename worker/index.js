@@ -62,7 +62,7 @@ const FLEX_MESSAGE = {
           action: {
             type: "uri",
             label: "ตำแหน่งงานที่เปิดรับ",
-            uri: "https://kppst.github.io/-attwork/"
+            data: "action=under_construction&menu=ตำแหน่งงานที่เปิดรับ"
           }
         },
         {
@@ -134,41 +134,75 @@ export default {
     }
 
     // LINE ส่ง Verify webhook โดยมี events เป็น array ว่างได้
-    for (const event of data.events || []) {
-      if (
-        event.type !== "message" ||
-        event.message?.type !== "text" ||
-        !event.replyToken
-      ) {
-        continue;
-      }
+    
+for (const event of data.events || []) {
+  if (!event.replyToken) continue;
 
-      try {
-        const response = await fetch(
-          "https://api.line.me/v2/bot/message/reply",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              "Authorization":
-                `Bearer ${env.LINE_CHANNEL_ACCESS_TOKEN}`
-            },
-            body: JSON.stringify({
-              replyToken: event.replyToken,
-              messages: [FLEX_MESSAGE]
-            })
-          }
-        );
+  let messages = null;
 
-        if (!response.ok) {
-          console.error(
-            "LINE Reply API failed:",
-            response.status,
-            await response.text()
-          );
+  // ผู้ใช้กดเมนูที่กำลังปรับปรุง
+  if (event.type === "postback" && event.postback?.data) {
+    const params = new URLSearchParams(event.postback.data);
+
+    if (params.get("action") === "under_construction") {
+      const menuNames = {
+        resume: "สร้าง Resume"
+      };
+
+      const menuName =
+        menuNames[params.get("menu")] || "เมนูนี้";
+
+      messages = [
+        {
+          type: "text",
+          text:
+            `${menuName} กำลังปรับปรุงระบบ 🚧\n\n` +
+            "ขออภัยในความไม่สะดวก " +
+            "กรุณากลับมาใช้บริการอีกครั้งภายหลัง"
         }
-      } catch (error) {
-        console.error("LINE request failed:", error);
+      ];
+    }
+  }
+
+  // ผู้ใช้พิมพ์ข้อความ ให้แสดงเมนูหลัก
+  else if (
+    event.type === "message" &&
+    event.message?.type === "text"
+  ) {
+    messages = [FLEX_MESSAGE];
+  }
+
+  if (!messages) continue;
+
+  try {
+    const response = await fetch(
+      "https://api.line.me/v2/bot/message/reply",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization":
+            `Bearer ${env.LINE_CHANNEL_ACCESS_TOKEN}`
+        },
+        body: JSON.stringify({
+          replyToken: event.replyToken,
+          messages
+        })
+      }
+    );
+
+    if (!response.ok) {
+      console.error(
+        "LINE Reply API failed:",
+        response.status,
+        await response.text()
+      );
+    }
+  } catch (error) {
+    console.error("LINE request failed:", error);
+  }
+}
+
       }
     }
 
