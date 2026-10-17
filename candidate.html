@@ -76,16 +76,8 @@
       isolation: isolate;
       overflow: hidden;
       padding: 13px clamp(16px, 2.5vw, 24px) 13px;
-      background: linear-gradient(
-        118deg,
-        #2457D6 0%,
-        #237FE8 53%,
-        #00AFC5 100%
-      );
-  color: #fff;
-  border-radius: var(--radius-xl);
-  margin: 0 0 14px;
-  }
+      background: linear-gradient(118deg, #2457D6 0%, #237FE8 53%, #00AFC5 100%);
+      color: #fff;
     }
     .hero::before, .hero::after {
       position: absolute;
@@ -329,53 +321,6 @@
       html { scroll-behavior: auto; }
       *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
     }
-
-    /* แยกส่วนหัวสีฟ้าออกจากเนื้อหาด้านล่าง */
-.hero {
-  border-radius: var(--radius-xl);
-  margin-bottom: 14px;
-}
-
-/* ซ่อนกล่องแจ้งสถานะ LINE อันแรก */
-.hero-bottom-row > .line-status {
-  display: none !important;
-}
-
-/* ให้กล่องโปรไฟล์คงขนาดเดิมและชิดซ้าย */
-.hero-bottom-row,
-.hero-bottom-row.profile-active {
-  display: flex;
-  justify-content: flex-start;
-  align-items: stretch;
-  gap: 8px;
-  margin-top: 10px;
-}
-
-.hero-bottom-row > .profile-card,
-.hero-bottom-row.profile-active > .profile-card {
-  flex: 0 1 380px;
-  width: 380px;
-  max-width: 100%;
-  margin: 0;
-}
-
-/* มือถือ */
-@media (max-width: 620px) {
-  .hero-bottom-row,
-  .hero-bottom-row.profile-active {
-    display: flex;
-    justify-content: flex-start;
-    margin-top: 8px;
-  }
-
-  .hero-bottom-row > .profile-card,
-  .hero-bottom-row.profile-active > .profile-card {
-    flex: 0 1 380px;
-    width: 380px;
-    max-width: 100%;
-  }
-} 
-    
   </style>
 </head>
 <body>
@@ -383,6 +328,11 @@
     <header class="hero">
       <div class="eyebrow">CANDIDATE REGISTRATION</div>
       <h1>ข้อมูลผู้สมัครงาน</h1>
+      <p class="hero-copy">กรอกข้อมูลให้ครบเพื่อสร้างโปรไฟล์ผู้สมัครและ Resume ของคุณโดยอัตโนมัติ</p>
+      <div class="hero-meta">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 3 7.5 7 10 4-2.5 7-5.5 7-10V6l-7-3Z"></path><path d="m9 12 2 2 4-4"></path></svg>
+        ข้อมูลของคุณจะถูกใช้เพื่อประกอบการติดต่อเรื่องงาน
+      </div>
       <div class="hero-bottom-row">
       <div id="lineStatus" class="line-status" role="status" aria-live="polite">
         <span class="status-icon" aria-hidden="true">
@@ -410,8 +360,10 @@
     <section class="content">
       <div class="intro-row">
         <div>
-          <h2 class="intro-title">โปรไฟล์ผู้สมัคร</h2>
+          <h2 class="intro-title">เริ่มต้นโปรไฟล์ผู้สมัคร</h2>
+          <p class="intro-subtitle">กรอกข้อมูลที่จำเป็น โดยช่องที่มี <span class="required-star">*</span> เป็นช่องบังคับ</p>
         </div>
+        <span class="required-note">ข้อมูลส่วนตัว · เก็บเป็นความลับ</span>
       </div>
 
       <form id="candidateForm" novalidate>
@@ -739,7 +691,7 @@
           liff.login();
           return;
         }
-        if (!liff.getAccessToken()) throw new Error("ไม่พบ LINE Access Token กรุณาตรวจสอบว่า LIFF เข้าสู่ระบบสำเร็จแล้ว");
+        if (!liff.getAccessToken()) throw new Error("ไม่พบ LINE Access Token กรุณาปิดแบบฟอร์มแล้วเปิดใหม่จาก LINE OA และตรวจสอบการตั้งค่า LIFF");
         let profile = null;
         try { profile = await liff.getProfile(); }
         catch (error) { console.warn("อ่านโปรไฟล์ LINE ไม่สำเร็จ:", error); }
@@ -762,7 +714,7 @@
       setButtonState(canSubmit ? "บันทึกข้อมูลและสร้าง Resume" : (!liffReady ? "กำลังเชื่อมต่อ LINE..." : "รอตำแหน่งงานที่เปิดรับ"), !canSubmit, false);
     }
 
-    // สัญญาการเชื่อมต่อกับ Code.gs: GET ?action=getOpenJobs&callback=<ชื่อ callback>
+    // สัญญาการเชื่อมต่อกับ Code.gs: GET ?action=getOpenPositions&callback=<ชื่อ callback>
     // Code.gs ต้องส่ง JSONP { success:true, jobs:[{jobId:"...", title:"..."}] }
     function loadOpenJobs() {
       positionSelect.disabled = true;
@@ -787,7 +739,9 @@
         if (finished) return;
         finished = true;
         cleanup();
-        const jobs = response && Array.isArray(response.jobs) ? response.jobs : [];
+        const jobs = response && Array.isArray(response.positions)
+          ? response.positions
+          : (response && Array.isArray(response.jobs) ? response.jobs : []);
         if (!response || response.success !== true || !jobs.length) {
           handleJobLoadError(response && response.message ? response.message : "ขณะนี้ไม่มีตำแหน่งงานที่เปิดรับ หรือระบบยังไม่ได้เชื่อมรายการงาน");
           return;
@@ -816,9 +770,9 @@
         if (finished) return;
         finished = true;
         cleanup();
-        handleJobLoadError("ยังเชื่อมต่อรายการตำแหน่งงานไม่ได้ ต้องตั้งค่า endpoint getOpenJobs ใน Code.gs ก่อน");
+        handleJobLoadError("ยังเชื่อมต่อรายการตำแหน่งงานไม่ได้ ต้องตั้งค่า endpoint getOpenPositions ใน Code.gs ก่อน");
       };
-      script.src = ATWORK_APPS_SCRIPT_URL + "?action=getOpenJobs&callback=" + encodeURIComponent(callbackName) + "&_=" + Date.now();
+      script.src = ATWORK_APPS_SCRIPT_URL + "?action=getOpenPositions&callback=" + encodeURIComponent(callbackName) + "&_=" + Date.now();
       document.head.appendChild(script);
     }
 
@@ -1181,8 +1135,12 @@
         if (firstInvalid) firstInvalid.focus();
         return;
       }
-      if (!liffReady || !liff.getAccessToken()) {
-        showError("กรุณาเข้าสู่ระบบผ่าน LINE LIFF ก่อนส่งข้อมูล"); return;
+      // ใช้ Access Token ณ เวลาส่ง และให้ Code.gs ตรวจสอบความถูกต้องกับ LINE อีกครั้ง
+      // Access Token ของ LIFF มีอายุยาวกว่า ID Token จึงเหมาะกับแบบฟอร์มที่กรอกข้อมูลนาน
+      const currentAccessToken = liffReady ? liff.getAccessToken() : null;
+      if (!currentAccessToken) {
+        showError("ไม่พบ LINE Access Token กรุณาปิดแบบฟอร์มแล้วเปิดใหม่จาก LINE OA ก่อนส่งอีกครั้ง");
+        return;
       }
       if (!openJobs.length || !positionSelect.value) {
         showError("ยังไม่สามารถตรวจสอบตำแหน่งงานที่เปิดรับได้ กรุณารอโหลดรายการงานหรือติดต่อเจ้าหน้าที่");
@@ -1236,8 +1194,7 @@
       const selectedOption = positionSelect.options[positionSelect.selectedIndex];
       data.ExpectedPosition = positionSelect.value;
       data.ExpectedPositionJobID = selectedOption ? (selectedOption.dataset.jobId || "") : "";
-      data.lineAccessToken = liff.getAccessToken();
-      if (!data.lineAccessToken) { showError("ไม่พบ LINE Access Token กรุณาปิดและเปิดแบบฟอร์มจาก LINE ใหม่"); return; }
+      data.lineAccessToken = currentAccessToken;
 
       const reader = new FileReader();
       reader.onload = function() {
