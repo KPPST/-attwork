@@ -329,31 +329,17 @@
       <div class="eyebrow">CANDIDATE REGISTRATION</div>
       <h1>ข้อมูลผู้สมัครงาน</h1>
       <p class="hero-copy">กรอกข้อมูลให้ครบเพื่อสร้างโปรไฟล์ผู้สมัครและ Resume ของคุณโดยอัตโนมัติ</p>
-      <div class="hero-meta">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v5c0 4.5 3 7.5 7 10 4-2.5 7-5.5 7-10V6l-7-3Z"></path><path d="m9 12 2 2 4-4"></path></svg>
-        ข้อมูลของคุณจะถูกใช้เพื่อประกอบการติดต่อเรื่องงาน
-      </div>
-      <div class="hero-bottom-row">
+      <div class="hero-meta"></div>
+      <div class="hero-bottom-row" id="heroBottomRow">
       <div id="lineStatus" class="line-status" role="status" aria-live="polite">
-        <span class="status-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
-        </span>
-        <span id="lineStatusText">กำลังเชื่อมต่อบัญชี LINE...</span>
-      </div>
-
-      <!-- การ์ดโปรไฟล์จะแสดงหลัง LIFF เข้าสู่ระบบสำเร็จ -->
-      <section id="lineProfileCard" class="profile-card" aria-label="โปรไฟล์ LINE ของคุณ">
-        <div class="avatar-frame">
-          <span id="profileFallback" class="avatar-fallback" aria-hidden="true">A</span>
-          <img id="profilePicture" alt="รูปโปรไฟล์ LINE" referrerpolicy="no-referrer">
+          <span class="status-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></span>
+          <span id="lineStatusText">กำลังเชื่อมต่อบัญชี LINE...</span>
         </div>
-        <div class="profile-copy">
-          <div class="profile-kicker">เข้าสู่ระบบด้วย LINE แล้ว</div>
-          <p id="profileName" class="profile-name">ผู้ใช้ LINE</p>
-          <div class="profile-caption">บัญชีนี้จะใช้ยืนยันการส่งข้อมูลผู้สมัคร</div>
-        </div>
-        <span class="profile-badge">เชื่อมต่อแล้ว</span>
-      </section>
+        <section id="lineProfileCard" class="profile-card" aria-label="โปรไฟล์ LINE ของผู้ประสานงาน">
+          <div class="avatar-frame"><span id="profileFallback" class="avatar-fallback" aria-hidden="true">L</span><img id="profilePicture" alt="รูปโปรไฟล์ LINE" referrerpolicy="no-referrer"></div>
+          <div class="profile-copy"><div class="profile-kicker">เข้าสู่ระบบด้วย LINE แล้ว</div><p id="profileName" class="profile-name">ผู้ใช้ LINE</p><div class="profile-caption">บัญชี LINE ที่ใช้ติดต่อกับ ATWORK</div></div>
+          <span class="profile-badge">เชื่อมต่อแล้ว</span>
+        </section>
       </div>
     </header>
 
@@ -535,7 +521,7 @@
 
         <div class="privacy-note">
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"></rect><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"></path></svg>
-          <span>โปรดตรวจสอบข้อมูลก่อนส่ง ระบบใช้ LINE เพื่อยืนยันบัญชีผู้สมัคร ข้อมูลและรูปจะถูกส่งไปยังระบบ ATWORK เพื่อบันทึกและสร้าง Resume</span>
+          <span>โปรดตรวจสอบข้อมูลก่อนส่ง ระบบใช้ LINE เพื่อยืนยันบัญชีผู้สมัคร ข้อมูลและรูปจะถูกส่งไปยังระบบ @ATTWORK เพื่อบันทึกและสร้าง Resume</span>
         </div>
 
         <div class="actions">
@@ -556,7 +542,7 @@
   <div id="submissionModal" class="submission-modal" hidden aria-hidden="true">
     <div class="modal-backdrop" aria-hidden="true"></div>
     <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDescription">
-      <div class="modal-brand">ATWORK · CANDIDATE PORTAL</div>
+      <div class="modal-brand">@ATTWORK · CANDIDATE PORTAL</div>
       <div id="progressWrap" class="progress-wrap">
         <svg class="progress-svg" viewBox="0 0 120 120" aria-hidden="true">
           <circle class="progress-track" cx="60" cy="60" r="48"></circle>
