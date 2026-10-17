@@ -1,521 +1,471 @@
 <!doctype html>
 <html lang="th">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#173b65">
-<meta name="description" content="ค้นหาและดูตำแหน่งงานที่เปิดรับกับ ATWORK">
-<title>ATWORK | ตำแหน่งงานที่เปิดรับ</title>
-  
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-<style>
-  
-:root{
-  color-scheme:light;
-  --navy:#1749A2;
-  --blue:#287DEB;
-  --blue2:#1789E8;
-  --ink:#1B3150;
-  --muted:#6F7C87;
-  --line:#DCE7F5;
-  --paper:#F2F7FF;
-  --purple:#7650dc;
-  --purple-soft:#f2edff;
-  --green:#24664B;
-  --green-bg:#EFF7F2;
-  --gold:#FFC247;
-  --shadow:0 18px 55px rgba(24,44,64,.075);
-  --r:22px}
-  
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0;
-  background:var(--paper);
-  color:var(--ink);
-  font:14px/1.7 "Noto Sans Thai",Tahoma,Arial,sans-serif;
-  -webkit-font-smoothing:antialiased}
-  
-button,input,select{font:inherit}
-  
-button{
-  cursor:pointer;
-  touch-action:manipulation}
-  
-a{color:inherit}
-  
-.page{
-  width:min(1380px,100%);
-  margin:auto;
-  padding:24px 24px 44px}
-  
-.topbar{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:18px;
-  margin-bottom:22px}
-  
-.brand{
-  display:flex;
-  align-items:center;
-  gap:11px;
-  text-decoration:none}
-  
-.logo{
-  width:44px;
-  height:44px;
-  display:grid;
-  place-items:center;
-  border-radius:14px;
-  background:linear-gradient(135deg,#2457d6,#00a8bf);
-  color:white;
-  font-weight:800;
-  font-size:17px;
-  box-shadow:0 8px 18px #2457d629}
-  
-.brand-name{
-  font-weight:800;
-  letter-spacing:1.6px;
-  color:var(--navy);
-  font-size:16px;
-  line-height:1.25}
-  
-.brand-caption{
-  font-size:10px;
-  color:#8a97a5;
-  letter-spacing:1.2px;
-  margin-top:3px}
-  
-.top-actions{
-  display:flex;
-  gap:8px;
-  align-items:center}
-  
-.top-link,.icon-btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:7px;border:1px solid var(--line);
-  background:#fff;
-  color:var(--navy);
-  padding:10px 13px;
-  border-radius:11px;
-  font-size:12px;
-  font-weight:700;
-  text-decoration:none}
-  
-.icon-btn{
-  width:42px;
-  padding:0;
-  height:42px}
-  
-.hero{
-  position:relative;
-  overflow:hidden;
-  border-radius:24px;
-  padding:26px clamp(20px,4vw,42px);
-  background:linear-gradient(115deg,#173b65 0%,#2459b9 54%,#287de8 100%);
-  color:#fff;box-shadow:var(--shadow);
-  margin-bottom:22px}
-  
-.hero:before,
-.hero:after{
-  content:"";
-  position:absolute;
-  border:1px solid #ffffff26;
-  border-radius:50%;
-  pointer-events:none}
-  
-.hero:before{
-  width:300px;
-  height:300px;
-  right:-100px;
-  top:-170px}
-  
-.hero:after{
-  width:210px;
-  height:210px;
-  right:-55px;
-  top:-125px}
-  
-.hero-inner{
-  position:relative;
-  z-index:1;
-  max-width:760px}
-  
-.eyebrow{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  text-transform:uppercase;
-  letter-spacing:1.5px;
-  font-size:10px;
-  font-weight:800;
-  color:#ffe5a0}
-
-.eyebrow:before{
-  content:"";
-  height:2px;
-  width:22px;
-  background:#ffd166}
-
-.hero h1{
-  font-size:clamp(25px,3vw,36px);
-  line-height:1.3;
-  margin:8px 0 8px;
-  font-weight:800}
-
-.hero p{
-  margin:0;
-  color:#e7f0ff;
-  font-size:13px;
-  flex;gap:12px;
-  align-items:center;
-  margin-bottom:16px}
-.searchbox{display:flex;align-items:center;gap:10px;flex:1;min-width:180px;background:#fff;border:1px solid var(--line);border-radius:13px;padding:0 14px;box-shadow:0 2px 7px #1e416408}
-.searchbox svg{flex:0 0 auto;color:#8191a3}
-.searchbox input{border:0;outline:0;box-shadow:none!important;width:100%;min-width:0;padding:13px 0;background:transparent;color:var(--ink);font-size:13px}
-.searchbox input::placeholder{color:#a0acb8}
-.filter{min-width:160px;border:1px solid var(--line);border-radius:13px;background:#fff;color:var(--ink);padding:12px 13px;font-size:12px;outline:0}
-.layout{display:grid;grid-template-columns:minmax(300px, .87fr) minmax(0,1.45fr);gap:18px;align-items:start}
-.panel{background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
-.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:17px 18px;border-bottom:1px solid #edf1f6}
-.panel-title{margin:0;color:var(--navy);font-size:14px;font-weight:800}
-.panel-subtitle{font-size:11px;color:var(--muted);margin-top:3px}
-.count-pill{border-radius:999px;background:#edf4ff;color:#235ab1;padding:4px 9px;font-size:10px;font-weight:800;white-space:nowrap}
-.job-list{padding:9px;display:grid;gap:8px;max-height:740px;overflow:auto}
-.job-card{width:100%;position:relative;text-align:left;border:1px solid transparent;border-radius:13px;background:#fff;padding:14px 13px 13px 16px;transition:background .15s,border-color .15s,transform .15s;display:block;color:inherit}
-.job-card:hover{background:#f8faff;border-color:#d9e4fa}
-.job-card.active{border-color:#8764e5;background:linear-gradient(115deg,#f7f3ff,#fff 87%);box-shadow:inset 3px 0 #7650dc,0 5px 16px #6840c110}
-.job-card.active:before{content:"";position:absolute;left:0;top:12px;bottom:12px;width:3px;border-radius:0 4px 4px 0;background:var(--purple)}
-.job-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
-.job-company-wrap{display:flex;align-items:center;gap:10px;min-width:0}
-company-mark{width:38px;height:38px;display:grid;place-items:center;flex:0 0 auto;border-radius:11px;background:linear-gradient(135deg,#eaf2ff,#f4f7ff);color:#2e61b5;font-weight:800}
-.job-card.active 
-.company-mark{background:#e9e0ff;color:#6942c9}
-.company-small{font-size:10px;color:var(--muted);line-height:1.45;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.job-title{font-weight:800;font-size:13px;line-height:1.55;color:#183b61;margin:1px 0 0}
-.job-date{font-size:10px;color:#8d99a7;white-space:nowrap}
-.job-meta{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:12px;font-size:10px;color:#6e7d8d}
-.meta-item{display:inline-flex;align-items:center;gap:5px}
-.meta-item svg{color:#8093a7}
-.job-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px}
-.tag{display:inline-flex;align-items:center;gap:5px;border-radius:7px;padding:4px 8px;background:#f1f5fa;color:#4c6176;font-size:10px;font-weight:600}
-.tag.open{background:var(--green-bg);color:var(--green)}
-.tag.purple{background:var(--purple-soft);color:#6843bf}
-.empty{padding:38px 22px;text-align:center;color:var(--muted);font-size:12px}
-.empty-icon{width:54px;height:54px;margin:0 auto 12px;display:grid;place-items:center;border-radius:17px;background:#f1f5fb;color:#8095ad}
-.detail{min-height:420px}
-.detail-body{padding:23px 25px 26px}
-.detail-topline{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
-.status-chip{display:inline-flex;align-items:center;gap:7px;padding:5px 10px;border-radius:999px;background:var(--green-bg);color:var(--green);font-size:10px;font-weight:800}
-.status-chip:before{content:"";width:6px;height:6px;border-radius:50%;background:#3da16b}
-.detail-actions-top{display:flex;gap:7px}
-.small-icon{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:10px;border:1px solid var(--line);background:white;color:#60748a}
-small-icon.saved{color:var(--purple);background:var(--purple-soft);border-color:#dfd3ff}
-.detail-title{font-size:clamp(23px,2.2vw,30px);line-height:1.35;color:#183b61;font-weight:800;margin:0}
-.detail-company{display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:#697c90;font-size:12px;margin-top:9px}
-.detail-separator{color:#ccd4de}
-.detail-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:21px 0 19px}
-.fact{padding:12px 12px;border:1px solid #e8edf4;border-radius:12px;background:#fbfcfe;min-width:0}
-.fact-label{font-size:10px;color:#8593a2;display:flex;align-items:center;gap:6px}
-.fact-value{font-size:12px;font-weight:800;color:#284864;margin-top:5px;overflow-wrap:anywhere}
-.detail-sep{height:1px;background:#e9eef4;margin:21px 0}
-.section-title{display:flex;align-items:center;gap:9px;margin:0 0 10px;font-size:14px;font-weight:800;color:#1e4266}
-.section-mark{display:grid;place-items:center;width:28px;height:28px;border-radius:8px;background:#eef4ff;color:#2c63c5}
-.detail-copy{white-space:pre-line;color:#53677a;font-size:12px;line-height:1.9;margin:0}
-.detail-copy.missing{color:#98a4b1;font-style:italic}
-.detail-bottom{display:flex;gap:10px;margin-top:24px}
-.btn{min-height:46px;display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:11px 16px;border-radius:11px;font-size:12px;font-weight:800;text-decoration:none;border:1px solid transparent;transition:transform .12s,box-shadow .12s,background .12s}
-.btn:active{transform:translateY(1px)}
-.btn-primary{background:linear-gradient(105deg,#245ddd,#1789e8);color:#fff;box-shadow:0 7px 16px #2466d926;flex:1}
-.btn-primary:hover{box-shadow:0 9px 22px #2466d933}
-.btn-secondary{background:#fff;color:#2459a9;border-color:#cbdcf4}
-.btn-secondary:hover{background:#f6f9ff}
-.btn[disabled]{opacity:.55;cursor:not-allowed}
-.page-note{display:flex;align-items:flex-start;gap:9px;margin-top:17px;padding:12px 14px;border-radius:11px;background:#f7f9fc;color:#7c8a98;font-size:10px;line-height:1.8}
-.page-note svg{flex:0 0 auto;margin-top:3px}
-.mobile-back{display:none}
-.overlay[hidden]{display:none!important}
-.overlay{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:18px}
-.overlay-backdrop{position:absolute;inset:0;background:#122943a8;backdrop-filter:blur(5px)}
-.modal{position:relative;width:min(720px,100%);max-height:min(90dvh,900px);overflow:auto;border-radius:20px;background:#fff;box-shadow:0 25px 80px #10233b45}
-.modal-head{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line);background:#fff}
-.modal-head h2{font-size:14px;color:var(--navy);margin:0}
-.modal-content{padding:22px}
-.modal-job-heading{margin-bottom:20px}
-.modal-job-heading h3{font-size:24px;color:var(--navy);line-height:1.35;margin:6px 0}
-.full-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.full-fact{padding:12px;border:1px solid var(--line);border-radius:11px}
-.full-fact span{font-size:10px;color:var(--muted);display:block}
-.full-fact strong{font-size:12px;color:#284864;display:block;margin-top:3px;overflow-wrap:anywhere}
-.resume-box{padding:16px;border:1px dashed #c8d7e8;border-radius:13px;background:#f8fbff;margin-top:18px}
-.resume-box h4{margin:0 0 4px;color:var(--navy);font-size:13px}
-.resume-box p{margin:0 0 12px;font-size:11px;color:var(--muted)}
-.resume-select{display:block;width:100%;font-size:11px;padding:8px;border:1px solid #d3deea;border-radius:9px;background:#fff}
-.file-name{font-size:11px;color:#52677a;margin-top:8px;overflow-wrap:anywhere}
-.upload-state{font-size:11px;color:#8b6b2d;margin-top:10px}
-.modal-footer{padding:15px 22px;border-top:1px solid var(--line);display:flex;gap:10px;justify-content:flex-end;position:sticky;bottom:0;background:#fff}
-.toast{position:fixed;z-index:150;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#173b65;color:white;padding:11px 16px;border-radius:12px;box-shadow:0 10px 30px #12294333;font-size:12px;transition:opacity .18s,transform .18s;max-width:calc(100vw - 32px);text-align:center}
-.toast.show{opacity:1;transform:translate(-50%,0)}
-.footer{text-align:center;margin-top:25px;color:#96a1ad;font-size:10px}
-.footer strong{color:#6e7d8d;letter-spacing:1.1px}
-@media(max-width:900px){
-.page{padding:18px 14px 30px}
-.layout{grid-template-columns:minmax(280px,.9fr) minmax(0,1.2fr)}
-.detail-body{padding:20px}
-.detail-facts{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:700px){
-.page{padding:12px 9px 26px}
-.topbar{margin:2px 3px 14px}
-.brand-name{font-size:14px}
-.brand-caption{font-size:9px}
-.top-link{padding:9px 10px}
-.hero{border-radius:18px;padding:22px 19px;margin-bottom:13px}
-.hero h1{font-size:26px}
-.hero p{font-size:12px}
-.hero-stats{margin-top:14px}
-.stat{padding:7px 10px}
-.toolbar{flex-wrap:wrap;gap:8px;margin-bottom:12px}
-.searchbox{flex-basis:100%}
-.filter{flex:1;min-width:0}
-.layout{display:block}
-.job-panel{margin-bottom:12px}
-.job-list{display:flex;gap:8px;max-height:none;overflow-x:auto;padding:9px;scroll-snap-type:x mandatory}
-.job-card{flex:0 0 min(82vw,320px);scroll-snap-align:start}
-.panel-head{padding:13px 15px}
-.job-panel .panel-head{padding:12px 14px}
-.detail{min-height:0}
-detail-body{padding:17px 15px}
-detail-title{font-size:23px}
-.detail-facts{gap:7px;margin:16px 0}
-.fact{padding:10px}
-.fact-value{font-size:11px}
-.detail-sep{margin:17px 0}
-.detail-bottom{flex-direction:column}
-.btn{min-height:47px}
-.mobile-back{display:inline-flex;margin-bottom:12px;border:0;background:transparent;color:#526b85;font-size:11px;padding:4px 0}
-.full-facts{grid-template-columns:1fr}
-.modal-content{padding:16px}
-.modal-head{padding:14px 16px}
-.modal-footer{padding:12px 16px}
-.modal-job-heading h3{font-size:21px}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
-
-/* ATWORK visual theme adapted from the supplied style. The job-list layout and
-   existing page interactions are intentionally preserved. */
-body {
-  background:
-    radial-gradient(circle at 90% 0%, rgba(56,139,255,.15), transparent 25rem),
-    radial-gradient(circle at 5% 30%, rgba(0,190,210,.07), transparent 22rem),
-    var(--paper);
-}
-.top-link,.icon-btn,.searchbox,.filter,.panel,.small-icon,.fact,.full-fact,.modal {
-  border-color: var(--line);
-}
-.logo {
-  background: linear-gradient(135deg,#2457D6,#00AFC5);
-  border-radius: 11px;
-  box-shadow: 0 8px 18px rgba(36,87,214,.16);
-}
-.brand-name,.panel-title,.detail-title,.modal-head h2,.modal-job-heading h3,
-.resume-box h4 { color: var(--navy); }
-.brand-caption { color: #8A959D; }
-.hero {
-  background: linear-gradient(118deg,#2457D6 0%,#237FE8 53%,#00AFC5 100%);
-  border-radius: var(--r);
-  box-shadow: var(--shadow);
-}
-.eyebrow { color:#FFF0B7; }
-.eyebrow:before { background:#FFE07A; }
-.hero p { color:#EFF8FF; }
-.stat {
-  border-color:rgba(255,255,255,.28);
-  border-radius:11px;
-  background:rgba(255,255,255,.1);
-}
-.top-link,.icon-btn,.searchbox,.filter {
-  border-radius:11px;
-}
-.top-link:hover,.icon-btn:hover,.small-icon:hover { background:#F4F8FF; }
-.searchbox:focus-within,.filter:focus-visible {
-  border-color:var(--blue);
-  box-shadow:0 0 0 3px rgba(40,125,235,.12);
-}
-.panel { border-radius:var(--r); box-shadow:var(--shadow); }
-.panel-head { border-bottom-color:#EAEDEF; }
-.count-pill { background:var(--blue-soft); color:var(--navy); }
-.job-card { border-radius:11px; }
-.job-card:hover { background:#F5F9FF; border-color:#C9DFFA; }
-.job-card.active {
-  border-color:#8764E5;
-  background:linear-gradient(115deg,#F7F3FF,#FFFFFF 87%);
-  box-shadow:inset 3px 0 #7650DC,0 5px 16px rgba(104,64,193,.07);
-}
-.job-card.active:before { background:#7650DC; }
-.company-mark { background:linear-gradient(135deg,#EDF5FF,#F7FAFF); color:#245FC2; }
-.job-title { color:#1B3150; }
-.tag { background:#F2F6FB; color:#4C6176; }
-.status-chip { background:var(--green-bg); color:var(--green); }
-.detail-title { color:#1749A2; }
-.detail-company { color:#6F7C87; }
-.fact { border-radius:11px; background:#FCFDFF; }
-.fact-value,.full-fact strong { color:#234365; }
-.section-mark { background:var(--blue-soft); color:var(--navy); }
-.detail-copy { color:#53677A; }
-.btn-primary {
-  background:linear-gradient(105deg,#245DDB,#1789E8);
-  box-shadow:0 7px 18px rgba(36,93,219,.22);
-}
-.btn-primary:hover { box-shadow:0 10px 22px rgba(36,93,219,.28); }
-.btn-secondary { color:var(--navy); border-color:#BFD4F5; }
-.btn-secondary:hover { background:#F4F8FF; }
-.page-note { background:#F7F8F8; color:#6D7982; }
-.modal { border-radius:20px; }
-.modal-head { border-bottom-color:#EAEDEF; }
-.resume-box { border-color:#C9D4DC; background:#FAFBFC; }
-.resume-select { border-color:#D6DDE2; }
-.toast { background:#1749A2; border-radius:11px; }
-input:focus-visible,select:focus-visible,button:focus-visible {
-  outline-color:rgba(40,125,235,.25);
-}
-@media(max-width:700px) {
-  .hero { border-radius:17px; }
-}
-
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1749A2">
+  <meta name="description" content="ค้นหาและสมัครตำแหน่งงานที่เปิดรับกับ ATWORK">
+  <title>ATWORK | ตำแหน่งงานที่เปิดรับ</title>
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1B3150; --navy: #1749A2; --navy-2: #245FC2; --blue: #287DEB;
+      --blue-soft: #EDF5FF; --gold: #FFC247; --gold-soft: #FFF4D8;
+      --paper: #F2F7FF; --surface: #FFFFFF; --line: #DCE7F5;
+      --muted: #6F7C87; --placeholder: #9AA5AE; --green: #24664B;
+      --green-bg: #EFF7F2; --red: #A74440; --red-bg: #FFF3F1;
+      --amber: #88672C; --amber-bg: #FBF6EA;
+      --purple: #7650DC; --purple-soft: #F2EDFF;
+      --shadow: 0 18px 55px rgba(24,44,64,.075);
+      --radius-xl: 22px; --radius-lg: 15px; --radius-md: 11px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin:0; padding:24px 16px 42px; color:var(--ink); background:radial-gradient(circle at 90% 0%,rgba(56,139,255,.15),transparent 25rem),radial-gradient(circle at 5% 30%,rgba(0,190,210,.07),transparent 22rem),var(--paper); font-family:"Noto Sans Thai",Tahoma,Arial,sans-serif; font-size:14px; line-height:1.7; -webkit-font-smoothing:antialiased; }
+    button,input,select { font:inherit; } button { touch-action:manipulation; cursor:pointer; } a { color:inherit; }
+    .page { width:min(1380px,100%); margin:0 auto; }
+    .topbar { display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:18px; }
+    .brand { display:flex; align-items:center; gap:10px; text-decoration:none; min-width:0; }
+    .brand-mark { display:grid; width:42px; height:42px; flex:0 0 42px; place-items:center; border:1px solid rgba(233,219,187,.55); border-radius:12px; background:linear-gradient(135deg,#2457D6,#00AFC5); color:#fff0bf; font-size:16px; font-weight:800; }
+    .brand-name { color:var(--navy); font-size:14px; font-weight:800; letter-spacing:1.7px; line-height:1.3; }
+    .brand-caption { display:block; margin-top:2px; color:var(--muted); font-size:9px; letter-spacing:1px; }
+    .top-actions { display:flex; align-items:center; gap:8px; }
+    .top-link,.icon-btn { display:inline-flex; align-items:center; justify-content:center; gap:7px; min-height:40px; padding:9px 12px; border:1px solid var(--line); border-radius:10px; background:#fff; color:var(--navy); font-size:11px; font-weight:800; text-decoration:none; }
+    .icon-btn { width:40px; padding:0; }
+    .hero { position:relative; isolation:isolate; overflow:hidden; margin:0 0 14px; padding:20px clamp(16px,3vw,28px); color:#fff; border-radius:var(--radius-xl); background:linear-gradient(118deg,#2457D6 0%,#237FE8 53%,#00AFC5 100%); box-shadow:var(--shadow); }
+    .hero:before,.hero:after { position:absolute; z-index:-1; content:""; border:1px solid rgba(255,255,255,.24); border-radius:50%; pointer-events:none; }
+    .hero:before { width:220px;height:220px;right:-90px;top:-140px; } .hero:after { width:150px;height:150px;right:-60px;top:-100px; }
+    .hero-inner { position:relative; z-index:1; max-width:850px; }
+    .eyebrow { display:inline-flex; align-items:center; gap:7px; margin-bottom:4px; color:#FFF0B7; font-size:9px; font-weight:800; letter-spacing:1.2px; }
+    .eyebrow:before { content:""; width:18px;height:1px;background:#FFE07A; }
+    h1 { margin:0; color:#fff; font-size:clamp(23px,3vw,32px); font-weight:800; line-height:1.35; }
+    .hero-copy { max-width:700px; margin:7px 0 0; color:#EFF8FF; font-size:12px; line-height:1.75; }
+    .hero-bottom { display:flex; align-items:center; flex-wrap:wrap; gap:10px; margin-top:16px; }
+    .hero-meta { display:flex; align-items:center; gap:8px; padding:7px 11px; border:1px solid #ffffff35; border-radius:10px; background:#ffffff12; color:#f3fbff; font-size:10px; }
+    .line-state { display:flex; align-items:center; gap:9px; max-width:100%; min-width:230px; padding:7px 10px; border:1px solid #ffffff45; border-radius:11px; background:#ffffff12; color:#fff; }
+    .line-state.connected { border-color:#CFE5D7; background:var(--green-bg); color:var(--green); }
+    .line-state.error { border-color:#F0CECA; background:var(--red-bg); color:var(--red); }
+    .line-icon { display:grid; width:31px;height:31px; flex:0 0 31px; place-items:center; border-radius:50%; background:#ffffff20; font-size:14px; font-weight:800; }
+    .line-state.connected .line-icon { background:rgba(36,102,75,.09); } .line-state.error .line-icon { background:rgba(167,68,64,.09); }
+    .line-copy { min-width:0; flex:1; } .state-title { font-size:10px; font-weight:800; line-height:1.4; } .subtle { margin-top:2px; font-size:9px; line-height:1.5; opacity:.9; overflow-wrap:anywhere; }
+    .line-button { min-height:36px; padding:7px 10px; border:1px solid #ffffff6b; border-radius:8px; background:#fff; color:var(--navy); font-size:10px; font-weight:800; white-space:nowrap; }
+    .content { padding:16px 0 24px; }
+    .intro-row { display:flex; align-items:flex-start; justify-content:space-between; gap:14px; margin-bottom:12px; }
+    .intro-title { margin:0; color:var(--navy); font-size:17px; font-weight:800; }
+    .intro-subtitle { margin:4px 0 0; color:var(--muted); font-size:11px; }
+    .required-note { flex:0 0 auto; padding:5px 9px; border:1px solid #E8DCD1; border-radius:7px; background:#FCF8F4; color:#95664C; font-size:10px; font-weight:700; }
+    .toolbar { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+    .searchbox { display:flex; align-items:center; gap:9px; flex:1; min-width:160px; padding:0 12px; border:1px solid var(--line); border-radius:11px; background:#fff; }
+    .searchbox svg { flex:0 0 auto; color:#8191a3; }
+    .searchbox input { width:100%; min-width:0; min-height:43px; padding:9px 0; border:0; outline:0; background:transparent; color:var(--ink); font-size:12px; }
+    .filter { min-width:150px; max-width:220px; min-height:43px; padding:9px 11px; border:1px solid var(--line); border-radius:11px; background:#fff; color:var(--ink); font-size:11px; outline:0; }
+    .layout { display:grid; grid-template-columns:minmax(300px,.88fr) minmax(0,1.42fr); gap:14px; align-items:start; }
+    .panel { overflow:hidden; border:1px solid #DCE7F5; border-radius:var(--radius-lg); background:#fff; box-shadow:var(--shadow); }
+    .panel-head { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:14px 15px; border-bottom:1px solid #EAEDEF; }
+    .panel-title { margin:0; color:var(--navy); font-size:13px; font-weight:800; }
+    .panel-subtitle { margin-top:3px; color:var(--muted); font-size:10px; }
+    .count-pill { padding:4px 8px; border-radius:999px; background:var(--blue-soft); color:var(--navy); font-size:10px; font-weight:800; white-space:nowrap; }
+    .job-list { display:grid; gap:8px; max-height:720px; overflow:auto; padding:8px; }
+    .job-card { display:block; position:relative; width:100%; padding:12px 12px 12px 15px; border:1px solid transparent; border-radius:12px; background:#fff; color:inherit; text-align:left; transition:background .15s,border-color .15s; }
+    .job-card:hover { border-color:#D9E4FA; background:#F8FAFF; }
+    .job-card.active { border-color:#8764E5; background:linear-gradient(115deg,#F7F3FF,#fff 87%); box-shadow:inset 3px 0 var(--purple),0 5px 16px #6840c110; }
+    .job-card-top { display:flex; align-items:flex-start; justify-content:space-between; gap:8px; }
+    .job-company-wrap { display:flex; align-items:center; gap:9px; min-width:0; }
+    .company-mark { display:grid; width:36px;height:36px;flex:0 0 36px;place-items:center;border-radius:10px;background:linear-gradient(135deg,#EAF2FF,#F4F7FF);color:#2E61B5;font-size:13px;font-weight:800; }
+    .job-card.active .company-mark { background:#E9E0FF;color:#6942C9; }
+    .company-small { overflow:hidden; color:var(--muted); font-size:10px; line-height:1.5; white-space:nowrap; text-overflow:ellipsis; }
+    .job-title { margin:1px 0 0; color:#183B61; font-size:12px; font-weight:800; line-height:1.55; }
+    .job-date { color:#8D99A7; font-size:9px; white-space:nowrap; }
+    .job-meta { display:flex; flex-wrap:wrap; gap:5px 11px; margin-top:9px; color:#6E7D8D; font-size:10px; }
+    .meta-item { display:inline-flex; align-items:center; gap:5px; }
+    .job-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:9px; }
+    .tag { display:inline-flex; align-items:center; gap:5px; padding:3px 7px; border-radius:7px; background:#F1F5FA; color:#4C6176; font-size:9px; font-weight:700; }
+    .tag.open { background:var(--green-bg); color:var(--green); } .tag.purple { background:var(--purple-soft); color:#6843BF; }
+    .empty { padding:34px 18px; color:var(--muted); text-align:center; font-size:11px; }
+    .empty-icon { display:grid; width:48px;height:48px; margin:0 auto 10px; place-items:center; border-radius:15px; background:#F1F5FB; color:#8095AD; font-size:20px; }
+    .detail { min-height:400px; } .detail-body { padding:20px; }
+    .detail-topline { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:12px; }
+    .status-chip { display:inline-flex; align-items:center; gap:6px; padding:4px 9px; border-radius:999px; background:var(--green-bg); color:var(--green); font-size:9px; font-weight:800; }
+    .status-chip:before { content:""; width:6px;height:6px;border-radius:50%;background:#3DA16B; }
+    .detail-actions-top { display:flex; gap:6px; }
+    .small-icon { display:inline-flex; align-items:center; justify-content:center; width:34px;height:34px; border:1px solid var(--line); border-radius:9px; background:white; color:#60748A; }
+    .small-icon.saved { border-color:#DFD3FF; background:var(--purple-soft); color:var(--purple); }
+    .detail-title { margin:0; color:#183B61; font-size:clamp(21px,2vw,27px); font-weight:800; line-height:1.4; }
+    .detail-company { display:flex; align-items:center; flex-wrap:wrap; gap:7px; margin-top:7px; color:#697C90; font-size:11px; }
+    .detail-separator { color:#CCD4DE; }
+    .detail-facts { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin:17px 0; }
+    .fact { min-width:0; padding:10px; border:1px solid #E8EDF4; border-radius:11px; background:#FBFCFE; }
+    .fact-label { display:flex; align-items:center; gap:5px; color:#8593A2; font-size:9px; }
+    .fact-value { margin-top:4px; color:#284864; font-size:11px; font-weight:800; overflow-wrap:anywhere; }
+    .detail-sep { height:1px; margin:18px 0; background:#E9EEF4; }
+    .section-title { display:flex; align-items:center; gap:8px; margin:0 0 9px; color:#1E4266; font-size:12px; font-weight:800; }
+    .section-mark { display:grid; width:26px;height:26px;place-items:center;border-radius:8px;background:#EEF4FF;color:#2C63C5; }
+    .detail-copy { margin:0; color:#53677A; font-size:11px; line-height:1.9; white-space:pre-line; overflow-wrap:anywhere; }
+    .detail-copy.missing { color:#98A4B1; font-style:italic; }
+    .detail-bottom { display:flex; flex-wrap:wrap; gap:8px; margin-top:20px; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:43px; padding:10px 13px; border:1px solid transparent; border-radius:10px; font-size:11px; font-weight:800; text-decoration:none; transition:transform .12s,box-shadow .12s; }
+    .btn:active { transform:translateY(1px); }
+    .btn-primary { flex:1; background:linear-gradient(105deg,#245DDB,#1789E8); color:#fff; box-shadow:0 7px 16px #2466d926; }
+    .btn-secondary { border-color:#BFD4F5; background:#F4F8FF; color:#1749A2; }
+    .page-note { display:flex; align-items:flex-start; gap:8px; margin-top:14px; padding:10px 12px; border-radius:10px; background:#F7F8F8; color:#6D7982; font-size:10px; line-height:1.8; }
+    .page-note svg { flex:0 0 auto; margin-top:3px; }
+    .foot { padding:14px 20px; border-top:1px solid #E9ECEF; background:#FBFBFC; color:#8A959D; text-align:center; font-size:9px; letter-spacing:.2px; }
+    .overlay[hidden] { display:none!important; } .overlay { position:fixed; inset:0; z-index:1000; display:grid; place-items:center; padding:16px; }
+    .overlay-backdrop { position:absolute; inset:0; background:rgba(12,26,39,.6); backdrop-filter:blur(5px); }
+    .modal { position:relative; width:min(720px,100%); max-height:min(90dvh,900px); overflow:auto; border:1px solid #fff; border-radius:18px; background:#fff; box-shadow:0 25px 80px rgba(16,35,59,.28); }
+    .modal-head { position:sticky; top:0; z-index:2; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 17px; border-bottom:1px solid var(--line); background:#fff; }
+    .modal-head h2 { margin:0; color:var(--navy); font-size:13px; font-weight:800; }
+    .modal-content { padding:18px; }
+    .modal-job-heading { margin-bottom:16px; }
+    .modal-job-heading h3 { margin:9px 0 0; color:#183B61; font-size:22px; line-height:1.4; }
+    .full-facts { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+    .full-fact { min-width:0; padding:10px 11px; border:1px solid #E3EAF3; border-radius:10px; background:#FBFDFF; }
+    .full-fact span { display:block; color:var(--muted); font-size:9px; }
+    .full-fact strong { display:block; margin-top:3px; color:#284864; font-size:11px; font-weight:800; overflow-wrap:anywhere; white-space:pre-line; }
+    .resume-box { margin-top:18px; padding:14px; border:1px dashed #C9D4DC; border-radius:12px; background:#FAFBFC; }
+    .resume-box h4 { margin:0; color:var(--navy); font-size:12px; }
+    .resume-box p { margin:4px 0 12px; color:var(--muted); font-size:10px; line-height:1.8; }
+    .resume-box input[type=file] { display:block; width:100%; padding:8px; border:1px solid #D6DDE2; border-radius:9px; background:#fff; color:#415362; font-size:11px; }
+    .file-name { margin-top:8px; color:var(--navy); font-size:10px; font-weight:700; overflow-wrap:anywhere; }
+    .upload-state { margin-top:5px; color:var(--muted); font-size:10px; line-height:1.7; }
+    .notice { display:flex; gap:8px; margin-top:12px; padding:10px 11px; border:1px solid #D7E6F7; border-radius:10px; background:var(--blue-soft); color:var(--navy); font-size:10px; line-height:1.8; }
+    .toast { position:fixed; left:50%; bottom:20px; z-index:1200; width:max-content; max-width:calc(100% - 28px); padding:10px 14px; border-radius:11px; background:#173B65; color:#fff; font-size:11px; box-shadow:0 8px 24px #10233b30; transform:translate(-50%,14px); opacity:0; pointer-events:none; transition:opacity .2s,transform .2s; }
+    .toast.show { opacity:1; transform:translate(-50%,0); }
+    @media(max-width:900px) { .layout { grid-template-columns:minmax(270px,.9fr) minmax(0,1.1fr); } .detail-body { padding:16px; } .detail-facts { grid-template-columns:1fr; } }
+    @media(max-width:700px) { body { padding:9px 7px calc(18px + env(safe-area-inset-bottom)); } .topbar { gap:8px; margin-bottom:12px; } .brand-mark { width:38px;height:38px;flex-basis:38px; } .brand-name { font-size:12px; } .brand-caption { font-size:8px; } .top-link { padding:8px 9px; font-size:10px; } .hero { padding:15px 13px; border-radius:17px; } .hero-copy { font-size:10px; } .layout { grid-template-columns:1fr; } .job-list { max-height:410px; } .detail { min-height:0; } .detail-facts { grid-template-columns:repeat(3,minmax(0,1fr)); } .detail-bottom .btn { width:100%; } .detail-body { padding:14px; } .toolbar { flex-wrap:wrap; } .searchbox { flex-basis:100%; } .filter { flex:1;max-width:none;min-width:0; } .content { padding:13px 0 18px; } }
+    @media(max-width:420px) { .brand-caption { letter-spacing:.5px; } .intro-row { display:block; } .required-note { display:inline-flex; margin-top:8px; } .detail-facts { grid-template-columns:1fr; } .full-facts { grid-template-columns:1fr; } .modal-content { padding:13px; } .modal-job-heading h3 { font-size:19px; } .line-state { min-width:0; width:100%; } .hero-bottom { align-items:stretch; } }
+    @media(prefers-reduced-motion:reduce) { html{scroll-behavior:auto} *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important} }
+  </style>
 </head>
 <body>
-<div class="page">
-  <header class="topbar"></header>
+  <main class="page">
+    <nav class="topbar" aria-label="เมนูหลัก">
+      <a class="brand" href="./" aria-label="ATWORK หน้าแรก">
+        <span class="brand-mark">AW</span><span><span class="brand-name">@ATTWORK</span><span class="brand-caption">CAREER · FIND YOUR NEXT STEP</span></span>
+      </a>
+      <div class="top-actions"><a class="top-link" href="https://liff.line.me/2011995684-Db7RXwnB">สมัครงาน / สร้าง Resume ↗</a></div>
+    </nav>
 
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="eyebrow">@ATTWORK CAREER PORTAL</div>
-      <h1>ตำแหน่งงานที่เปิดรับ</h1>
-      <p>ค้นหาโอกาสในการทำงานที่เหมาะกับคุณ เลือกตำแหน่งเพื่อดูรายละเอียด และเตรียม Resume ก่อนสมัครงาน</p>
-      <div class="hero-stats"><div class="stat"><strong id="heroJobCount">—</strong><span>ตำแหน่งที่เปิดรับ</span></div><div class="stat"><span>ข้อมูลตำแหน่งงานจากระบบ ATWORK</span></div></div>
-    </div>
-  </section>
+    <header class="hero">
+      <div class="hero-inner">
+        <div class="eyebrow">ATWORK CAREER</div>
+        <h1>ตำแหน่งงานที่เปิดรับ</h1>
+        <p class="hero-copy">ค้นหาตำแหน่งงานที่เหมาะกับคุณ ดูรายละเอียดก่อนสมัคร และไปยังระบบผู้สมัครเพื่อสร้างหรือใช้ Resume ของคุณ</p>
+        <div class="hero-bottom">
+          <div class="hero-meta"><strong id="heroJobCount">—</strong><span>ตำแหน่งที่เปิดรับ</span></div>
+          <div class="line-state" id="lineState" role="status" aria-live="polite">
+            <span class="line-icon" aria-hidden="true">L</span><div class="line-copy"><div class="state-title" id="lineTitle">กำลังตรวจสอบการเชื่อมต่อ LINE</div><div class="subtle" id="lineSubtitle">คุณสามารถดูรายการงานได้ระหว่างนี้</div></div>
+            <button class="line-button" id="lineButton" type="button">เชื่อมต่อ LINE</button>
+          </div>
+        </div>
+      </div>
+    </header>
 
-  <div class="toolbar">
-    <label class="searchbox" aria-label="ค้นหางาน"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg><input id="searchInput" type="search" placeholder="ค้นหาตำแหน่งงาน บริษัท หรือจังหวัด..." autocomplete="off"></label>
-  </div>
-
-  <main class="layout">
-    <section class="panel job-panel" aria-labelledby="listHeading">
-      <div class="panel-head"><div><h2 class="panel-title" id="listHeading">รายการตำแหน่งงาน</h2><div class="panel-subtitle" id="listSubtitle">กำลังโหลดข้อมูลตำแหน่งงาน...</div></div><span class="count-pill" id="visibleCount">0 รายการ</span></div>
-      <div class="job-list" id="jobList"><div class="empty"><div class="empty-icon">⌕</div>กำลังโหลดตำแหน่งงานที่เปิดรับ...</div></div>
+    <section class="content" aria-labelledby="listHeading">
+      <div class="intro-row"><div><h2 class="intro-title" id="listHeading">ค้นหางานสำหรับคุณ</h2><p class="intro-subtitle">เลือกงานทางซ้ายเพื่อดูรายละเอียดทางขวา</p></div><span class="required-note">ข้อมูลจากระบบ ATWORK</span></div>
+      <div class="toolbar">
+        <label class="searchbox" aria-label="ค้นหาตำแหน่งงาน"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 4.5 4.5"></path></svg><input id="searchInput" type="search" placeholder="ค้นหาตำแหน่งงานหรือรหัสอ้างอิง" autocomplete="off"></label>
+        <select id="typeFilter" class="filter" aria-label="กรองประเภทงาน"><option value="">ทุกประเภทงาน</option></select>
+        <select id="provinceFilter" class="filter" aria-label="กรองจังหวัด"><option value="">ทุกจังหวัด</option></select>
+      </div>
+      <div class="layout">
+        <section class="panel" aria-labelledby="jobListHeading">
+          <header class="panel-head"><div><h2 class="panel-title" id="jobListHeading">รายการงาน</h2><div class="panel-subtitle" id="listSubtitle">กำลังเชื่อมต่อระบบ ATWORK</div></div><span class="count-pill" id="visibleCount">กำลังโหลด</span></header>
+          <div class="job-list" id="jobList"><div class="empty"><div class="empty-icon">↻</div>กำลังโหลดตำแหน่งงานที่เปิดรับ...</div></div>
+        </section>
+        <section class="panel detail" id="detailPanel" aria-labelledby="detailPanelHeading">
+          <header class="panel-head"><div><h2 class="panel-title" id="detailPanelHeading">รายละเอียดงาน</h2><div class="panel-subtitle">รายละเอียดเบื้องต้นของตำแหน่งที่เลือก</div></div></header>
+          <div class="detail-body" id="detailBody"><div class="empty"><div class="empty-icon">▤</div>เลือกตำแหน่งงานจากรายการเพื่อดูรายละเอียด</div></div>
+        </section>
+      </div>
     </section>
-
-    <section class="panel detail" id="detailPanel" aria-labelledby="detailTitle">
-      <div class="panel-head"><div><h2 class="panel-title">รายละเอียดงานเบื้องต้น</h2><div class="panel-subtitle">เลือกรายการทางซ้ายเพื่อดูข้อมูลงาน</div></div><span class="count-pill">JOB DETAILS</span></div>
-      <div class="detail-body" id="detailBody"><div class="empty"><div class="empty-icon">▤</div>เลือกตำแหน่งงานจากรายการเพื่อดูรายละเอียด</div></div>
-    </section>
+    <footer class="foot">ATWORK · ตำแหน่งงานที่เปิดรับ</footer>
   </main>
 
-  <div class="page-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></svg><span>ตรวจสอบรายละเอียดและคุณสมบัติก่อนส่ง Resume โปรดส่งข้อมูลผ่านช่องทาง ATWORK ที่ระบุในขั้นตอนสมัครงานเท่านั้น</span></div>
-  <footer class="footer"><strong>ATWORK</strong> · CAREER & OPPORTUNITY</footer>
-</div>
+  <div class="overlay" id="detailModal" hidden aria-hidden="true">
+    <div class="overlay-backdrop" data-close-modal></div>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <header class="modal-head"><h2 id="modalTitle">รายละเอียดตำแหน่งงาน</h2><button type="button" class="small-icon" aria-label="ปิดหน้าต่าง" data-close-modal>✕</button></header>
+      <div class="modal-content" id="modalContent"></div>
+      <div style="padding:0 18px 18px"><button class="btn btn-primary" id="applyButton" type="button" style="width:100%">สมัครงาน / สร้าง Resume →</button></div>
+    </section>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<div class="overlay" id="detailModal" hidden aria-hidden="true">
-  <div class="overlay-backdrop" data-close-modal></div>
-  <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalHeading">
-    <div class="modal-head"><h2 id="modalHeading">รายละเอียดงานแบบเต็ม</h2><button class="small-icon" type="button" aria-label="ปิด" data-close-modal>✕</button></div>
-    <div class="modal-content" id="modalContent"></div>
-    <div class="modal-footer"><button class="btn btn-secondary" type="button" data-close-modal>ปิด</button><button class="btn btn-primary" id="applyButton" type="button">สมัครงาน / สร้าง Resume <span aria-hidden="true">→</span></button></div>
-  </section>
-</div>
-<div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script>
-(function(){
-  'use strict';
-  // API ดึงรายการงานที่มีอยู่ใน Apps Script ปัจจุบัน
-  const API_URL = 'https://script.google.com/macros/s/AKfycbzjLTf5pExf4UrFWjSvadcM4G3bCqugaY1kSuq0I6ajIYorWO9hBOO_r9F3pT0j1G00/exec';
-  const CANDIDATE_LIFF_URL = 'https://liff.line.me/2011995684-Db7RXwnB';
-  const $ = (id) => document.getElementById(id);
-  const state = { jobs: [], selectedId: '', saved: new Set(), modalJob: null, requestTimer: null };
-  const icons = {
-    pin:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>',
-    briefcase:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V4h8v3M3 12h18M10 12v2h4v-2"/></svg>',
-    calendar:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>',
-    money:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2.5" y="5" width="19" height="14" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M6 9h.01M18 15h.01"/></svg>',
-    bookmark:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-4-6 4Z"/></svg>',
-    share:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.7 10.7 6.6-4.4M8.7 13.3l6.6 4.4"/></svg>',
-    briefLarge:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V4h8v3M3 12h18"/></svg>',
-    file:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 13h8M8 17h8"/></svg>'
-  };
-  const text = (value, fallback='ไม่ระบุ') => (value === null || value === undefined || String(value).trim()==='') ? fallback : String(value).trim();
-  const esc = (value) => String(value==null?'':value).replace(/[&<>"']/g, ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
-  const firstChar = value => Array.from(text(value,'A'))[0] || 'A';
-  function toast(message){const node=$('toast');node.textContent=message;node.classList.add('show');clearTimeout(state.toastTimer);state.toastTimer=setTimeout(()=>node.classList.remove('show'),2300)}
-  function normalizedJob(raw, i){
-    raw = raw || {};
-    return {
-      jobId:text(raw.jobId || raw.JobID || raw.RequestID, 'JOB-'+String(i+1).padStart(3,'0')),
-      title:text(raw.title || raw.jobTitle || raw.JobTitle || raw.Position,'ตำแหน่งงาน'),
-      companyName:text(raw.companyName || raw.CompanyName,''), province:text(raw.province || raw.Province || raw.workProvince || raw.WorkProvince,''),
-      workLocation:text(raw.workLocation || raw.WorkLocation,''), jobType:text(raw.jobType || raw.JobType || raw.employmentType || raw.EmploymentType,''),
-      publishedDate:text(raw.publishedDate || raw.CreatedAt || raw.createdAt,''), category:text(raw.category || raw.Category || raw.department || raw.Department,''),
-      reference:text(raw.reference || raw.referenceCode || raw.RequestID || raw.jobId || raw.JobID,''),
-      salary:text(raw.salary || raw.SalaryRange || raw.salaryRange || raw.Salary,''), headcount:text(raw.headcount || raw.Headcount,''),
-      qualifications:text(raw.qualifications || raw.Qualifications,''), description:text(raw.description || raw.JobDescription || raw.jobDescription,''),
-      benefits:text(raw.benefits || raw.Benefits,''), status:text(raw.status || raw.Status,'เปิดรับสมัคร'), sortOrder:Number(raw.sortOrder || i+1), raw
+  <script>
+    'use strict';
+    // LIFF ของผู้สมัครงาน (ไม่ใช่ LIFF นายจ้าง)
+    const CANDIDATE_LIFF_ID = '2011995684-Db7RXwnB';
+    const CANDIDATE_LIFF_URL = 'https://liff.line.me/' + CANDIDATE_LIFF_ID;
+    const API_URL = 'https://script.google.com/macros/s/AKfycbzjLTf5pExf4UrFWjSvadcM4G3bCqugaY1kSuq0I6ajIYorWO9hBOO_r9F3pT0j1G00/exec';
+    const $ = id => document.getElementById(id);
+    const state = { jobs: [], selectedId: '', saved: new Set(), lineReady: false, lineProfile: null, modalJob: null };
+    let toastTimer = null;
+    let liffInitialized = false;
+
+    const icons = {
+      pin: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>',
+      briefcase: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18M10 12v2h4v-2"/></svg>',
+      money: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="5" width="19" height="14" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M6 9H5m14 6h-1"/></svg>',
+      bookmark: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 4.5A1.5 1.5 0 0 1 7.5 3h9A1.5 1.5 0 0 1 18 4.5V21l-6-4-6 4Z"/></svg>',
+      share: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.7 10.7 6.6-4.4m-6.6 7.4 6.6 4.1"/></svg>',
+      briefLarge: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>'
     };
-  }
-  function isOpen(job){return ['กำลังจัดหาบุคลากร','เปิดรับสมัคร','open','active','เปิดรับ'].includes(job.status.toLowerCase()) || ['กำลังจัดหาบุคลากร','เปิดรับสมัคร','เปิดรับ'].includes(job.status)}
-  function formatDate(value){if(!value || value==='ไม่ระบุ')return 'ไม่ระบุ';const d=new Date(value);if(Number.isNaN(d.getTime()))return value;return new Intl.DateTimeFormat('th-TH',{year:'numeric',month:'short',day:'numeric'}).format(d)}
-  function getFilteredJobs(){const q=$('searchInput').value.trim().toLocaleLowerCase();const type=$('typeFilter').value;const province=$('provinceFilter').value;return state.jobs.filter(job=>{
-      const hay=[job.title,job.companyName,job.province,job.workLocation,job.jobType,job.category].join(' ').toLocaleLowerCase();
-      return (!q||hay.includes(q))&&(!type||job.jobType===type)&&(!province||job.province===province);
-    })}
-  function updateProvinceFilter(){const select=$('provinceFilter');const current=select.value;const provinces=[...new Set(state.jobs.map(j=>j.province).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'th'));select.innerHTML='<option value="">ทุกจังหวัด</option>'+provinces.map(p=>'<option value="'+esc(p)+'">'+esc(p)+'</option>').join('');if(provinces.includes(current))select.value=current}
-  function renderList(){const jobs=getFilteredJobs();$('visibleCount').textContent=jobs.length+' รายการ';$('listSubtitle').textContent=jobs.length?'เลือกตำแหน่งงานเพื่ออ่านรายละเอียด':'ไม่พบตำแหน่งงานที่ตรงกับการค้นหา';$('heroJobCount').textContent=state.jobs.length;
-    if(!jobs.length){$('jobList').innerHTML='<div class="empty"><div class="empty-icon">⌕</div>ไม่พบตำแหน่งงานที่ตรงกับเงื่อนไข<br><span style="font-size:10px">ลองเปลี่ยนคำค้นหาหรือตัวกรอง</span></div>';return}
-    $('jobList').innerHTML=jobs.map(job=>{const active=job.jobId===state.selectedId;return '<button type="button" class="job-card '+(active?'active':'')+'" data-job-id="'+esc(job.jobId)+'" aria-pressed="'+active+'"><div class="job-card-top"><div class="job-company-wrap"><div class="company-mark">'+esc(firstChar(job.companyName&&job.companyName!=='ไม่ระบุ'?job.companyName:job.title))+'</div><div style="min-width:0"><div class="company-small">'+esc(text(job.companyName,'บริษัทผู้ประกาศงาน'))+'</div><div class="job-title">'+esc(job.title)+'</div></div></div><span class="job-date">'+esc(formatDate(job.publishedDate))+'</span></div><div class="job-meta"><span class="meta-item">'+icons.pin+esc(text(job.province,'จังหวัดไม่ระบุ'))+'</span><span class="meta-item">'+icons.briefcase+esc(text(job.jobType,'ประเภทงานไม่ระบุ'))+'</span></div><div class="job-tags"><span class="tag open">● '+esc(job.status)+'</span>'+(job.salary&&job.salary!=='ไม่ระบุ'?'<span class="tag">'+icons.money+esc(job.salary)+'</span>':'')+(job.category&&job.category!=='ไม่ระบุ'?'<span class="tag purple">'+esc(job.category)+'</span>':'')+'</div></button>'}).join('');
+
+    function esc(value) {
+      return String(value == null ? '' : value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
     }
-  function fact(icon,label,value){return '<div class="fact"><div class="fact-label">'+icon+esc(label)+'</div><div class="fact-value">'+esc(text(value))+'</div></div>'}
-  function section(icon,title,value){const missing=!value||value==='ไม่ระบุ';return '<div class="detail-sep"></div><h3 class="section-title"><span class="section-mark">'+icon+'</span>'+esc(title)+'</h3><p class="detail-copy '+(missing?'missing':'')+'">'+esc(missing?'ยังไม่มีรายละเอียดในข้อมูลที่ได้รับจากระบบ':value)+'</p>'}
-  function renderDetails(){const job=state.jobs.find(j=>j.jobId===state.selectedId);if(!job){$('detailBody').innerHTML='<div class="empty"><div class="empty-icon">▤</div>เลือกตำแหน่งงานจากรายการเพื่อดูรายละเอียด</div>';return}
-    const saved=state.saved.has(job.jobId);
-    $('detailBody').innerHTML='<div class="detail-topline"><span class="status-chip">'+esc(job.status)+'</span><div class="detail-actions-top"><button type="button" class="small-icon '+(saved?'saved':'')+'" id="saveCurrent" title="บันทึกงาน" aria-label="บันทึกงาน">'+icons.bookmark+'</button><button type="button" class="small-icon" id="shareCurrent" title="แชร์งาน" aria-label="แชร์งาน">'+icons.share+'</button></div></div><h2 class="detail-title" id="detailTitle">'+esc(job.title)+'</h2><div class="detail-company"><strong>'+esc(text(job.companyName,'บริษัทผู้ประกาศงาน'))+'</strong><span class="detail-separator">•</span><span>'+esc(text(job.province,'จังหวัดไม่ระบุ'))+'</span></div><div class="detail-facts">'+fact(icons.pin,'ที่ตั้ง',job.province)+fact(icons.briefcase,'ประเภทงาน',job.jobType)+fact(icons.money,'ค่าตอบแทน',job.salary)+'</div><div class="detail-sep"></div><h3 class="section-title"><span class="section-mark">'+icons.briefLarge+'</span>ข้อมูลตำแหน่งงาน</h3><p class="detail-copy">หมวดหมู่: '+esc(text(job.category))+'\nวันที่เผยแพร่: '+esc(formatDate(job.publishedDate))+'\nรหัสอ้างอิง: '+esc(text(job.reference,job.jobId))+'\nจำนวนที่รับ: '+esc(text(job.headcount))+'</p>'+section('✓','คุณสมบัติผู้สมัคร',job.qualifications)+section('≡','หน้าที่และความรับผิดชอบ',job.description)+(job.benefits&&job.benefits!=='ไม่ระบุ'?section('✦','สวัสดิการ',job.benefits):'')+'<div class="detail-bottom"><button class="btn btn-primary" type="button" id="fullDetailsButton">ดูรายละเอียดทั้งหมด / สมัครงาน <span aria-hidden="true">→</span></button><button class="btn btn-secondary" type="button" id="quickApplyButton">สมัครงาน / สร้าง Resume</button></div><div class="page-note"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></svg><span>ข้อมูลที่ไม่แสดงอาจยังไม่ได้ส่งมาจากข้อมูลตำแหน่งงานต้นทาง หน้านี้จะไม่เติมข้อมูลบริษัทหรือรายละเอียดขึ้นมาเอง</span></div>';
-    $('saveCurrent').addEventListener('click',()=>toggleSave(job));$('shareCurrent').addEventListener('click',()=>shareJob(job));$('fullDetailsButton').addEventListener('click',()=>openDetailsModal(job));$('quickApplyButton').addEventListener('click',()=>openDetailsModal(job));
-  }
-  function selectJob(id){state.selectedId=id;renderList();renderDetails();if(window.matchMedia('(max-width:700px)').matches){$('detailPanel').scrollIntoView({behavior:'smooth',block:'start'})}}
-  function toggleSave(job){if(state.saved.has(job.jobId)){state.saved.delete(job.jobId);toast('นำตำแหน่งงานออกจากรายการบันทึกแล้ว')}else{state.saved.add(job.jobId);toast('บันทึกตำแหน่งงานแล้ว')}renderList();renderDetails()}
-  async function shareJob(job){const url=new URL(window.location.href);url.searchParams.set('job',job.jobId);try{if(navigator.share){await navigator.share({title:'ATWORK | '+job.title,text:'ตำแหน่งงานที่เปิดรับ: '+job.title,url:url.href})}else if(navigator.clipboard){await navigator.clipboard.writeText(url.href);toast('คัดลอกลิงก์ตำแหน่งงานแล้ว')}else{toast('คัดลอก URL จากแถบที่อยู่เพื่อแชร์ตำแหน่งงาน')}}catch(e){if(e&&e.name!=='AbortError')toast('แชร์ลิงก์ไม่สำเร็จ')}}
-  function detailValue(label,value){return '<div class="full-fact"><span>'+esc(label)+'</span><strong>'+esc(text(value))+'</strong></div>'}
-  function openDetailsModal(job){state.modalJob=job;$('modalContent').innerHTML='<div class="modal-job-heading"><span class="status-chip">'+esc(job.status)+'</span><h3>'+esc(job.title)+'</h3><div class="detail-company"><strong>'+esc(text(job.companyName,'บริษัทผู้ประกาศงาน'))+'</strong><span class="detail-separator">•</span><span>'+esc(text(job.province,'จังหวัดไม่ระบุ'))+'</span></div></div><div class="full-facts">'+detailValue('1. ตำแหน่งที่เปิดรับ',job.title)+detailValue('2. ที่ตั้ง (จังหวัด)',job.province)+detailValue('3. ประเภทงาน',job.jobType)+detailValue('4. วันที่เผยแพร่',formatDate(job.publishedDate))+detailValue('5. หมวดหมู่',job.category)+detailValue('6. รหัสอ้างอิง',text(job.reference,job.jobId))+'</div><div class="detail-sep"></div><h3 class="section-title"><span class="section-mark">✓</span>7. คุณสมบัติผู้สมัคร</h3><p class="detail-copy '+(job.qualifications==='ไม่ระบุ'?'missing':'')+'">'+esc(job.qualifications==='ไม่ระบุ'?'ยังไม่มีข้อมูลคุณสมบัติจากระบบ':job.qualifications)+'</p><div class="detail-sep"></div><h3 class="section-title"><span class="section-mark">≡</span>8. หน้าที่และความรับผิดชอบ</h3><p class="detail-copy '+(job.description==='ไม่ระบุ'?'missing':'')+'">'+esc(job.description==='ไม่ระบุ'?'ยังไม่มีข้อมูลหน้าที่และความรับผิดชอบจากระบบ':job.description)+'</p><div class="resume-box"><h4>Resume ของคุณ</h4><p>หากมี Resume ในระบบแล้ว สามารถไปยังหน้าผู้สมัครเพื่อดำเนินการต่อได้ หากยังไม่มี ให้สร้าง Resume ก่อนสมัครงาน</p><label class="resume-select" style="cursor:pointer"><input id="resumeFile" type="file" accept=".pdf,.doc,.docx" style="display:block;width:100%;font-size:11px">เลือกไฟล์ Resume (PDF, DOC, DOCX)</label><div id="fileName" class="file-name">ยังไม่ได้เลือกไฟล์</div><div class="upload-state" id="uploadState">การเลือกไฟล์ตรงนี้เป็นเพียงการเตรียมไฟล์ในหน้าเว็บ ยังไม่ได้อัปโหลดไปยังเซิร์ฟเวอร์</div></div>';
-    $('applyButton').textContent='สมัครงาน / สร้าง Resume →';$('detailModal').hidden=false;$('detailModal').setAttribute('aria-hidden','false');document.body.style.overflow='hidden';$('resumeFile').addEventListener('change',function(){const file=this.files&&this.files[0];$('fileName').textContent=file?file.name+' · '+formatBytes(file.size):'ยังไม่ได้เลือกไฟล์';$('uploadState').textContent=file?'เลือกไฟล์แล้ว แต่ยังไม่ได้ส่งหรืออัปโหลด กรุณากดสมัครงาน / สร้าง Resume เพื่อไปยังระบบผู้สมัคร':'การเลือกไฟล์ตรงนี้เป็นเพียงการเตรียมไฟล์ในหน้าเว็บ ยังไม่ได้อัปโหลดไปยังเซิร์ฟเวอร์'});
-  }
-  function formatBytes(bytes){if(!bytes)return '0 B';const units=['B','KB','MB','GB'];const i=Math.min(Math.floor(Math.log(bytes)/Math.log(1024)),3);return (bytes/Math.pow(1024,i)).toFixed(i?1:0)+' '+units[i]}
-  function closeModal(){ $('detailModal').hidden=true;$('detailModal').setAttribute('aria-hidden','true');document.body.style.overflow=''}
-  function goToCandidate(){window.location.href=CANDIDATE_LIFF_URL}
-  function showLoadError(message){$('jobList').innerHTML='<div class="empty"><div class="empty-icon">!</div><strong style="display:block;color:#a74440;margin-bottom:4px">โหลดรายการตำแหน่งงานไม่สำเร็จ</strong>'+esc(message)+'<div style="margin-top:13px"><button class="btn btn-secondary" id="retryLoad" type="button">ลองอีกครั้ง</button></div></div>';$('listSubtitle').textContent='ยังไม่สามารถโหลดข้อมูล';$('heroJobCount').textContent='—';$('retryLoad').addEventListener('click',loadJobs)}
-  function loadJobs(){
-    $('jobList').innerHTML='<div class="empty"><div class="empty-icon">↻</div>กำลังโหลดตำแหน่งงานที่เปิดรับ...</div>';$('listSubtitle').textContent='กำลังเชื่อมต่อระบบ ATWORK';
-    const callbackName='atworkOpenPositions_'+Date.now();const script=document.createElement('script');let done=false;const timer=setTimeout(()=>finishError('หมดเวลารอข้อมูล กรุณาลองอีกครั้ง'),16000);
-    function cleanup(){clearTimeout(timer);script.remove();try{delete window[callbackName]}catch(_){window[callbackName]=undefined}}
-    function finishError(msg){if(done)return;done=true;cleanup();showLoadError(msg)}
-    window[callbackName]=function(response){if(done)return;done=true;cleanup();if(!response||response.success!==true){showLoadError(response&&response.message?response.message:'ระบบไม่สามารถส่งรายการงานกลับมาได้');return}
-      state.jobs=(Array.isArray(response.jobs)?response.jobs:[]).map(normalizedJob).filter(job=>job.title&&job.jobId);
-      state.jobs.sort((a,b)=>a.sortOrder-b.sortOrder);updateProvinceFilter();
-      if(!state.jobs.length){$('jobList').innerHTML='<div class="empty"><div class="empty-icon">⌕</div><strong style="display:block;color:var(--navy);margin-bottom:4px">ขณะนี้ไม่มีตำแหน่งงานที่เปิดรับ</strong>เมื่อมีตำแหน่งงานในระบบ รายการจะแสดงที่นี่</div>';$('listSubtitle').textContent='ยังไม่มีตำแหน่งงาน';$('heroJobCount').textContent='0';$('visibleCount').textContent='0 รายการ';return}
-      const urlJob=new URLSearchParams(window.location.search).get('job');state.selectedId=state.jobs.some(j=>j.jobId===urlJob)?urlJob:state.jobs[0].jobId;renderList();renderDetails();
-    };
-    script.onerror=()=>finishError('เชื่อมต่อ Apps Script ไม่ได้ กรุณาตรวจสอบการเผยแพร่ Web App');script.src=API_URL+'?action=getOpenJobs&callback='+encodeURIComponent(callbackName)+'&_='+Date.now();document.head.appendChild(script);
-  }
-  $('jobList').addEventListener('click',e=>{const card=e.target.closest('[data-job-id]');if(card)selectJob(card.dataset.jobId)});
-  $('searchInput').addEventListener('input',()=>{renderList();if(!getFilteredJobs().some(j=>j.jobId===state.selectedId)){const first=getFilteredJobs()[0];state.selectedId=first?first.jobId:'';renderDetails();renderList()}});
-  $('typeFilter').addEventListener('change',()=>{renderList();if(!getFilteredJobs().some(j=>j.jobId===state.selectedId)){state.selectedId=getFilteredJobs()[0]?.jobId||'';renderDetails();renderList()}});
-  $('provinceFilter').addEventListener('change',()=>{renderList();if(!getFilteredJobs().some(j=>j.jobId===state.selectedId)){state.selectedId=getFilteredJobs()[0]?.jobId||'';renderDetails();renderList()}});
-  document.querySelectorAll('[data-close-modal]').forEach(el=>el.addEventListener('click',closeModal));window.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('detailModal').hidden)closeModal()});$('applyButton').addEventListener('click',goToCandidate);
-  loadJobs();
-})();
-</script>
+    function text(value, fallback) {
+      const v = String(value == null ? '' : value).trim();
+      return v || (fallback || 'ยังไม่มีข้อมูลจากระบบ');
+    }
+    function firstValue(obj, keys) {
+      for (const key of keys) if (obj && obj[key] != null && String(obj[key]).trim() !== '') return obj[key];
+      return '';
+    }
+    function normalizeJob(raw, index) {
+      const jobId = String(firstValue(raw, ['jobId','JobID','id','ID','reference','ReferenceID']) || '').trim();
+      const title = String(firstValue(raw, ['title','jobTitle','JobTitle','positionTitle','PositionTitle','Position']) || '').trim();
+      return {
+        jobId: jobId,
+        title: title,
+        sortOrder: Number.isFinite(Number(firstValue(raw,['sortOrder','SortOrder']))) && String(firstValue(raw,['sortOrder','SortOrder'])) !== '' ? Number(firstValue(raw,['sortOrder','SortOrder'])) : index + 1,
+        companyName: String(firstValue(raw,['companyName','CompanyName']) || ''),
+        province: String(firstValue(raw,['province','Province','workProvince','WorkProvince']) || ''),
+        workLocation: String(firstValue(raw,['workLocation','WorkLocation','location','Location']) || ''),
+        jobType: String(firstValue(raw,['jobType','JobType','employmentType','EmploymentType','type','Type']) || ''),
+        salary: String(firstValue(raw,['salary','Salary','salaryRange','SalaryRange','compensation','Compensation']) || ''),
+        headcount: String(firstValue(raw,['headcount','Headcount','quantity','Quantity']) || ''),
+        publishedDate: String(firstValue(raw,['publishedDate','PublishedDate','createdAt','CreatedAt','datePublished','DatePublished']) || ''),
+        category: String(firstValue(raw,['category','Category','jobCategory','JobCategory']) || ''),
+        reference: String(firstValue(raw,['reference','Reference','referenceId','ReferenceID','jobId','JobID']) || jobId),
+        qualifications: String(firstValue(raw,['qualifications','Qualifications','requirements','Requirements']) || ''),
+        description: String(firstValue(raw,['description','Description','jobDescription','JobDescription','responsibilities','Responsibilities']) || ''),
+        benefits: String(firstValue(raw,['benefits','Benefits','welfare','Welfare']) || ''),
+        status: String(firstValue(raw,['displayStatus','DisplayStatus','status','Status']) || 'เปิดรับสมัคร')
+      };
+    }
+    function formatDate(value) {
+      if (!value) return 'ยังไม่มีข้อมูลจากระบบ';
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return String(value);
+      return new Intl.DateTimeFormat('th-TH',{day:'numeric',month:'short',year:'numeric'}).format(date);
+    }
+    function showToast(message) {
+      $('toast').textContent = message;
+      $('toast').classList.add('show');
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => $('toast').classList.remove('show'), 2400);
+    }
+    function displayMissing(value) { return value ? esc(value) : 'ยังไม่มีข้อมูลจากระบบ'; }
+    function updateLineUi(stateName, title, subtitle) {
+      const box = $('lineState'); box.classList.remove('connected','error');
+      if (stateName === 'connected') box.classList.add('connected');
+      if (stateName === 'error') box.classList.add('error');
+      $('lineTitle').textContent = title; $('lineSubtitle').textContent = subtitle;
+      $('lineButton').textContent = stateName === 'connected' ? 'เปลี่ยนบัญชี' : 'เชื่อมต่อ LINE';
+    }
+    async function initLiff() {
+      if (!window.liff) {
+        updateLineUi('error','โหลด LIFF SDK ไม่สำเร็จ','ตรวจสอบอินเทอร์เน็ต แล้วลองเปิดหน้าใหม่');
+        return;
+      }
+      try {
+        await liff.init({ liffId: CANDIDATE_LIFF_ID });
+        liffInitialized = true;
+        if (liff.isLoggedIn() || liff.isInClient()) {
+          const profile = await liff.getProfile().catch(() => null);
+          state.lineReady = Boolean(liff.getAccessToken() || liff.isInClient());
+          state.lineProfile = profile;
+          if (state.lineReady) {
+            updateLineUi('connected', profile ? 'เชื่อมต่อ LINE แล้ว · ' + profile.displayName : 'เชื่อมต่อ LINE แล้ว','พร้อมไปยังระบบสมัครงานและสร้าง Resume');
+            $('lineButton').textContent = 'ออกจากบัญชี';
+            $('lineButton').dataset.action = 'logout';
+          } else {
+            updateLineUi('error','เข้าสู่ระบบ LINE ไม่สำเร็จ','กดเชื่อมต่อ LINE เพื่อเข้าสู่ระบบอีกครั้ง');
+          }
+        } else {
+          updateLineUi('pending','ยังไม่ได้เชื่อมต่อ LINE','คุณดูตำแหน่งงานได้ และเข้าสู่ระบบเมื่อต้องการสมัคร');
+        }
+      } catch (error) {
+        console.error('ATWORK LIFF initialization failed:', error);
+        $('lineButton').dataset.action = 'open-candidate';
+        updateLineUi('error','หน้านี้ยังเชื่อม LINE โดยตรงไม่ได้','ใช้ปุ่มด้านขวาเพื่อเปิดระบบสมัครงานผ่าน LIFF แทน');
+        $('lineButton').textContent = 'เปิดระบบสมัครงาน';
+      }
+    }
+    $('lineButton').addEventListener('click', () => {
+      if ($('lineButton').dataset.action === 'open-candidate' || !liffInitialized) {
+        window.location.href = CANDIDATE_LIFF_URL;
+        return;
+      }
+      if (!window.liff) { window.location.href = CANDIDATE_LIFF_URL; return; }
+      if ($('lineButton').dataset.action === 'logout') {
+        try { liff.logout(); } catch (_) {}
+        state.lineReady = false; state.lineProfile = null;
+        $('lineButton').dataset.action = '';
+        updateLineUi('pending','ออกจากบัญชี LINE แล้ว','คุณยังสามารถดูตำแหน่งงานได้');
+        return;
+      }
+      try {
+        if (!liff.isLoggedIn()) {
+          liff.login({ redirectUri: window.location.href });
+        } else {
+          initLiff();
+        }
+      } catch (error) {
+        console.error('ATWORK LIFF login failed:', error);
+        showToast('เริ่มเข้าสู่ระบบ LINE ไม่สำเร็จ กรุณาลองใหม่');
+      }
+    });
+    function getFilteredJobs() {
+      const query = $('searchInput').value.trim().toLocaleLowerCase();
+      const type = $('typeFilter').value;
+      const province = $('provinceFilter').value;
+      return state.jobs.filter(job => {
+        const haystack = [job.title,job.jobId,job.companyName,job.province,job.jobType].join(' ').toLocaleLowerCase();
+        return (!query || haystack.includes(query)) && (!type || job.jobType === type) && (!province || job.province === province);
+      });
+    }
+    function updateFilters() {
+      const currentType = $('typeFilter').value;
+      const currentProvince = $('provinceFilter').value;
+      const types = [...new Set(state.jobs.map(j => j.jobType).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'th'));
+      const provinces = [...new Set(state.jobs.map(j => j.province).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'th'));
+      $('typeFilter').replaceChildren(new Option('ทุกประเภทงาน',''), ...types.map(v=>new Option(v,v)));
+      $('provinceFilter').replaceChildren(new Option('ทุกจังหวัด',''), ...provinces.map(v=>new Option(v,v)));
+      $('typeFilter').value = types.includes(currentType) ? currentType : '';
+      $('provinceFilter').value = provinces.includes(currentProvince) ? currentProvince : '';
+    }
+    function renderList() {
+      const jobs = getFilteredJobs();
+      $('heroJobCount').textContent = String(state.jobs.length);
+      $('visibleCount').textContent = jobs.length + ' รายการ';
+      $('listSubtitle').textContent = state.jobs.length ? 'พบตำแหน่งงานทั้งหมด ' + state.jobs.length + ' รายการ' : 'ยังไม่มีตำแหน่งงาน';
+      if (!jobs.length) {
+        $('jobList').innerHTML = '<div class="empty"><div class="empty-icon">⌕</div><strong style="display:block;color:var(--navy);margin-bottom:4px">ไม่พบตำแหน่งงาน</strong>ลองเปลี่ยนคำค้นหาหรือตัวกรอง</div>';
+        return;
+      }
+      $('jobList').innerHTML = jobs.map(job => {
+        const active = job.jobId === state.selectedId;
+        const company = text(job.companyName,'บริษัทผู้ประกาศงาน');
+        const loc = text(job.province,'จังหวัดไม่ระบุ');
+        return '<button type="button" class="job-card '+(active?'active':'')+'" data-job-id="'+esc(job.jobId)+'" aria-pressed="'+active+'">'+
+          '<div class="job-card-top"><div class="job-company-wrap"><span class="company-mark">'+esc(Array.from(company)[0]||'A')+'</span><div style="min-width:0"><div class="company-small">'+esc(company)+'</div><div class="job-title">'+esc(job.title)+'</div></div></div><span class="job-date">'+esc(formatDate(job.publishedDate))+'</span></div>'+
+          '<div class="job-meta"><span class="meta-item">'+icons.pin+esc(loc)+'</span><span class="meta-item">'+icons.briefcase+esc(text(job.jobType,'ไม่ระบุประเภท'))+'</span></div>'+
+          '<div class="job-tags"><span class="tag open">'+esc(job.status)+'</span><span class="tag purple">รหัส '+esc(job.jobId)+'</span></div></button>';
+      }).join('');
+    }
+    function fact(icon,label,value) {
+      return '<div class="fact"><div class="fact-label">'+icon+esc(label)+'</div><div class="fact-value">'+esc(text(value))+'</div></div>';
+    }
+    function section(icon,title,value) {
+      return '<div class="detail-sep"></div><h3 class="section-title"><span class="section-mark">'+icon+'</span>'+esc(title)+'</h3><p class="detail-copy '+(!value?'missing':'')+'">'+displayMissing(value)+'</p>';
+    }
+    function renderDetails() {
+      const job = state.jobs.find(j=>j.jobId===state.selectedId);
+      if (!job) {
+        $('detailBody').innerHTML = '<div class="empty"><div class="empty-icon">▤</div>เลือกตำแหน่งงานจากรายการเพื่อดูรายละเอียด</div>';
+        return;
+      }
+      const saved = state.saved.has(job.jobId);
+      $('detailBody').innerHTML = '<div class="detail-topline"><span class="status-chip">'+esc(job.status)+'</span><div class="detail-actions-top"><button type="button" class="small-icon '+(saved?'saved':'')+'" id="saveCurrent" title="บันทึกงาน" aria-label="บันทึกงาน">'+icons.bookmark+'</button><button type="button" class="small-icon" id="shareCurrent" title="แชร์งาน" aria-label="แชร์งาน">'+icons.share+'</button></div></div>'+
+        '<h2 class="detail-title">'+esc(job.title)+'</h2><div class="detail-company"><strong>'+esc(text(job.companyName,'บริษัทผู้ประกาศงาน'))+'</strong><span class="detail-separator">•</span><span>'+esc(text(job.province,'จังหวัดไม่ระบุ'))+'</span></div>'+
+        '<div class="detail-facts">'+fact(icons.pin,'ที่ตั้ง (จังหวัด)',job.province)+fact(icons.briefcase,'ประเภทงาน',job.jobType)+fact(icons.money,'ค่าตอบแทน',job.salary)+'</div>'+
+        '<div class="detail-sep"></div><h3 class="section-title"><span class="section-mark">'+icons.briefLarge+'</span>ข้อมูลตำแหน่งงาน</h3><p class="detail-copy">หมวดหมู่: '+displayMissing(job.category)+'\nวันที่เผยแพร่: '+esc(formatDate(job.publishedDate))+'\nรหัสอ้างอิง: '+esc(text(job.reference,job.jobId))+'\nจำนวนที่รับ: '+displayMissing(job.headcount)+'</p>'+
+        section('✓','คุณสมบัติผู้สมัคร',job.qualifications)+section('≡','หน้าที่และความรับผิดชอบ',job.description)+
+        '<div class="detail-bottom"><button class="btn btn-primary" type="button" id="fullDetailsButton">ดูรายละเอียดทั้งหมด / สมัครงาน →</button><button class="btn btn-secondary" type="button" id="quickApplyButton">สมัครงาน / สร้าง Resume</button></div>'+
+        '<div class="page-note"><span aria-hidden="true">ⓘ</span><span>รายละเอียดที่แสดงมาจากข้อมูลที่ API ส่งกลับ หากบางช่องว่าง หมายถึง API ยังไม่ได้ส่งข้อมูลส่วนนั้นมา</span></div>';
+      $('saveCurrent').addEventListener('click',()=>toggleSave(job));
+      $('shareCurrent').addEventListener('click',()=>shareJob(job));
+      $('fullDetailsButton').addEventListener('click',()=>openDetailsModal(job));
+      $('quickApplyButton').addEventListener('click',()=>goToCandidate(job));
+    }
+    function selectJob(id) {
+      state.selectedId = id; renderList(); renderDetails();
+      if (window.matchMedia('(max-width:700px)').matches) $('detailPanel').scrollIntoView({behavior:'smooth',block:'start'});
+    }
+    function toggleSave(job) {
+      if (state.saved.has(job.jobId)) { state.saved.delete(job.jobId); showToast('นำตำแหน่งงานออกจากรายการบันทึกแล้ว'); }
+      else { state.saved.add(job.jobId); showToast('บันทึกตำแหน่งงานแล้วในหน้านี้'); }
+      renderList(); renderDetails();
+    }
+    async function shareJob(job) {
+      const url = new URL(window.location.href); url.searchParams.set('job',job.jobId);
+      try {
+        if (navigator.share) await navigator.share({title:'ATWORK | '+job.title,text:'ตำแหน่งงานที่เปิดรับ: '+job.title,url:url.href});
+        else if (navigator.clipboard && window.isSecureContext) { await navigator.clipboard.writeText(url.href); showToast('คัดลอกลิงก์ตำแหน่งงานแล้ว'); }
+        else { window.prompt('คัดลอกลิงก์นี้เพื่อแชร์ตำแหน่งงาน',url.href); }
+      } catch (error) { if (!error || error.name !== 'AbortError') showToast('แชร์ลิงก์ไม่สำเร็จ'); }
+    }
+    function detailValue(label,value) {
+      return '<div class="full-fact"><span>'+esc(label)+'</span><strong>'+esc(text(value))+'</strong></div>';
+    }
+    function openDetailsModal(job) {
+      state.modalJob = job;
+      $('modalContent').innerHTML = '<div class="modal-job-heading"><span class="status-chip">'+esc(job.status)+'</span><h3>'+esc(job.title)+'</h3><div class="detail-company"><strong>'+esc(text(job.companyName,'บริษัทผู้ประกาศงาน'))+'</strong><span class="detail-separator">•</span><span>'+esc(text(job.province,'จังหวัดไม่ระบุ'))+'</span></div></div>'+
+        '<div class="full-facts">'+detailValue('1. ตำแหน่งที่เปิดรับ',job.title)+detailValue('2. ที่ตั้ง (จังหวัด)',job.province)+detailValue('3. ประเภทงาน',job.jobType)+detailValue('4. วันที่เผยแพร่',formatDate(job.publishedDate))+detailValue('5. หมวดหมู่',job.category)+detailValue('6. รหัสอ้างอิง',text(job.reference,job.jobId))+'</div>'+
+        '<div class="detail-sep"></div><h3 class="section-title"><span class="section-mark">✓</span>7. คุณสมบัติผู้สมัคร</h3><p class="detail-copy '+(!job.qualifications?'missing':'')+'">'+displayMissing(job.qualifications)+'</p>'+
+        '<div class="detail-sep"></div><h3 class="section-title"><span class="section-mark">≡</span>8. หน้าที่และความรับผิดชอบ</h3><p class="detail-copy '+(!job.description?'missing':'')+'">'+displayMissing(job.description)+'</p>'+
+        '<div class="resume-box"><h4>Resume ของคุณ</h4><p>คุณสามารถไปยังระบบผู้สมัครเพื่อใช้ Resume ที่สร้างไว้หรือสร้าง Resume ใหม่ได้ หากต้องการอัปโหลดไฟล์เอง ระบบจำเป็นต้องเชื่อม API อัปโหลดก่อน</p><label for="resumeFile" style="display:block;margin-bottom:6px;font-size:10px;font-weight:800">เลือกไฟล์ Resume (PDF, DOC, DOCX)</label><input id="resumeFile" type="file" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"><div id="fileName" class="file-name">ยังไม่ได้เลือกไฟล์</div><div class="upload-state" id="uploadState">การเลือกไฟล์ในขั้นตอนนี้ยังไม่อัปโหลดไฟล์ไปยังเซิร์ฟเวอร์</div></div>'+
+        '<div class="notice">ⓘ การสมัครและการสร้าง Resume จะดำเนินการต่อในระบบผู้สมัคร ATWORK หลังจากเข้าสู่ LIFF</div>';
+      $('detailModal').hidden = false; $('detailModal').setAttribute('aria-hidden','false'); document.body.style.overflow='hidden';
+      $('resumeFile').addEventListener('change',function(){
+        const file=this.files && this.files[0]; $('fileName').textContent=file?file.name+' · '+formatBytes(file.size):'ยังไม่ได้เลือกไฟล์';
+        $('uploadState').textContent=file?'เลือกไฟล์แล้ว แต่ยังไม่ได้อัปโหลด กรุณากดปุ่มสมัครงานเพื่อไปยังระบบผู้สมัคร':'การเลือกไฟล์ในขั้นตอนนี้ยังไม่อัปโหลดไฟล์ไปยังเซิร์ฟเวอร์';
+      });
+      $('applyButton').onclick = () => goToCandidate(job);
+    }
+    function formatBytes(bytes) {
+      if (!bytes) return '0 B'; const units=['B','KB','MB','GB']; const i=Math.min(Math.floor(Math.log(bytes)/Math.log(1024)),3); return (bytes/Math.pow(1024,i)).toFixed(i?1:0)+' '+units[i];
+    }
+    function closeModal() { $('detailModal').hidden=true; $('detailModal').setAttribute('aria-hidden','true'); document.body.style.overflow=''; }
+    function goToCandidate(job) {
+      if (!state.lineReady && window.liff && liff.isLoggedIn && !liff.isLoggedIn()) {
+        showToast('กำลังเปิดหน้าสมัครงาน กรุณาเข้าสู่ระบบ LINE หากระบบร้องขอ');
+      }
+      const url = new URL(CANDIDATE_LIFF_URL);
+      if (job) { url.searchParams.set('jobId',job.jobId); url.searchParams.set('jobTitle',job.title); }
+      window.location.href = url.href;
+    }
+    function showLoadError(message) {
+      $('jobList').innerHTML = '<div class="empty"><div class="empty-icon">!</div><strong style="display:block;color:#A74440;margin-bottom:4px">โหลดรายการตำแหน่งงานไม่สำเร็จ</strong>'+esc(message)+'<div style="margin-top:13px"><button class="btn btn-secondary" id="retryLoad" type="button">ลองอีกครั้ง</button></div></div>';
+      $('listSubtitle').textContent='ยังไม่สามารถโหลดข้อมูล'; $('heroJobCount').textContent='—'; $('visibleCount').textContent='—';
+      $('retryLoad').addEventListener('click',loadJobs);
+    }
+    function loadJobs() {
+      $('jobList').innerHTML='<div class="empty"><div class="empty-icon">↻</div>กำลังโหลดตำแหน่งงานที่เปิดรับ...</div>';
+      $('listSubtitle').textContent='กำลังเชื่อมต่อระบบ ATWORK';
+      const callbackName='atworkOpenJobsCallback_'+Date.now(); const script=document.createElement('script'); let finished=false;
+      const timer=setTimeout(()=>finishError('หมดเวลารอข้อมูล กรุณาลองอีกครั้ง'),16000);
+      function cleanup(){ clearTimeout(timer); script.remove(); try{delete window[callbackName];}catch(_){window[callbackName]=undefined;} }
+      function finishError(message){ if(finished)return; finished=true; cleanup(); showLoadError(message); }
+      window[callbackName]=function(response){
+        if(finished)return; finished=true; cleanup();
+        if(!response || response.success!==true){ showLoadError(response&&response.message?response.message:'ระบบไม่สามารถส่งรายการงานกลับมาได้'); return; }
+        state.jobs=(Array.isArray(response.jobs)?response.jobs:(Array.isArray(response.positions)?response.positions:[])).map(normalizeJob).filter(job=>job.title && job.jobId);
+        state.jobs.sort((a,b)=>a.sortOrder-b.sortOrder);
+        updateFilters();
+        if(!state.jobs.length){ $('jobList').innerHTML='<div class="empty"><div class="empty-icon">⌕</div><strong style="display:block;color:var(--navy);margin-bottom:4px">ขณะนี้ไม่มีตำแหน่งงานที่เปิดรับ</strong>เมื่อมีรายการในระบบ รายการจะแสดงที่นี่</div>'; $('listSubtitle').textContent='ยังไม่มีตำแหน่งงาน'; $('heroJobCount').textContent='0'; $('visibleCount').textContent='0 รายการ'; $('detailBody').innerHTML='<div class="empty"><div class="empty-icon">▤</div>ยังไม่มีรายละเอียดงานให้แสดง</div>'; return; }
+        const urlJob=new URLSearchParams(window.location.search).get('job'); state.selectedId=state.jobs.some(j=>j.jobId===urlJob)?urlJob:state.jobs[0].jobId;
+        renderList(); renderDetails();
+      };
+      script.onerror=()=>finishError('เชื่อมต่อ Apps Script ไม่ได้ กรุณาตรวจสอบ Web App URL และการเผยแพร่');
+      script.src=API_URL+'?action=getOpenJobs&callback='+encodeURIComponent(callbackName)+'&_='+Date.now();
+      document.head.appendChild(script);
+    }
+    $('jobList').addEventListener('click',event=>{ const card=event.target.closest('[data-job-id]'); if(card)selectJob(card.dataset.jobId); });
+    function selectJob(id){ state.selectedId=id; renderList(); renderDetails(); if(window.matchMedia('(max-width:700px)').matches) $('detailPanel').scrollIntoView({behavior:'smooth',block:'start'}); }
+    $('searchInput').addEventListener('input',()=>{ const filtered=getFilteredJobs(); if(!filtered.some(j=>j.jobId===state.selectedId)) state.selectedId=filtered[0]?filtered[0].jobId:''; renderList(); renderDetails(); });
+    $('typeFilter').addEventListener('change',()=>{ const filtered=getFilteredJobs(); if(!filtered.some(j=>j.jobId===state.selectedId)) state.selectedId=filtered[0]?filtered[0].jobId:''; renderList(); renderDetails(); });
+    $('provinceFilter').addEventListener('change',()=>{ const filtered=getFilteredJobs(); if(!filtered.some(j=>j.jobId===state.selectedId)) state.selectedId=filtered[0]?filtered[0].jobId:''; renderList(); renderDetails(); });
+    document.querySelectorAll('[data-close-modal]').forEach(element=>element.addEventListener('click',closeModal));
+    window.addEventListener('keydown',event=>{if(event.key==='Escape'&&!$('detailModal').hidden)closeModal();});
+    loadJobs(); initLiff();
+  </script>
 </body>
 </html>
