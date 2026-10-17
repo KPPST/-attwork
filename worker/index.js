@@ -1,7 +1,6 @@
-
-const FLEX_MESSAGE = {
+const FLEX_EMPLOYER = {
   type: "flex",
-  altText: "@ATTWORK เมนูระบบสมัครงาน",
+  altText: "@ATTWORK เมนูสำหรับบริษัท",
   contents: {
     type: "bubble",
     size: "mega",
@@ -13,17 +12,18 @@ const FLEX_MESSAGE = {
       contents: [
         {
           type: "text",
-          text: "ATWORK",
+          text: "@ATTWORK",
           color: "#FFFFFF",
           weight: "bold",
           size: "xl"
         },
         {
           type: "text",
-          text: "สำหรับผู้หางาน",
+          text: "สำหรับบริษัทผู้รับสมัครงาน",
           color: "#DCEBFF",
           size: "sm",
-          margin: "sm"
+          margin: "sm",
+          wrap: true
         }
       ]
     },
@@ -35,14 +35,14 @@ const FLEX_MESSAGE = {
       contents: [
         {
           type: "text",
-          text: "ยินดีต้อนรับ 👋",
+          text: "ยินดีต้อนรับบริษัท 👋",
           weight: "bold",
           size: "xl",
           wrap: true
         },
         {
           type: "text",
-          text: "เลือกบริการที่คุณต้องการ",
+          text: "เลือกบริการสำหรับผู้หาสมัครงาน",
           size: "sm",
           color: "#666666",
           wrap: true
@@ -58,29 +58,29 @@ const FLEX_MESSAGE = {
         {
           type: "button",
           style: "primary",
+          color: "#1749A2",
           action: {
             type: "postback",
-            label: "ตำแหน่งงานที่เปิดรับ",
-            data: "action=under_construction&menu=ตำแหน่งงานที่เปิดรับ"
-          }
-        },
-        {
-          type: "button",
-          style: "primary",
-          color: "#287DEB",
-          action: {
-            type: "uri",
-            label: "สมัครงาน,สร้าง Resume",
-            uri: "https://kppst.github.io/-attwork/candidate.html"
+            label: "ดูตำแหน่งงานว่าง",
+            data: "action=under_construction&menu=View_Jobs"
           }
         },
         {
           type: "button",
           style: "secondary",
           action: {
-            type: "uri",
-            label: "ตรวจสอบสถานะ",
-            uri: "https://kppst.github.io/-attwork/Status.html"
+            type: "postback",
+            label: "จัดการตำแหน่งงาน",
+            data: "action=under_construction&menu=View_Jobs"
+          }
+        },
+        {
+          type: "button",
+          style: "secondary",
+          action: {
+            type: "postback",
+            label: "ดูรายชื่อผู้สมัคร",
+            data: "action=under_construction&menu=applicants"
           }
         }
       ]
@@ -134,18 +134,36 @@ export default {
 
     // LINE ส่ง Verify webhook โดยมี events เป็น array ว่างได้
     
+
 for (const event of data.events || []) {
   if (!event.replyToken) continue;
 
   let messages = null;
 
-  // ผู้ใช้กดเมนูที่กำลังปรับปรุง
-  if (event.type === "postback" && event.postback?.data) {
-    const params = new URLSearchParams(event.postback.data);
+  // กรณีกดปุ่มแบบ Postback
+  if (event.type === "postback") {
+    const params = new URLSearchParams(
+      event.postback?.data || ""
+    );
 
-    if (params.get("action") === "under_construction") {
+    const action = params.get("action");
+
+    // เปิด Flex ตามฝั่งที่เลือก
+    if (action === "open_menu") {
+      const role = params.get("role");
+
+      if (role === "jobseeker") {
+        messages = [FLEX_MESSAGE];
+      } else if (role === "employer") {
+        messages = [FLEX_EMPLOYER];
+      }
+    }
+
+    // เมนูที่ยังพัฒนาไม่เสร็จ
+    if (action === "under_construction") {
       const menuNames = {
-        resume: "สร้าง Resume"
+        job_posting: "ประกาศรับสมัครงาน",
+    
       };
 
       const menuName =
@@ -163,14 +181,30 @@ for (const event of data.events || []) {
     }
   }
 
-  // ผู้ใช้พิมพ์ข้อความ ให้แสดงเมนูหลัก
+  // รองรับ Rich Menu ที่ตั้ง Action เป็น Message ด้วย
   else if (
     event.type === "message" &&
     event.message?.type === "text"
   ) {
-    messages = [FLEX_MESSAGE];
-  }
+    const text = event.message.text.trim();
 
+    if (
+      [
+        "ATWORK_JOBSEEKER_MENU",
+        "เมนูผู้หางาน"
+      ].includes(text)
+    ) {
+      messages = [FLEX_MESSAGE];
+    } else if (
+      [
+        "ATWORK_EMPLOYER_MENU",
+        "เมนูบริษัท"
+      ].includes(text)
+    ) {
+      messages = [FLEX_EMPLOYER];
+    }
+  }
+  // ข้อความอื่นที่ไม่ใช่คำสั่งจาก Rich Menu จะไม่เรียก Flex
   if (!messages) continue;
 
   try {
@@ -201,9 +235,6 @@ for (const event of data.events || []) {
     console.error("LINE request failed:", error);
   }
 }
-
-      }
-    }
 
     return new Response("OK", { status: 200 });
   }
