@@ -58,7 +58,6 @@ const FLEX_MESSAGE = {
         {
           type: "button",
           style: "primary",
-          color: "#1749A2",
           action: {
             type: "postback",
             label: "ตำแหน่งงานที่เปิดรับ",
